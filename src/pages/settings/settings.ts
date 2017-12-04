@@ -1,25 +1,20 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from '@angular/core'
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
 
 @IonicPage()
 @Component({
-  selector: 'page-settings',
-  templateUrl: 'settings.html',
+    selector: 'page-settings',
+    templateUrl: 'settings.html'
 })
 export class SettingsPage {
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public events: Events
+    ) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
-  }
-
+    // function which publishes events
+    publishEvent(eventName: string) {
+        this.events.publish('all-events', eventName)
+    }
 }

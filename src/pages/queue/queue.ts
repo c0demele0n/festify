@@ -1,25 +1,20 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the QueuePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from '@angular/core'
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
 
 @IonicPage()
 @Component({
-  selector: 'page-queue',
-  templateUrl: 'queue.html',
+    selector: 'page-queue',
+    templateUrl: 'queue.html'
 })
 export class QueuePage {
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public events: Events
+    ) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad QueuePage');
-  }
-
+    // function which publishes events
+    publishEvent(eventName: string) {
+        this.events.publish('all-events', eventName)
+    }
 }

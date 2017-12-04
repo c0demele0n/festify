@@ -1,25 +1,20 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AdminPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component } from '@angular/core'
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
 
 @IonicPage()
 @Component({
-  selector: 'page-admin',
-  templateUrl: 'admin.html',
+    selector: 'page-admin',
+    templateUrl: 'admin.html'
 })
 export class AdminPage {
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public events: Events
+    ) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminPage');
-  }
-
+    // function which publishes events
+    publishEvent(eventName: string) {
+        this.events.publish('all-events', eventName)
+    }
 }
