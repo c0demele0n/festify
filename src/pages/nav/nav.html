@@ -1,18 +1,30 @@
-<!--
-  Generated template for the NavPage page.
+<!-- ios -->
+<div showWhen="ios">
+  <!-- <ion-header>
+    <ion-navbar>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="openModal()">
+          <ion-icon name="options"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header> -->
+  <ion-tabs>
+    <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
+    <ion-tab tabTitle="Settings" tabIcon="settings" [root]="tab3"></ion-tab>
+  </ion-tabs>
+</div>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<!-- android -->
+<div showWhen="android">
+  <ion-tabs>
+    <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
+  </ion-tabs>
+</div>
 
-  <ion-navbar>
-    <ion-title>NavPage</ion-title>
-  </ion-navbar>
+<!-- web -->
+<div showWhen="web">
 
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+</div>

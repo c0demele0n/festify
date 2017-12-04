@@ -1,25 +1,22 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core'
+import { IonicPage, NavController, NavParams } from 'ionic-angular'
 
-/**
- * Generated class for the NavPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+// page imports
+import { AdminPage } from '../admin/admin'
+import { HomePage } from '../home/home'
+import { QueuePage } from '../queue/queue'
+import { SettingsPage } from '../settings/settings'
+import { TvModePage } from '../tv-mode/tv-mode'
 
 @IonicPage()
 @Component({
-  selector: 'page-nav',
-  templateUrl: 'nav.html',
+    selector: 'page-nav',
+    templateUrl: 'nav.html'
 })
 export class NavPage {
+    tab1 = QueuePage
+    tab2 = AdminPage
+    tab3 = SettingsPage
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NavPage');
-  }
-
+    constructor(public navCtrl: NavController, public navParams: NavParams) {}
 }
