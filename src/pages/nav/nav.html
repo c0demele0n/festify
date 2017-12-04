@@ -1,14 +1,5 @@
 <!-- ios -->
 <div showWhen="ios">
-  <!-- <ion-header>
-    <ion-navbar>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="openModal()">
-          <ion-icon name="options"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header> -->
   <ion-tabs>
     <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
     <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
@@ -24,7 +15,22 @@
   </ion-tabs>
 </div>
 
-<!-- web -->
-<div showWhen="web">
+<!-- web (mobile) -->
+<div showWhen="mobileweb">
+  mobileweb
 
+</div>
+
+<!-- web (desktop) -->
+<div showWhen="core">
+  desktop web
+  <ion-menu [content]="mycontent">
+    <ion-content>
+      <ion-list>
+        <p>some menu content, could be list items</p>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav id="nav" #mycontent [root]="QueuePage"></ion-nav>
 </div>
