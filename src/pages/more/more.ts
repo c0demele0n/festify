@@ -3,7 +3,8 @@ import {
     IonicPage,
     NavController,
     NavParams,
-    ViewController
+    ViewController,
+    Events
 } from 'ionic-angular'
 
 @IonicPage()
@@ -15,10 +16,13 @@ export class MorePage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public viewCtrl: ViewController
+        public viewCtrl: ViewController,
+        public events: Events
     ) {}
 
-    close() {
+    // function which publishes events
+    publishEvent(eventName: string) {
         this.viewCtrl.dismiss()
+        this.events.publish('all-events', eventName)
     }
 }
