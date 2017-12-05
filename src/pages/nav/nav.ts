@@ -1,5 +1,12 @@
 import { Component } from '@angular/core'
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
+import {
+    IonicPage,
+    Nav,
+    NavController,
+    NavParams,
+    Events,
+    Platform
+} from 'ionic-angular'
 
 // page imports
 import { AdminPage } from '../admin/admin'
@@ -8,27 +15,37 @@ import { QueuePage } from '../queue/queue'
 import { SettingsPage } from '../settings/settings'
 import { TvModePage } from '../tv-mode/tv-mode'
 
+// provider imports
+import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
+
 @IonicPage()
 @Component({
     selector: 'page-nav',
     templateUrl: 'nav.html'
 })
 export class NavPage {
+    root = QueuePage
     tab1 = QueuePage
     tab2 = AdminPage
     tab3 = SettingsPage
 
+    plt: string
+
     constructor(
+        public nav: Nav,
         public navCtrl: NavController,
         public navParams: NavParams,
-        public events: Events
+        public events: Events,
+        public platform: PlatformServiceProvider
     ) {
+        // get current platform
+        this.plt = this.platform.getPlatform()
+
         // subscribe to all events
         this.events.subscribe('all-events', eventName => {
             if (eventName == 'exit-party') {
                 this.exitPart()
             }
-
             if (eventName == 'tv-mode') {
                 this.tvMode()
             }
@@ -62,7 +79,7 @@ export class NavPage {
     }
 
     // function which pushes a new page to the navigation stack (only for web-view)
-    openPage(page: string) {
-        this.navCtrl.push(page)
+    openPage(page: any) {
+        this.root = page
     }
 }
