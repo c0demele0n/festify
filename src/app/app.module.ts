@@ -19,6 +19,7 @@ import { SpotifiyProvider } from '../providers/spotifiy/spotifiy'
 import { FirebaseProvider } from '../providers/firebase/firebase'
 import { SettingsProvider } from '../providers/settings/settings'
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
+import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
         SpotifiyProvider,
         FirebaseProvider,
         SettingsProvider,
-        ErrorHandlerProvider
+        ErrorHandlerProvider,
+        PlatformServiceProvider
     ]
 })
 export class AppModule {}
