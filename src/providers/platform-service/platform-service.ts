@@ -8,7 +8,7 @@ export class PlatformServiceProvider {
     plt: string
 
     // toggle 'dev' to 'true' when testing the application in your local browser
-    dev: boolean = false
+    dev: boolean = true
 
     constructor(public platform: Platform) {
         // platforms
@@ -30,6 +30,7 @@ export class PlatformServiceProvider {
             this.plt = 'cordova'
         } else {
             console.log('cordova: false')
+            // check if device is mobile
             if (this.plts.indexOf('mobile') > -1) {
                 console.log('mobile: true')
                 this.plt = 'mobileweb'
@@ -40,6 +41,7 @@ export class PlatformServiceProvider {
         }
     }
 
+    // function which returns the current platform
     getPlatform() {
         return this.plt
     }
