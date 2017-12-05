@@ -83,6 +83,7 @@ export class NavPage {
     // function which pushes the settings-page to the navigation stack
     showSettings() {
         console.log('showSettings()')
+        this.navCtrl.push(SettingsPage)
     }
 
     // functio which toggles the 'more' menu on android devices
