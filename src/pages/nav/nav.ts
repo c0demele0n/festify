@@ -5,7 +5,9 @@ import {
     NavController,
     NavParams,
     Events,
-    Platform
+    Platform,
+    PopoverController,
+    ViewController
 } from 'ionic-angular'
 
 // page imports
@@ -14,6 +16,7 @@ import { HomePage } from '../home/home'
 import { QueuePage } from '../queue/queue'
 import { SettingsPage } from '../settings/settings'
 import { TvModePage } from '../tv-mode/tv-mode'
+import { MorePage } from '../more/more'
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
@@ -36,7 +39,8 @@ export class NavPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public events: Events,
-        public platform: PlatformServiceProvider
+        public platform: PlatformServiceProvider,
+        public popoverCtrl: PopoverController
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
@@ -51,6 +55,9 @@ export class NavPage {
             }
             if (eventName == 'share-party') {
                 this.shareParty()
+            }
+            if (eventName == 'show-settings') {
+                this.showSettings()
             }
             if (eventName == 'toggle-more') {
                 this.toggleMore()
@@ -73,9 +80,20 @@ export class NavPage {
         console.log('shareParty()')
     }
 
+    // function which pushes the settings-page to the navigation stack
+    showSettings() {
+        console.log('showSettings()')
+    }
+
     // functio which toggles the 'more' menu on android devices
     toggleMore() {
         console.log('toggleMore()')
+        let morePopover = this.popoverCtrl.create(
+            MorePage,
+            {},
+            { cssClass: 'more-popover' }
+        )
+        morePopover.present()
     }
 
     // function which pushes a new page to the navigation stack (only for web-view)
