@@ -13,6 +13,7 @@ import { QueuePage } from '../pages/queue/queue'
 import { AdminPage } from '../pages/admin/admin'
 import { SettingsPage } from '../pages/settings/settings'
 import { TvModePage } from '../pages/tv-mode/tv-mode'
+import { MorePage } from '../pages/more/more'
 
 // Providers
 import { SpotifiyProvider } from '../providers/spotifiy/spotifiy'
@@ -25,6 +26,7 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
     declarations: [
         MyApp,
         NavPage,
+        MorePage,
         HomePage,
         QueuePage,
         AdminPage,
@@ -36,6 +38,7 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
     entryComponents: [
         MyApp,
         NavPage,
+        MorePage,
         HomePage,
         QueuePage,
         AdminPage,
