@@ -1,64 +1,68 @@
 <!-- cordova app -->
 <div *ngIf="plt == 'cordova'">
 
-  <!-- ios -->
-  <div showWhen="ios">
-    <ion-tabs>
-      <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
-      <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
-      <ion-tab tabTitle="Settings" tabIcon="settings" [root]="tab3"></ion-tab>
-    </ion-tabs>
-  </div>
+    <!-- ios -->
+    <div showWhen="ios">
+        <ion-tabs>
+            <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
+            <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
+            <ion-tab tabTitle="Settings" tabIcon="settings" [root]="tab3"></ion-tab>
+        </ion-tabs>
+    </div>
 
-  <!-- android -->
-  <div showWhen="android">
-    <ion-tabs>
-      <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
-      <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
-    </ion-tabs>
-  </div>
+    <!-- android -->
+    <div showWhen="android">
+        <ion-tabs>
+            <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
+            <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
+        </ion-tabs>
+    </div>
 
 </div>
+
 
 <!-- mobile web app -->
 <div *ngIf="plt == 'mobileweb'">
 
-  <ion-menu type="overlay" [content]="sideMenu">
-    <ion-content>
-      <h2 padding>Menu</h2>
-      <ion-list>
-        <button ion-item menuClose (tap)="openPage(tab1)">
-          <!-- <ion-icon name="menu" icon-start></ion-icon> -->
-          Queue
-        </button>
-        <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
-        <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
-        <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-  <ion-nav id="nav" #sideMenu [root]="root"></ion-nav>
+    <ion-menu type="overlay" [content]="sideMenu">
+        <ion-content>
+            <h2 padding>Menu</h2>
+            <ion-list>
+                <button ion-item menuClose (tap)="openPage(tab1)">
+                    <!-- <ion-icon name="menu" icon-start></ion-icon> -->
+                    Queue
+                </button>
+                <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
+                <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
+                <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-nav id="nav" #sideMenu [root]="root"></ion-nav>
 
 </div>
 
-<!-- desktop web app -->
-<div showWhen="core">
-  <ion-split-pane>
-    <ion-menu type="overlay" [content]="sideMenuCore">
-      <ion-content>
-        <h2 padding>Menu</h2>
-        <ion-list>
-          <button ion-item menuClose (tap)="openPage(tab1)">
-            <!-- <ion-icon name="menu" icon-start></ion-icon> -->
-            Queue
-          </button>
-          <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
-          <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
-          <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
 
-    <ion-nav id="nav-core" #sideMenuCore [root]="root" main></ion-nav>
-  </ion-split-pane>
+<!-- desktop web app -->
+<div *ngIf="plt != 'mobileweb' && plt != 'cordova'">
+
+    <ion-split-pane>
+        <ion-menu type="overlay" [content]="sideMenuCore">
+            <ion-content>
+                <h2 padding>Menu</h2>
+                <ion-list>
+                    <button ion-item menuClose (tap)="openPage(tab1)">
+                        <!-- <ion-icon name="menu" icon-start></ion-icon> -->
+                        Queue
+                    </button>
+                    <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
+                    <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
+                    <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+
+        <ion-nav id="nav-core" #sideMenuCore [root]="root" main></ion-nav>
+    </ion-split-pane>
+
 </div>
