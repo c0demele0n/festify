@@ -42,15 +42,23 @@
 </div>
 
 <!-- desktop web app -->
-<!-- <div showWhen="core">
-  <ion-menu type="overlay" [content]="sideMenuCore">
-    <ion-content>
-      <ion-list>
-        <p>some menu content, could be list items</p>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
+<div showWhen="core">
+  <ion-split-pane>
+    <ion-menu type="overlay" [content]="sideMenuCore">
+      <ion-content>
+        <h2 padding>Menu</h2>
+        <ion-list>
+          <button ion-item menuClose (tap)="openPage(tab1)">
+            <!-- <ion-icon name="menu" icon-start></ion-icon> -->
+            Queue
+          </button>
+          <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
+          <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
+          <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
 
-  <ion-nav id="nav-core" #sideMenuCore [root]="root"></ion-nav>
-  <button ion-button menuToggle>Toggle Menu</button>
-</div> -->
+    <ion-nav id="nav-core" #sideMenuCore [root]="root" main></ion-nav>
+  </ion-split-pane>
+</div>
