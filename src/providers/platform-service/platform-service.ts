@@ -16,28 +16,34 @@ export class PlatformServiceProvider {
         // ios (webbrowser): ["mobile", "ios", "iphone", "mobileweb"] (4)
         // web: ['core'] (1)
 
-        // log current platform(s) to the console
+        // save the current platform(s) in array 'plts[]'
         this.plts = this.platform.platforms()
-        console.log(this.plts)
 
         if (this.dev) {
             console.log('you are in developing mode: platform check is faked')
         }
 
-        // check if application is installed native on the device using cordova
-        if (this.plts.indexOf('cordova') > -1 || this.dev) {
-            console.log('cordova: true')
+        // check which platform the client uses
+
+        // plt: cordova
+        if (
+            (this.dev && this.plts.indexOf('mobileweb') > -1) ||
+            this.plts.indexOf('cordova') > -1
+        ) {
+            console.log('Client Platform: CORDOVA')
             this.plt = 'cordova'
-        } else {
-            console.log('cordova: false')
-            // check if device is mobile
-            if (this.plts.indexOf('mobile') > -1) {
-                console.log('mobile: true')
-                this.plt = 'mobileweb'
-            } else {
-                console.log('mobile: false')
-                // platform is 'core'
-            }
+        }
+
+        // plt: mobileweb
+        if (!this.dev && this.plts.indexOf('mobileweb') > -1) {
+            console.log('Client Platform: MOBILEWEB')
+            this.plt = 'mobileweb'
+        }
+
+        // plt: desktopweb
+        if (this.plts.indexOf('core') > -1) {
+            console.log('Client Platform: DESKTOPWEB')
+            this.plt = 'desktopweb'
         }
     }
 
