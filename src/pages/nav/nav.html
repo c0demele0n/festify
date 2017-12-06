@@ -4,17 +4,17 @@
     <!-- ios -->
     <div showWhen="ios">
         <ion-tabs>
-            <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
-            <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
-            <ion-tab tabTitle="Settings" tabIcon="settings" [root]="tab3"></ion-tab>
+            <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab3.Name}}" tabIcon="{{tab3.Icon}}" [root]="tab3.Page"></ion-tab>
         </ion-tabs>
     </div>
 
     <!-- android -->
     <div showWhen="android">
         <ion-tabs>
-            <ion-tab tabTitle="Queue" tabIcon="menu" [root]="tab1"></ion-tab>
-            <ion-tab tabTitle="Admin" tabIcon="person" [root]="tab2"></ion-tab>
+            <ion-tab tabTitle="Queue" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
         </ion-tabs>
     </div>
 
@@ -28,13 +28,18 @@
         <ion-content>
             <h2 padding>Menu</h2>
             <ion-list>
-                <button ion-item menuClose (tap)="openPage(tab1)">
-                    <!-- <ion-icon name="menu" icon-start></ion-icon> -->
-                    Queue
+                <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
+                    <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
+                    {{tab.Name}}
                 </button>
-                <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
-                <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
-                <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
+                <button ion-item menuClose (tap)="shareParty()">
+                    <ion-icon name="share" item-start></ion-icon>
+                    Share Party
+                </button>
+                <button ion-item menuClose (tap)="exitParty()">
+                    <ion-icon name="power" item-start></ion-icon>
+                    Exit Party
+                </button>
             </ion-list>
         </ion-content>
     </ion-menu>
@@ -44,20 +49,25 @@
 
 
 <!-- desktop web app -->
-<div *ngIf="plt != 'mobileweb' && plt != 'cordova'">
+<div *ngIf="plt == 'desktopweb'">
 
     <ion-split-pane>
         <ion-menu type="overlay" [content]="sideMenuCore">
             <ion-content>
                 <h2 padding>Menu</h2>
                 <ion-list>
-                    <button ion-item menuClose (tap)="openPage(tab1)">
-                        <!-- <ion-icon name="menu" icon-start></ion-icon> -->
-                        Queue
+                    <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
+                        <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
+                        {{tab.Name}}
                     </button>
-                    <button ion-item menuClose (tap)="openPage(tab2)">Admin</button>
-                    <button ion-item menuClose (tap)="openPage(tab3)">Settings</button>
-                    <button ion-item menuClose (tap)="openPage(tab4)">TV Mode</button>
+                    <button ion-item menuClose (tap)="shareParty()">
+                        <ion-icon name="share" item-start></ion-icon>
+                        Share Party
+                    </button>
+                    <button ion-item menuClose (tap)="exitParty()">
+                        <ion-icon name="power" item-start></ion-icon>
+                        Exit Party
+                    </button>
                 </ion-list>
             </ion-content>
         </ion-menu>

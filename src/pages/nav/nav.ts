@@ -28,9 +28,28 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
 })
 export class NavPage {
     root = QueuePage
-    tab1 = QueuePage
-    tab2 = AdminPage
-    tab3 = SettingsPage
+    tab1: any = {
+        Name: 'Queue',
+        Page: QueuePage,
+        Icon: 'menu'
+    }
+    tab2: any = {
+        Name: 'Admin',
+        Page: AdminPage,
+        Icon: 'contact'
+    }
+    tab3: any = {
+        Name: 'Settings',
+        Page: SettingsPage,
+        Icon: 'settings'
+    }
+    tab4: any = {
+        Name: 'Tv Mode',
+        Page: TvModePage,
+        Icon: 'desktop'
+    }
+
+    tabs = [this.tab1, this.tab2, this.tab3, this.tab4]
 
     plt: string
 
@@ -48,7 +67,7 @@ export class NavPage {
         // subscribe to all events
         this.events.subscribe('all-events', eventName => {
             if (eventName == 'exit-party') {
-                this.exitPart()
+                this.exitParty()
             }
             if (eventName == 'tv-mode') {
                 this.tvMode()
@@ -66,7 +85,7 @@ export class NavPage {
     }
 
     // function which shutdowns the current party
-    exitPart() {
+    exitParty() {
         console.log('exitParty()')
     }
 
