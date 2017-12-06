@@ -7,7 +7,8 @@ import {
     Events,
     Platform,
     PopoverController,
-    ViewController
+    ViewController,
+    ModalController
 } from 'ionic-angular'
 
 // page imports
@@ -59,7 +60,8 @@ export class NavPage {
         public navParams: NavParams,
         public events: Events,
         public platform: PlatformServiceProvider,
-        public popoverCtrl: PopoverController
+        public popoverCtrl: PopoverController,
+        public modalCtrl: ModalController
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
@@ -70,7 +72,7 @@ export class NavPage {
                 this.exitParty()
             }
             if (eventName == 'tv-mode') {
-                this.tvMode()
+                this.showTvMode()
             }
             if (eventName == 'share-party') {
                 this.shareParty()
@@ -90,8 +92,18 @@ export class NavPage {
     }
 
     // function which switches to the tv mode
-    tvMode() {
+    showTvMode() {
         console.log('tvMode()')
+
+        let tvModeModal = this.modalCtrl.create(
+            TvModePage,
+            {},
+            {
+                showBackdrop: true,
+                enableBackdropDismiss: true
+            }
+        )
+        tvModeModal.present()
     }
 
     // function which provides a share link to the current party
@@ -102,10 +114,19 @@ export class NavPage {
     // function which pushes the settings-page to the navigation stack
     showSettings() {
         console.log('showSettings()')
-        this.navCtrl.push(SettingsPage)
+
+        let settingsModal = this.modalCtrl.create(
+            SettingsPage,
+            {},
+            {
+                showBackdrop: true,
+                enableBackdropDismiss: true
+            }
+        )
+        settingsModal.present()
     }
 
-    // functio which toggles the 'more' menu on android devices
+    // function which toggles the 'more' menu on android devices
     toggleMore() {
         console.log('toggleMore()')
         let morePopover = this.popoverCtrl.create(

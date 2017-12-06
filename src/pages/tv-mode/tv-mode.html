@@ -5,19 +5,11 @@
     <ion-header showWhen="ios">
         <ion-navbar>
             <ion-buttons start>
-                <button ion-button icon-only (tap)="publishEvent('exit-party')">
-                    <ion-icon name="power"></ion-icon>
+                <button ion-button navPop>
+                    Close
                 </button>
             </ion-buttons>
             <ion-title>Tv Mode</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-only (tap)="publishEvent('tv-mode')">
-                    <ion-icon name="desktop"></ion-icon>
-                </button>
-                <button ion-button icon-only (tap)="publishEvent('share-party')">
-                    <ion-icon name="share"></ion-icon>
-                </button>
-            </ion-buttons>
         </ion-navbar>
     </ion-header>
 
@@ -25,9 +17,9 @@
     <ion-header showWhen="android">
         <ion-navbar>
             <ion-title>Tv Mode</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-only (tap)="publishEvent('toggle-more')">
-                    <ion-icon name="more"></ion-icon>
+            <ion-buttons start>
+                <button ion-button navPop>
+                    Close
                 </button>
             </ion-buttons>
         </ion-navbar>
