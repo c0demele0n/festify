@@ -18,11 +18,7 @@ export class QueuePage {
         public events: Events,
         public platform: PlatformServiceProvider
     ) {
+        // get current platform
         this.plt = this.platform.getPlatform()
-    }
-
-    // function which publishes events
-    publishEvent(eventName: string) {
-        this.events.publish('all-events', eventName)
     }
 }
