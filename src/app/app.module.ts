@@ -13,12 +13,14 @@ import { QueuePage } from '../pages/queue/queue'
 import { AdminPage } from '../pages/admin/admin'
 import { SettingsPage } from '../pages/settings/settings'
 import { TvModePage } from '../pages/tv-mode/tv-mode'
+import { MorePage } from '../pages/more/more'
 
 // Providers
 import { FirebaseProvider } from '../providers/firebase/firebase'
 import { SettingsProvider } from '../providers/settings/settings'
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
+import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
         QueuePage,
         AdminPage,
         SettingsPage,
+        MorePage,
         TvModePage
     ],
     imports: [BrowserModule, IonicModule.forRoot(MyApp)],
@@ -39,6 +42,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
         QueuePage,
         AdminPage,
         SettingsPage,
+        MorePage,
         TvModePage
     ],
     providers: [
@@ -48,6 +52,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
         FirebaseProvider,
         SettingsProvider,
         ErrorHandlerProvider,
+        PlatformServiceProvider,
         SpotifyProvider
     ]
 })
