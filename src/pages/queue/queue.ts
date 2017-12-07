@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+//import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the QueuePage page.
@@ -14,12 +15,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'queue.html',
 })
 export class QueuePage {
+  Code:any=504215;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, /*private alertCtrl: AlertController*/) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QueuePage');
+    
+  }
+  shareLink()
+  {
+    /*let alert = this.alertCtrl.create({
+      title: 'Fehlermeldung',
+      subTitle: 'Funktion fehlt noch!',
+      buttons: ['OK']
+    });
+    alert.present();*/
+    
   }
 
 }

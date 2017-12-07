@@ -13,6 +13,26 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="queue">
+  <!-- search bar-->
+  <img src="/assets/icon/favicon.ico">
+  <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+    placeholder="Add Tracks">
+  </ion-searchbar>
+  <div class="text">
+    <p> Add new songs to the queue by searching for them or ask your guests to go to
+      <span>
+        <a href="https://festify.rocks">festify.us</a>
+      </span> and enter this code: </p>
+  </div>
+  <div clase="code">
+    <ion-label>
+      {{Code}}
+    </ion-label>
+  </div>
+
+  <button ion-button (click)="shareLink()" class="share-button">Share Link
+    <ion-icon ios="ios-share" md="md-share"></ion-icon>
+  </button>
 
 </ion-content>
