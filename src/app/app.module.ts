@@ -20,6 +20,7 @@ import { SettingsProvider } from '../providers/settings/settings'
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
 
+// test
 @NgModule({
     declarations: [
         MyApp,
