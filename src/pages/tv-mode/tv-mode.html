@@ -17,33 +17,15 @@
     <ion-header showWhen="android">
         <ion-navbar>
             <ion-title>Tv Mode</ion-title>
-            <ion-buttons start>
-                <button ion-button navPop>
-                    Close
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-
-</div>
-
-
-<!-- mobile web app -->
-<div *ngIf="plt == 'mobileweb'">
-
-    <ion-header>
-        <ion-navbar>
             <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
+                <button ion-button icon-oncly navPop>
+                    <ion-icon name="arrow-round-back"></ion-icon>
                 </button>
             </ion-buttons>
-            <ion-title>Tv Mode</ion-title>
         </ion-navbar>
     </ion-header>
 
 </div>
-
 
 <!-- desktop web app -->
 <div *ngIf="plt == 'desktopweb'">

@@ -1,57 +1,19 @@
 <!-- cordova app -->
 <div *ngIf="plt == 'cordova'">
 
-    <!-- ios -->
-    <ion-header showWhen="ios">
-        <ion-navbar>
-            <ion-buttons start>
-                <button ion-button icon-only (tap)="publishEvent('exit-party')">
-                    <ion-icon name="power"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title>Settings</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-only (tap)="publishEvent('tv-mode')">
-                    <ion-icon name="desktop"></ion-icon>
-                </button>
-                <button ion-button icon-only (tap)="publishEvent('share-party')">
-                    <ion-icon name="share"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-
     <!-- android -->
     <ion-header showWhen="android">
         <ion-navbar>
             <ion-title>Settings</ion-title>
-            <ion-buttons start>
-                <button ion-button navPop>
-                    Close
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-
-</div>
-
-
-<!-- mobile web app -->
-<div *ngIf="plt == 'mobileweb'">
-
-    <ion-header>
-        <ion-navbar>
             <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
+                <button ion-button icon-oncly navPop>
+                    <ion-icon name="arrow-round-back"></ion-icon>
                 </button>
             </ion-buttons>
-            <ion-title>Settings</ion-title>
         </ion-navbar>
     </ion-header>
 
 </div>
-
 
 <!-- desktop web app -->
 <div *ngIf="plt == 'desktopweb'">

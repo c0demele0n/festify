@@ -3,7 +3,26 @@
 
     <!-- ios -->
     <div showWhen="ios">
-        <ion-tabs>
+        <ion-header>
+            <ion-navbar>
+                <ion-buttons start>
+                    <button ion-button icon-only (tap)="exitParty()">
+                        <ion-icon name="exit"></ion-icon>
+                    </button>
+                </ion-buttons>
+                <ion-title>{{currentTabName}}</ion-title>
+                <ion-buttons end>
+                    <button ion-button icon-only (tap)="showTvMode()">
+                        <ion-icon name="desktop"></ion-icon>
+                    </button>
+                    <button ion-button icon-only (tap)="shareParty()">
+                        <ion-icon name="share"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-navbar>
+        </ion-header>
+
+        <ion-tabs #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
             <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
             <ion-tab tabTitle="{{tab3.Name}}" tabIcon="{{tab3.Icon}}" [root]="tab3.Page"></ion-tab>
@@ -12,8 +31,22 @@
 
     <!-- android -->
     <div showWhen="android">
-        <ion-tabs>
-            <ion-tab tabTitle="Queue" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
+        <ion-header>
+            <ion-navbar>
+                <ion-title>{{currentTabName}}</ion-title>
+                <ion-buttons end>
+                    <button ion-button icon-only (tap)="shareParty()">
+                        <ion-icon name="share"></ion-icon>
+                    </button>
+                    <button ion-button icon-only (tap)="toggleMore()">
+                        <ion-icon name="more"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-navbar>
+        </ion-header>
+
+        <ion-tabs #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
+            <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
         </ion-tabs>
     </div>
@@ -24,11 +57,22 @@
 <!-- mobile web app -->
 <div *ngIf="plt == 'mobileweb'">
 
+    <ion-header>
+        <ion-navbar>
+            <ion-buttons left>
+                <button ion-button icon-only menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>{{currentTabName}}</ion-title>
+        </ion-navbar>
+    </ion-header>
+
     <ion-menu type="overlay" [content]="sideMenu">
         <ion-content>
             <h2 padding>Menu</h2>
             <ion-list>
-                <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
+                <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page, tab.Name)">
                     <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
                     {{tab.Name}}
                 </button>
@@ -37,7 +81,7 @@
                     Share Party
                 </button>
                 <button ion-item menuClose (tap)="exitParty()">
-                    <ion-icon name="power" item-start></ion-icon>
+                    <ion-icon name="exit" item-start></ion-icon>
                     Exit Party
                 </button>
             </ion-list>
@@ -65,7 +109,7 @@
                         Share Party
                     </button>
                     <button ion-item menuClose (tap)="exitParty()">
-                        <ion-icon name="power" item-start></ion-icon>
+                        <ion-icon name="exit" item-start></ion-icon>
                         Exit Party
                     </button>
                 </ion-list>
