@@ -13,9 +13,9 @@
 </ion-header>
 
 
-<ion-content class="queue">
+<ion-content padding class="queue">
   <!-- search bar-->
-  <img src="/assets/icon/favicon.ico">
+  <img class="searchbar-search-ico" src="/assets/icon/favicon.ico">
   <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
     placeholder="Add Tracks">
   </ion-searchbar>
@@ -31,7 +31,7 @@
     </ion-label>
   </div>
 
-  <button ion-button (click)="shareLink()" class="share-button">Share Link
+  <button ion-button (tab)="shareLink()" class="share-button">Share Link
     <ion-icon ios="ios-share" md="md-share"></ion-icon>
   </button>
 
