@@ -15,10 +15,10 @@ import { SettingsPage } from '../pages/settings/settings'
 import { TvModePage } from '../pages/tv-mode/tv-mode'
 
 // Providers
-import { SpotifiyProvider } from '../providers/spotifiy/spotifiy'
 import { FirebaseProvider } from '../providers/firebase/firebase'
 import { SettingsProvider } from '../providers/settings/settings'
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
+import { SpotifyProvider } from '../providers/spotify/spotify'
 
 @NgModule({
     declarations: [
@@ -45,10 +45,10 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        SpotifiyProvider,
         FirebaseProvider,
         SettingsProvider,
-        ErrorHandlerProvider
+        ErrorHandlerProvider,
+        SpotifyProvider
     ]
 })
 export class AppModule {}
