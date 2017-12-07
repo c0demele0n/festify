@@ -1,18 +1,122 @@
-<!--
-  Generated template for the NavPage page.
+<!-- cordova app -->
+<div *ngIf="plt == 'cordova'">
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <!-- ios -->
+    <div showWhen="ios">
+        <ion-header>
+            <ion-navbar>
+                <ion-buttons start>
+                    <button ion-button icon-only (tap)="exitParty()">
+                        <ion-icon name="exit"></ion-icon>
+                    </button>
+                </ion-buttons>
+                <ion-title>{{currentTabName}}</ion-title>
+                <ion-buttons end>
+                    <button ion-button icon-only (tap)="showTvMode()">
+                        <ion-icon name="desktop"></ion-icon>
+                    </button>
+                    <button ion-button icon-only (tap)="shareParty()">
+                        <ion-icon name="share"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-navbar>
+        </ion-header>
 
-  <ion-navbar>
-    <ion-title>NavPage</ion-title>
-  </ion-navbar>
+        <ion-tabs #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
+            <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab3.Name}}" tabIcon="{{tab3.Icon}}" [root]="tab3.Page"></ion-tab>
+        </ion-tabs>
+    </div>
 
-</ion-header>
+    <!-- android -->
+    <div showWhen="android">
+        <ion-header>
+            <ion-navbar>
+                <ion-title>{{currentTabName}}</ion-title>
+                <ion-buttons end>
+                    <button ion-button icon-only (tap)="shareParty()">
+                        <ion-icon name="share"></ion-icon>
+                    </button>
+                    <button ion-button icon-only (tap)="toggleMore()">
+                        <ion-icon name="more"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-navbar>
+        </ion-header>
+
+        <ion-tabs #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
+            <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
+            <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
+        </ion-tabs>
+    </div>
+
+</div>
 
 
-<ion-content padding>
+<!-- mobile web app -->
+<div *ngIf="plt == 'mobileweb'">
 
-</ion-content>
+    <ion-header>
+        <ion-navbar>
+            <ion-buttons left>
+                <button ion-button icon-only menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>{{currentTabName}}</ion-title>
+        </ion-navbar>
+    </ion-header>
+
+    <ion-menu type="overlay" [content]="sideMenu">
+        <ion-content>
+            <h2 padding>Menu</h2>
+            <ion-list>
+                <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page, tab.Name)">
+                    <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
+                    {{tab.Name}}
+                </button>
+                <button ion-item menuClose (tap)="shareParty()">
+                    <ion-icon name="share" item-start></ion-icon>
+                    Share Party
+                </button>
+                <button ion-item menuClose (tap)="exitParty()">
+                    <ion-icon name="exit" item-start></ion-icon>
+                    Exit Party
+                </button>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-nav id="nav" #sideMenu [root]="root"></ion-nav>
+
+</div>
+
+
+<!-- desktop web app -->
+<div *ngIf="plt == 'desktopweb'">
+
+    <ion-split-pane>
+        <ion-menu type="overlay" [content]="sideMenuCore">
+            <ion-content>
+                <h2 padding>Menu</h2>
+                <ion-list>
+                    <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
+                        <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
+                        {{tab.Name}}
+                    </button>
+                    <button ion-item menuClose (tap)="shareParty()">
+                        <ion-icon name="share" item-start></ion-icon>
+                        Share Party
+                    </button>
+                    <button ion-item menuClose (tap)="exitParty()">
+                        <ion-icon name="exit" item-start></ion-icon>
+                        Exit Party
+                    </button>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+
+        <ion-nav id="nav-core" #sideMenuCore [root]="root" main></ion-nav>
+    </ion-split-pane>
+
+</div>
