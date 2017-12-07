@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import {
     IonicPage,
     Nav,
@@ -8,7 +8,8 @@ import {
     Platform,
     PopoverController,
     ViewController,
-    ModalController
+    ModalController,
+    Tabs
 } from 'ionic-angular'
 
 // page imports
@@ -28,11 +29,22 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
     templateUrl: 'nav.html'
 })
 export class NavPage {
+    // local tab references to the tabs
+    @ViewChild('tabsIos') tabRefIos: Tabs
+    @ViewChild('tabsAndroid') tabRefAndroid: Tabs
+
+    // selected tab index when page is loaded (standart tab)
+    selectedTabIndex: number = 0
+
+    // current tab name
+    currentTabName: string = 'QueuePage'
+
     root = QueuePage
+
     tab1: any = {
         Name: 'Queue',
         Page: QueuePage,
-        Icon: 'menu'
+        Icon: 'musical-notes'
     }
     tab2: any = {
         Name: 'Admin',
@@ -50,8 +62,10 @@ export class NavPage {
         Icon: 'desktop'
     }
 
+    // array which holds all tabs
     tabs = [this.tab1, this.tab2, this.tab3, this.tab4]
 
+    // string which holds the current platform name
     plt: string
 
     constructor(
@@ -65,6 +79,10 @@ export class NavPage {
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
+
+        if (this.plt == 'desktopweb') {
+            this.openPage(this.tab1.Page, this.tab1.Name)
+        }
 
         // subscribe to all events
         this.events.subscribe('all-events', eventName => {
@@ -138,7 +156,25 @@ export class NavPage {
     }
 
     // function which pushes a new page to the navigation stack (only for web-view)
-    openPage(page: any) {
+    openPage(page: any, pageName?: string) {
         this.root = page
+        this.namePage(pageName)
+    }
+
+    // function which listens to the ionChange tab event
+    tabChanged(pltName: string) {
+        if (this.tabRefIos != null || this.tabRefAndroid != null) {
+            if (pltName == 'ios') {
+                this.namePage(this.tabRefIos.getSelected().tabTitle)
+            }
+            if (pltName == 'android') {
+                this.namePage(this.tabRefAndroid.getSelected().tabTitle)
+            }
+        }
+    }
+
+    // function which names the current page
+    namePage(pageName: string) {
+        this.currentTabName = pageName
     }
 }
