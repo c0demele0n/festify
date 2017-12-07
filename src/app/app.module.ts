@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
-import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component'
 
@@ -16,11 +15,10 @@ import { SettingsPage } from '../pages/settings/settings'
 import { TvModePage } from '../pages/tv-mode/tv-mode'
 
 // Providers
-import { SpotifiyProvider } from '../providers/spotifiy/spotifiy'
 import { FirebaseProvider } from '../providers/firebase/firebase'
 import { SettingsProvider } from '../providers/settings/settings'
 import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
-import { SpotifyProvider } from '../providers/spotify/spotify';
+import { SpotifyProvider } from '../providers/spotify/spotify'
 
 @NgModule({
     declarations: [
@@ -32,7 +30,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify';
         SettingsPage,
         TvModePage
     ],
-    imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
+    imports: [BrowserModule, IonicModule.forRoot(MyApp)],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
@@ -47,11 +45,10 @@ import { SpotifyProvider } from '../providers/spotify/spotify';
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        SpotifiyProvider,
         FirebaseProvider,
         SettingsProvider,
         ErrorHandlerProvider,
-    SpotifyProvider
+        SpotifyProvider
     ]
 })
 export class AppModule {}
