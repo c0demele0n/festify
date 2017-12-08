@@ -6,17 +6,17 @@
         <ion-header>
             <ion-navbar>
                 <ion-buttons start>
-                    <button ion-button icon-only (tap)="exitParty()">
-                        <ion-icon name="exit"></ion-icon>
+                    <button ion-button icon-only color="white" (tap)="exitParty()">
+                        <ion-icon name="ios-exit-outline"></ion-icon>
                     </button>
                 </ion-buttons>
                 <ion-title>{{currentTabName}}</ion-title>
                 <ion-buttons end>
-                    <button ion-button icon-only (tap)="showTvMode()">
-                        <ion-icon name="desktop"></ion-icon>
+                    <button ion-button icon-only color="white" (tap)="showTvMode()">
+                        <ion-icon name="ios-desktop-outline"></ion-icon>
                     </button>
-                    <button ion-button icon-only (tap)="shareParty()">
-                        <ion-icon name="share"></ion-icon>
+                    <button ion-button icon-only color="white" (tap)="shareParty()">
+                        <ion-icon name="ios-share-outline"></ion-icon>
                     </button>
                 </ion-buttons>
             </ion-navbar>
@@ -69,7 +69,7 @@
     </ion-header>
 
     <ion-menu type="overlay" [content]="sideMenu">
-        <ion-content>
+        <ion-content class="side-menu">
             <h2 padding>Menu</h2>
             <ion-list>
                 <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page, tab.Name)">
@@ -97,7 +97,7 @@
 
     <ion-split-pane>
         <ion-menu type="overlay" [content]="sideMenuCore">
-            <ion-content>
+            <ion-content class="side-menu">
                 <h2 padding>Menu</h2>
                 <ion-list>
                     <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
