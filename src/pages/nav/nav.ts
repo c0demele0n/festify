@@ -44,7 +44,7 @@ export class NavPage {
     tab1: any = {
         Name: 'Queue',
         Page: QueuePage,
-        Icon: 'musical-notes'
+        Icon: 'icon-playlist'
     }
     tab2: any = {
         Name: 'Admin',
