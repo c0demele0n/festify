@@ -11,6 +11,9 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
 })
 export class AdminPage {
     plt: string
+    playlists = []
+    generalName: string = 'Name of Party:'
+    amount: String = 'Nr. of Titles:'
 
     constructor(
         public navCtrl: NavController,
@@ -20,5 +23,16 @@ export class AdminPage {
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
+        this.playlists = [
+            this.playlist1,
+            this.playlist1,
+            this.playlist1,
+            this.playlist1
+        ]
+    }
+    playlist1: any = {
+        Name: 'Cool Playlist !',
+        AnzTitel: '43',
+        thumbnail: '../assets/imgs/logo.png'
     }
 }
