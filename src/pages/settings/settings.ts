@@ -10,6 +10,7 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
     templateUrl: 'settings.html'
 })
 export class SettingsPage {
+    dark: boolean = false
     plt: string
 
     constructor(
