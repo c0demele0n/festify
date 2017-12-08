@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core'
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
 
-/**
- * Generated class for the TvModePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+// provider imports
+import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
 
 @IonicPage()
 @Component({
-  selector: 'page-tv-mode',
-  templateUrl: 'tv-mode.html',
+    selector: 'page-tv-mode',
+    templateUrl: 'tv-mode.html'
 })
 export class TvModePage {
+    plt: string
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TvModePage');
-  }
-
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public events: Events,
+        public platform: PlatformServiceProvider
+    ) {
+        // get current platform
+        this.plt = this.platform.getPlatform()
+    }
 }
