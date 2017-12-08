@@ -16,16 +16,19 @@
 
 <!-- end: header: desktop web app -->
 
-<ion-content>
-    <ion-list margin>
+<ion-content padding>
+    <!-- <ion-list margin>
         <ion-item>
             <ion-label>Party Name: </ion-label>
             <ion-input type="text" placeholder="Type here"></ion-input>
         </ion-item>
-    </ion-list>
+    </ion-list> -->
+
+    <ion-searchbar [(ngModel)]="myInput" placeholder="Partyname">
+    </ion-searchbar>
 
 
-    <ion-list>
+    <ion-list class="striped">
         <ion-item *ngFor="let playlist of playlists ">
             <ion-thumbnail item-start>
                 <img ion-img [src]="playlist.thumbnail" />
