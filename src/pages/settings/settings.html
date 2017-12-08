@@ -3,8 +3,8 @@
 
     <!-- android -->
     <ion-header showWhen="android">
-        <ion-navbar>
-            <ion-title>Settings</ion-title>
+        <ion-navbar color="dark">
+            <ion-title>Einstellungen</ion-title>
             <ion-buttons left>
                 <button ion-button icon-oncly navPop>
                     <ion-icon name="arrow-round-back"></ion-icon>
@@ -12,12 +12,6 @@
             </ion-buttons>
         </ion-navbar>
     </ion-header>
-
-<<<<<<< HEAD
-  <ion-navbar color="dark">
-    <ion-title>Einstellungen</ion-title>
-  </ion-navbar>
-</ion-header>
 
 <ion-content padding class="content">
   <ion-list>
@@ -31,33 +25,11 @@
       <ion-label>Einstellung 2</ion-label>
       <ion-toggle color="danger" [(ngModel)]="Setting2"></ion-toggle>
     </ion-item>
-=======
-</div>
-
-<!-- desktop web app -->
-<div *ngIf="plt == 'desktopweb'">
-
-    <ion-header>
-        <ion-navbar>
-            <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title>Settings</ion-title>
-        </ion-navbar>
-    </ion-header>
-
-</div>
->>>>>>> master
 
     <ion-item color="dark">
       <ion-label>Einstellung 3</ion-label>
       <ion-toggle color="danger" [(ngModel)]="Setting3"></ion-toggle>
     </ion-item>
 
-<<<<<<< HEAD
   </ion-list>
-=======
->>>>>>> master
 </ion-content>
