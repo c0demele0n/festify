@@ -6,27 +6,27 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>SettingsPage</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>Einstellungen</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="content">
   <ion-list>
 
-    <ion-item>
+    <ion-item color="dark">
       <ion-label>Farbschema dunkel</ion-label>
-      <ion-toggle [(ngModel)]="DarkMode"></ion-toggle>
+      <ion-toggle color="danger" [(ngModel)]="DarkMode"></ion-toggle>
     </ion-item>
 
-    <ion-item>
+    <ion-item color="dark">
       <ion-label>Einstellung 2</ion-label>
-      <ion-toggle [(ngModel)]="Setting2"></ion-toggle>
+      <ion-toggle color="danger" [(ngModel)]="Setting2"></ion-toggle>
     </ion-item>
 
-    <ion-item>
+    <ion-item color="dark">
       <ion-label>Einstellung 3</ion-label>
-      <ion-toggle [(ngModel)]="Setting3"></ion-toggle>
+      <ion-toggle color="danger" [(ngModel)]="Setting3"></ion-toggle>
     </ion-item>
 
   </ion-list>
