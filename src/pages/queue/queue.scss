@@ -13,14 +13,6 @@ page-queue {
         float: left;
     }
 
-    .queue {
-        background-color: #1c1f24;
-    }
-
-    .text p {
-        color: white;
-        font-size: 18px;
-    }
     .label {
         display: block;
         flex: 1;
@@ -28,14 +20,8 @@ page-queue {
         color: white;
         text-align: center;
     }
-    .icon {
-        margin-left: 20px;
-        color: white;
-    }
     .share-button {
         display: block;
         margin: 0 auto;
-        font-size: 150%;
-        background-color: #951518;
     }
 }

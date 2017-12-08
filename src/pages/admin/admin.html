@@ -16,23 +16,27 @@
 
 <!-- end: header: desktop web app -->
 
-<ion-content class="background">
-    <ion-list>
-        <ion-item class="background">
-            <ion-label color="completeWhite">Party Name: </ion-label>
-            <ion-input class="white" type="text" placeholder="Type here"></ion-input>
+<ion-content>
+    <ion-list margin>
+        <ion-item>
+            <ion-label>Party Name: </ion-label>
+            <ion-input type="text" placeholder="Type here"></ion-input>
         </ion-item>
-        <ion-item class="background" *ngFor="let playlist of playlists ">
+    </ion-list>
+
+
+    <ion-list>
+        <ion-item *ngFor="let playlist of playlists ">
             <ion-thumbnail item-start>
                 <img ion-img [src]="playlist.thumbnail" />
             </ion-thumbnail>
-            <h2 class="white ">{{playlist.Name}}</h2>
-            <p class="white ">{{ amount }} {{playlist.AnzTitel}} </p>
+            <h2>{{playlist.Name}}</h2>
+            <p>{{ amount }} {{playlist.AnzTitel}} </p>
             <button ion-button clear item-end icon-only>
-                <ion-icon class="white" name="shuffle"></ion-icon>
+                <ion-icon name="shuffle"></ion-icon>
             </button>
             <button ion-button clear item-end icon-only>
-                <ion-icon class="white" name="add"></ion-icon>
+                <ion-icon name="add"></ion-icon>
             </button>
         </ion-item>
     </ion-list>

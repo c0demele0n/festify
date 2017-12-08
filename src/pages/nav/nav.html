@@ -22,7 +22,7 @@
             </ion-navbar>
         </ion-header>
 
-        <ion-tabs #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
+        <ion-tabs color="tuna" #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
             <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
             <ion-tab tabTitle="{{tab3.Name}}" tabIcon="{{tab3.Icon}}" [root]="tab3.Page"></ion-tab>
@@ -35,17 +35,17 @@
             <ion-navbar>
                 <ion-title>{{currentTabName}}</ion-title>
                 <ion-buttons end>
-                    <button ion-button icon-only (tap)="shareParty()">
+                    <button ion-button icon-only color="white" (tap)="shareParty()">
                         <ion-icon name="share"></ion-icon>
                     </button>
-                    <button ion-button icon-only (tap)="toggleMore()">
+                    <button ion-button icon-only color="white" (tap)="toggleMore()">
                         <ion-icon name="more"></ion-icon>
                     </button>
                 </ion-buttons>
             </ion-navbar>
         </ion-header>
 
-        <ion-tabs #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
+        <ion-tabs color="tuna" #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
             <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
         </ion-tabs>
