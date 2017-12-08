@@ -2,11 +2,16 @@ import { Component } from '@angular/core'
 import { Platform } from 'ionic-angular'
 import { StatusBar } from '@ionic-native/status-bar'
 import { SplashScreen } from '@ionic-native/splash-screen'
+<<<<<<< HEAD
 
 // page imports
 import { HomePage } from '../pages/home/home'
 import { NavPage } from '../pages/nav/nav'
 
+=======
+import { HomePage } from '../pages/home/home'
+import { QueuePage } from '../pages/queue/queue'
+>>>>>>> MPJ-63-queue-ui
 @Component({
     templateUrl: 'app.html'
 })
