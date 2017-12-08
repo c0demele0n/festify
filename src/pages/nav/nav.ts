@@ -79,7 +79,6 @@ export class NavPage {
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
-
         if (this.plt == 'desktopweb') {
             this.openPage(this.tab1.Page, this.tab1.Name)
         }
