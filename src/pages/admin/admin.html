@@ -1,18 +1,36 @@
 <!-- desktop web app -->
 <div *ngIf="plt == 'desktopweb'">
 
-    <ion-header>
-        <ion-navbar>
-            <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title>Admin</ion-title>
-        </ion-navbar>
-    </ion-header>
+  <ion-header>
+    <ion-navbar>
+      <ion-buttons left>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 </div>
+<ion-content class="background">
+  <ion-list>
+    <ion-item class="background">
+      <ion-label color="completeWhite">Party Name: </ion-label>
+      <ion-input class="white" type="text" placeholder="Type here"></ion-input>
+    </ion-item>
+    <ion-item class="background" *ngFor="let playlist of playlists ">
+      <ion-thumbnail item-start>
+        <img ion-img [src]="playlist.thumbnail" />
+      </ion-thumbnail>
+      <h2 class="white ">{{playlist.Name}}</h2>
+      <p class="white ">{{ amount }} {{playlist.AnzTitel}} </p>
+      <button ion-button clear item-end icon-only>
+        <ion-icon class="white" name="shuffle"></ion-icon>
+      </button>
+      <button ion-button clear item-end icon-only>
+        <ion-icon class="white" name="add"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 
-<ion-content padding>
 </ion-content>
