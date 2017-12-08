@@ -42,3 +42,30 @@
 a {
     color: color($colors, white);
 }
+
+.striped {
+    .item {
+        color: color($colors, white);
+        &:nth-child(even) {
+            background-color: color($colors, cinder);
+        }
+        &:nth-child(odd) {
+            background-color: color($colors, blackRussian);
+        }
+        img {
+            border: 2px solid white;
+        }
+        .icon {
+            color: color($colors, white);
+        }
+    }
+}
+
+.side-menu {
+    background-color: color($colors, white);
+    color: color($colors, primary);
+
+    .item:hover {
+        color: color($colors, primary);
+    }
+}
