@@ -6,4 +6,36 @@ page-queue {
     .content-md {
         margin-top: 56px !important;
     }
+    .searchbar-search-icon {
+        display: block;
+        width: 0;
+        height: 0;
+        float: left;
+    }
+
+    .queue {
+        background-color: #1c1f24;
+    }
+
+    .text p {
+        color: white;
+        font-size: 18px;
+    }
+    .label {
+        display: block;
+        flex: 1;
+        font-size: 200%;
+        color: white;
+        text-align: center;
+    }
+    .icon {
+        margin-left: 20px;
+        color: white;
+    }
+    .share-button {
+        display: block;
+        margin: 0 auto;
+        font-size: 150%;
+        background-color: #951518;
+    }
 }
