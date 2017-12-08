@@ -3,33 +3,51 @@
 
     <!-- android -->
     <ion-header showWhen="android">
-        <ion-navbar color="dark">
+        <ion-navbar>
             <ion-title>Einstellungen</ion-title>
             <ion-buttons left>
-                <button ion-button icon-oncly navPop>
+                <button ion-button icon-only navPop>
                     <ion-icon name="arrow-round-back"></ion-icon>
                 </button>
             </ion-buttons>
         </ion-navbar>
     </ion-header>
 
-<ion-content padding class="content">
-  <ion-list>
+</div>
 
-    <ion-item color="dark">
-      <ion-label>Farbschema dunkel</ion-label>
-      <ion-toggle color="danger" [(ngModel)]="DarkMode"></ion-toggle>
-    </ion-item>
+<!-- desktop web app -->
+<div *ngIf="plt == 'desktopweb'">
 
-    <ion-item color="dark">
-      <ion-label>Einstellung 2</ion-label>
-      <ion-toggle color="danger" [(ngModel)]="Setting2"></ion-toggle>
-    </ion-item>
+    <ion-header>
+        <ion-navbar>
+            <ion-buttons left>
+                <button ion-button icon-only menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>Settings</ion-title>
+        </ion-navbar>
+    </ion-header>
 
-    <ion-item color="dark">
-      <ion-label>Einstellung 3</ion-label>
-      <ion-toggle color="danger" [(ngModel)]="Setting3"></ion-toggle>
-    </ion-item>
+</div>
 
-  </ion-list>
+<ion-content>
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Farbschema dunkel</ion-label>
+            <ion-toggle color="danger" [(ngModel)]="DarkMode"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Einstellung 2</ion-label>
+            <ion-toggle color="danger" [(ngModel)]="Setting2"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Einstellung 3</ion-label>
+            <ion-toggle color="danger" [(ngModel)]="Setting3"></ion-toggle>
+        </ion-item>
+
+    </ion-list>
 </ion-content>

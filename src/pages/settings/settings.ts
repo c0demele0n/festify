@@ -1,9 +1,5 @@
 import { Component } from '@angular/core'
-<<<<<<< HEAD
-import { IonicPage, NavController, NavParams } from 'ionic-angular'
-=======
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
->>>>>>> master
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
@@ -14,14 +10,7 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
     templateUrl: 'settings.html'
 })
 export class SettingsPage {
-<<<<<<< HEAD
     dark: boolean = false
-
-    constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad SettingsPage')
-=======
     plt: string
 
     constructor(
@@ -32,6 +21,5 @@ export class SettingsPage {
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
->>>>>>> master
     }
 }
