@@ -1,22 +1,20 @@
-<ion-content padding class="background">
+<ion-content class="background">
   <ion-list>
     <ion-item class="background">
-      <span style="color:white; float:left;">
-        Party name
-      </span>
-      <span style="color:white; float:right;">
-        Hmmm
-      </span>
+      <ion-label color="completeWhite">Party Name: </ion-label>
+      <ion-input class="white" type="text" placeholder="Type here"></ion-input>
     </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item class="background " *ngFor="let playlist of playlists ">
-      <p class="white ">{{playlist.Name}}</p>
+    <ion-item class="background" *ngFor="let playlist of playlists ">
+      <ion-thumbnail item-start>
+        <img ion-img [src]="playlist.thumbnail" />
+      </ion-thumbnail>
+      <h2 class="white ">{{playlist.Name}}</h2>
+      <p class="white ">{{ amount }} {{playlist.AnzTitel}} </p>
       <button ion-button clear item-end icon-only>
-        <ion-icon class="white" name="menu"></ion-icon>
+        <ion-icon class="white" name="shuffle"></ion-icon>
       </button>
       <button ion-button clear item-end icon-only>
-        <ion-icon class="white" name="heart"></ion-icon>
+        <ion-icon class="white" name="add"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

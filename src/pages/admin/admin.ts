@@ -16,29 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular'
 export class AdminPage {
     playlists = []
     generalName: string = 'Name of Party:'
+    amount: String = 'Nr. of Titles:'
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         this.playlists = [
             this.playlist1,
-            this.playlist2,
             this.playlist1,
-            this.playlist2
+            this.playlist1,
+            this.playlist1
         ]
     }
     playlist1: any = {
-        Name: 'Meine Plylist1',
+        Name: 'Cool Playlist !',
         AnzTitel: '43',
-        Titel: {
-            Name: 'Schlecht',
-            Dauer: '5.00'
-        }
-    }
-    playlist2: any = {
-        Name: 'Meine Plylist2',
-        AnzTitel: '5',
-        Titel: {
-            Name: 'Toll',
-            Dauer: '7.00'
-        }
+        thumbnail: '../assets/imgs/logo.png'
     }
 }
