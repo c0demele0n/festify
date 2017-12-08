@@ -8,7 +8,7 @@ export class PlatformServiceProvider {
     plt: string
 
     // toggle 'dev' to 'true' when testing the application in your local browser
-    dev: boolean = false
+    dev: boolean = true
 
     constructor(public platform: Platform) {
         // platforms

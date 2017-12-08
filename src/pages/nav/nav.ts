@@ -57,7 +57,7 @@ export class NavPage {
         Icon: 'settings'
     }
     tab4: any = {
-        Name: 'Tv Mode',
+        Name: 'TV Mode',
         Page: TvModePage,
         Icon: 'desktop'
     }
