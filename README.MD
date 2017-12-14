@@ -14,8 +14,7 @@ Install the following tools to work on the project:
 * [xCode](https://developer.apple.com/xcode/): (for iOS Builds - MacOS only)
 * [Android Studio](https://developer.android.com/studio/install.html): (for
   Anrdoid Builds)
-* [Firebase Tools](https://github.com/firebase/firebase-tools): `npm i -g
-  firebase-tools`
+* [Firebase Tools](https://github.com/firebase/firebase-tools): `npm i -g firebase-tools`
 * [git](https://git-scm.com/downloads)
 * [ionic](https://ionicframework.com): `npm i -g ionic`
 * [cordova](https://cordova.apache.org/#getstarted): `npm i -g cordova`
@@ -26,7 +25,7 @@ Install the following tools to work on the project:
 > as Web-Browser for debugging.
 >
 > Helpful Visual Studio Code Plugins:
-> 
+>
 > * Prettier - Code formatter (auto indent and syntax structure)
 
 ### Error Handling
@@ -67,3 +66,14 @@ Install the following tools to work on the project:
 ## Spotify Integration
 
 * [Web-Api](https://developer.spotify.com/web-api/)
+
+--
+
+## iOS Build Information
+
+When building the app for iOS, there is a bug with the statusbar text-color. If the statusbar text-color is dark, you have to do the following:
+
+1. Open the Xcode Project
+2. Goto 'festify-info.plist'
+3. Change 'Status bar style' to `Transparent Black Style``
+4. Change 'View controller-based status bar appearance' to `NO`(if this field is not present, you can add it by clicking +)
