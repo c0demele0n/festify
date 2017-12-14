@@ -117,3 +117,14 @@ a {
     }
   }
 }
+@font-face {
+  font-family: 'fest-ion';
+  src: url('../assets/fonts/fest-ion/fest-ion.eot?s11258');
+  src: url('/assets/fonts/fest-ion/fest-ion.eot?s11258#iefix')
+      format('embedded-opentype'),
+    url('/assets/fonts/fest-ion/fest-ion.ttf?s11258') format('truetype'),
+    url('/assets/fonts/fest-ion/fest-ion.woff?s11258') format('woff'),
+    url('/assets/fonts/fest-ion/fest-ion.svg?s11258#fest-ion') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
