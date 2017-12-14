@@ -22,38 +22,42 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
+// Plugins
+import { SocialSharing } from '@ionic-native/social-sharing'
+
 @NgModule({
-    declarations: [
-        MyApp,
-        NavPage,
-        HomePage,
-        QueuePage,
-        AdminPage,
-        SettingsPage,
-        MorePage,
-        TvModePage
-    ],
-    imports: [BrowserModule, IonicModule.forRoot(MyApp)],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        NavPage,
-        HomePage,
-        QueuePage,
-        AdminPage,
-        SettingsPage,
-        MorePage,
-        TvModePage
-    ],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
-        FirebaseProvider,
-        SettingsProvider,
-        ErrorHandlerProvider,
-        PlatformServiceProvider,
-        SpotifyProvider
-    ]
+  declarations: [
+    MyApp,
+    NavPage,
+    HomePage,
+    QueuePage,
+    AdminPage,
+    SettingsPage,
+    MorePage,
+    TvModePage
+  ],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    NavPage,
+    HomePage,
+    QueuePage,
+    AdminPage,
+    SettingsPage,
+    MorePage,
+    TvModePage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    FirebaseProvider,
+    SettingsProvider,
+    ErrorHandlerProvider,
+    PlatformServiceProvider,
+    SpotifyProvider,
+    SocialSharing
+  ]
 })
 export class AppModule {}
