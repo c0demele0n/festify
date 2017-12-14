@@ -10,7 +10,8 @@ import {
   ViewController,
   ModalController,
   Tabs,
-  AlertController
+  AlertController,
+  ActionSheetController
 } from 'ionic-angular'
 
 // page imports
@@ -23,6 +24,9 @@ import { MorePage } from '../more/more'
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
+
+// plugin imports
+import { SocialSharing } from '@ionic-native/social-sharing'
 
 @IonicPage()
 @Component({
@@ -69,6 +73,15 @@ export class NavPage {
   // string which holds the current platform name
   plt: string
 
+  // array which holds all available sharing options
+  sharingOptions = [
+    { Name: 'sms', Status: false },
+    { Name: 'mail', Status: false },
+    { Name: 'whatsapp', Status: false }
+  ]
+
+  availableSharingoptions = []
+
   constructor(
     public nav: Nav,
     public navCtrl: NavController,
@@ -77,7 +90,9 @@ export class NavPage {
     public platform: PlatformServiceProvider,
     public popoverCtrl: PopoverController,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public socialSharing: SocialSharing,
+    public actionSheetCtrl: ActionSheetController
   ) {
     // get partyname from nav params
     console.log('Partyname: ' + this.navParams.get('partyName'))
@@ -149,7 +164,63 @@ export class NavPage {
 
   // function which provides a share link to the current party
   shareParty() {
-    console.log('shareParty()')
+    // Check if sharing via 'sharingOptions' is supported
+    this.sharingOptions.forEach(option => {
+      console.log('check sharing option: ' + option.Name)
+
+      this.socialSharing
+        .canShareVia(option.Name)
+        .then(() => {
+          console.log(option.Name + ' true')
+        })
+        .catch(() => {
+          console.log(option.Name + ' false')
+        })
+    })
+
+    this.sharingOptions.forEach(option => {
+      if (option.Status) {
+        this.availableSharingoptions.push(option)
+      }
+    })
+
+    console.log('available sharing options')
+    this.availableSharingoptions.forEach(option => {
+      console.log(option.Name)
+    })
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Sharing options',
+      buttons: [
+        {
+          text: 'SMS',
+          handler: () => {
+            console.log('Destructive clicked')
+          }
+        },
+        {
+          text: 'Mail',
+          handler: () => {
+            console.log('Archive clicked')
+          }
+        },
+        {
+          text: 'WhatsApp',
+          handler: () => {
+            this.socialSharing.shareVia()
+          }
+        },
+        {
+          text: 'cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked')
+          }
+        }
+      ]
+    })
+
+    actionSheet.present()
   }
 
   // function which pushes the settings-page to the navigation stack
