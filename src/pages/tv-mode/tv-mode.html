@@ -44,29 +44,33 @@
 <ion-content padding>
     <img ion-img [src]="current.thumbnail" class="background">
 
-    <div class="upper">
-        <div class="playing-track">
+    <ion-grid>
+        <ion-row wrap>
+            <ion-col>
+                <!-- <ion-thumbnail item-start> -->
+                <img [src]="current.thumbnail" />
+                <!-- </ion-thumbnail> -->
+            </ion-col>
+            <ion-col>
+                <div class="metadata">
+                    <h2>{{current.name}}</h2>
+                    <h3>{{current.artist}}</h3>
 
-            <img ion-img [src]="current.thumbnail">
-
-            <div class="metadata">
-                <h2>{{current.name}}</h2>
-                <h3>{{current.artist}}</h3>
-
-                <h4>Go to festify.us/{{meta.url}} and vote!</h4>
-                <h5>{{meta.id}}</h5>
-            </div>
-        </div>
-    </div>
-    <ion-list class="queueList">
-        <ion-item *ngFor="let track of queue">
-            <ion-thumbnail item-start>
-                <img ion-img [src]="track.thumbnail" />
-            </ion-thumbnail>
-            <h2>{{track.name}}</h2>
-            <p>{{track.artist}} </p>
-        </ion-item>
-    </ion-list>
+                    <h4>Go to festify.us/{{meta.url}} and vote!</h4>
+                    <h5>{{meta.id}}</h5>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row wrap>
+            <ion-col *ngFor="let track of queue">
+                <!-- <ion-thumbnail item-start> -->
+                <img [src]="track.thumbnail" />
+                <!-- </ion-thumbnail> -->
+                <h2>{{track.name}}</h2>
+                <p>{{track.artist}} </p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
 <!--     <dom-flip>
         <template is="dom-repeat" items="[[_getVisibleTracks(tracks.*)]]">

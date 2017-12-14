@@ -1,53 +1,12 @@
 page-tv-mode {
-  :host {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: hidden;
-    font-size: 5.278vh;
-  }
-  :host(.nocursor) {
-    cursor: none;
-  }
-  .upper,
-  dom-flip {
-    font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-    display: flex;
-    z-index: 1;
-  }
-  .upper {
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 8.334vh;
-    overflow: hidden;
-    flex-grow: 1;
-    width: 100%;
-  }
-  dom-flip {
-    flex-direction: row;
-    height: 29.26vh;
-    padding-left: 8.334vh;
-  }
-  tv-track {
-    --max-width: 18.889vh;
-    margin-right: 4.815vh;
-  }
-  .playing-track {
-    display: flex;
-    align-items: center;
-    z-index: 1;
-  }
-  .playing-track size-aware-image {
-    margin-right: 8.334vh;
-    height: 49vh;
-    width: 49vh;
-    box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.5);
-  }
+  //   .upper {
+  //     height: 80vh;
+  //   }
+
+  //   .lower {
+  //     height: 5vh;
+  //   }
+
   .background {
     position: absolute;
     left: -3.704vh;
@@ -57,40 +16,119 @@ page-tv-mode {
     filter: blur(50px);
     opacity: 0.3;
   }
-  playback-progress-bar {
-    margin: 4.167vh 0;
-    height: 0.556vh;
-    background: rgba(255, 255, 255, 0.2);
+
+  ion-grid,
+  ion-row,
+  ion-col {
+    height: 100%;
+
+    // ion-row {
+    //   height: 100%;
+
+    // }
   }
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin: 0;
-    opacity: 0.9;
+
+  img {
+    width: auto;
+    height: 100%;
   }
-  h2 {
-    font-size: 5.278vh;
-    font-weight: normal;
-    line-height: 7.407vh;
+
+  ion-navbar {
+    opacity: 0;
   }
-  h3 {
-    font-size: 5.278vh;
-    font-weight: 100;
-    line-height: 7.407vh;
-  }
-  h4 {
-    font-size: 4.444vh;
-    font-weight: normal;
-    line-height: 5.185vh;
-    margin-bottom: 0.741vh;
-  }
-  h5 {
-    font-size: 4.444vh;
-    font-weight: 100;
-    line-height: 5.185vh;
-  }
-  .metadata {
-    flex-grow: 1;
-  }
+
+  // :host {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: stretch;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   overflow: hidden;
+  //   font-size: 5.278vh;
+  // }
+  // :host(.nocursor) {
+  //   cursor: none;
+  // }
+  // .upper,
+  // dom-flip {
+  //   font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  //   display: flex;
+  //   z-index: 1;
+  // }
+  // .upper {
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   padding: 0 8.334vh;
+  //   overflow: hidden;
+  //   flex-grow: 1;
+  //   width: 100%;
+  // }
+  // dom-flip {
+  //   flex-direction: row;
+  //   height: 29.26vh;
+  //   padding-left: 8.334vh;
+  // }
+  // tv-track {
+  //   --max-width: 18.889vh;
+  //   margin-right: 4.815vh;
+  // }
+  // .playing-track {
+  //   display: flex;
+  //   align-items: center;
+  //   z-index: 1;
+  // }
+  // .playing-track size-aware-image {
+  //   margin-right: 8.334vh;
+  //   height: 49vh;
+  //   width: 49vh;
+  //   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.5);
+  // }
+  // .background {
+  //   position: absolute;
+  //   left: -3.704vh;
+  //   top: -3.704vh;
+  //   right: -3.704vh;
+  //   bottom: -3.704vh;
+  //   filter: blur(50px);
+  //   opacity: 0.3;
+  // }
+  // playback-progress-bar {
+  //   margin: 4.167vh 0;
+  //   height: 0.556vh;
+  //   background: rgba(255, 255, 255, 0.2);
+  // }
+  // h2,
+  // h3,
+  // h4,
+  // h5 {
+  //   margin: 0;
+  //   opacity: 0.9;
+  // }
+  // h2 {
+  //   font-size: 5.278vh;
+  //   font-weight: normal;
+  //   line-height: 7.407vh;
+  // }
+  // h3 {
+  //   font-size: 5.278vh;
+  //   font-weight: 100;
+  //   line-height: 7.407vh;
+  // }
+  // h4 {
+  //   font-size: 4.444vh;
+  //   font-weight: normal;
+  //   line-height: 5.185vh;
+  //   margin-bottom: 0.741vh;
+  // }
+  // h5 {
+  //   font-size: 4.444vh;
+  //   font-weight: 100;
+  //   line-height: 5.185vh;
+  // }
+  // .metadata {
+  //   flex-grow: 1;
+  // }
 }
