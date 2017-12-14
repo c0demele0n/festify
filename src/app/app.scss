@@ -70,7 +70,8 @@
   padding-top: 0px !important;
   margin-top: 66px;
 }
-.striped.list-ios {
+.bar-button-default-ios {
+  color: color($colors, white) !important;
 }
 // ###########################################################
 
@@ -78,6 +79,10 @@
 // ###########################################################
 .content-md {
   margin-top: 56px;
+}
+
+.bar-button-default-md {
+  color: color($colors, white) !important;
 }
 // ###########################################################
 
