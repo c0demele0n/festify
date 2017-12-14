@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Platform } from 'ionic-angular'
 
@@ -19,7 +19,6 @@ export class SpotifyProvider {
 
   // accessToken returned from successful login
   accessToken = this._getHashParams().access_token || false
-
   // set platform dependent redirectURI
   constructor(public http: HttpClient, public plt: Platform) {
     this.config.redirectURI = plt.is('mobile') ? 'festion://' : 'http://localhost:8100'
@@ -38,6 +37,23 @@ export class SpotifyProvider {
 
   isLoggedIn() {
     return this.accessToken ? true : false
+  }
+
+  /* wait for Spotify to return tracks for query
+     call in async function:
+     let result = await this.spotify.getTracks(query)
+  */
+  async getTracks(searchQuery) {
+    const query = encodeURIComponent(searchQuery)
+    const url = `https://api.spotify.com/v1/search?q=${query}&type=track`
+    const authorization = 'Bearer ' + this.accessToken
+    const header = new HttpHeaders({ Authorization: authorization })
+
+    const result = await new Promise(resolve => {
+      this.http.get(url, { headers: header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+    // TODO: define structure results - code works!
+    return result.tracks.items
   }
 
   // extract hash parameters from current url
