@@ -10,18 +10,20 @@ import { Platform } from 'ionic-angular'
 */
 @Injectable()
 export class SpotifyProvider {
-  // declare spotify credentials
-  config = {
-    clientID: '2d3395530b5641dba4f40c4571465621',
-    scope: 'user-read-private user-read-email',
-    redirectURI: ''
-  }
+  // holds spotify credentials
+  config: any
 
-  // accessToken returned from successful login
-  accessToken = this._getHashParams().access_token || false
-  // set platform dependent redirectURI
+  // api token from successful login
+  accessToken: string
+
+  // set credentials and token
   constructor(public http: HttpClient, public plt: Platform) {
-    this.config.redirectURI = plt.is('mobile') ? 'festion://' : 'http://localhost:8100'
+    this.config = {
+      clientID: '2d3395530b5641dba4f40c4571465621',
+      scope: 'user-read-private user-read-email',
+      redirectURI: plt.is('mobile') ? 'festion://' : 'http://localhost:8100'
+    }
+    this.setAccessToken()
   }
 
   // compose spotify login url from config and open it in browser
@@ -35,6 +37,17 @@ export class SpotifyProvider {
     window.location.href = url
   }
 
+  // get and set access token from url
+  setAccessToken(url = window.location.href) {
+    const tokens = url.split('#')
+    if (tokens.length <= 1) return
+
+    const hash = tokens[tokens.length - 1]
+    const token = hash.split('&')[0].replace('access_token=', '')
+    this.accessToken = token
+  }
+
+  // you are logged in if you have an access token
   isLoggedIn() {
     return this.accessToken ? true : false
   }
@@ -52,19 +65,6 @@ export class SpotifyProvider {
     const result = await new Promise(resolve => {
       this.http.get(url, { headers: header }).subscribe(data => resolve(data), err => console.log(err))
     })
-    // TODO: define structure results - code works!
-    return result.tracks.items
-  }
-
-  // extract hash parameters from current url
-  _getHashParams() {
-    let hashParams = { access_token: false }
-    let e,
-      r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1)
-    while ((e = r.exec(q))) {
-      hashParams[e[1]] = decodeURIComponent(e[2])
-    }
-    return hashParams
+    return (result as any).tracks.items
   }
 }
