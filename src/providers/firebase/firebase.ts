@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { AngularFireDatabase } from 'angularfire2/database'
-import { AngularFireAuth } from 'angularfire2/auth'
+import firebase from 'firebase'
+
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -10,13 +10,23 @@ import { AngularFireAuth } from 'angularfire2/auth'
 */
 @Injectable()
 export class FirebaseProvider {
-  constructor(public afd: AngularFireDatabase, public auth: AngularFireAuth) {
-    this.auth.auth.signInAnonymously()
-    // auth.authState.subscribe(user => {
-    //   console.log(user)
-    //   if (user) {
-    //     console.log(user.uid)
-    //   }
-    // })
+  public fireAuth: firebase.auth.Auth
+  public userProfile: firebase.database.Reference
+  public currentUser: firebase.User
+ 
+  constructor() {
+    this.userProfile = firebase.database().ref('/userProfile')
+    this.fireAuth = firebase.auth()
+
+    firebase.auth().onAuthStateChanged(user => {
+      this.currentUser = user
+      var uid = user.uid
+      console.log(user)
+      console.log('UID: ', uid)
+    })
+  }
+  // methode: signin to the Firebase as anonymous user
+  createAnonymousUser() {
+    return this.fireAuth.signInAnonymously()
   }
 }

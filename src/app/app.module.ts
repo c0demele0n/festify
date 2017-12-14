@@ -3,9 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
-import { AngularFireDatabaseModule } from 'angularfire2/database'
-import { AngularFireModule } from 'angularfire2'
-import { AngularFireAuthModule } from 'angularfire2/auth'
 import { HttpModule } from '@angular/http'
 import { MyApp } from './app.component'
 
@@ -25,14 +22,6 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
-var config = {
-  apiKey: 'AIzaSyDl9A10FlNzy3smQQWp11RzYVPs2FgOzMg',
-  authDomain: 'festify-dev.firebaseapp.com',
-  databaseURL: 'https://festify-dev.firebaseio.com',
-  projectId: 'festify-dev',
-  storageBucket: 'festify-dev.appspot.com',
-  messagingSenderId: '1010348797724'
-}
 
 @NgModule({
   declarations: [
@@ -48,10 +37,6 @@ var config = {
   imports: [
     BrowserModule,
     HttpModule,
-    AngularFireDatabaseModule,
-    AngularFireModule,
-    AngularFireModule.initializeApp(config),
-
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
