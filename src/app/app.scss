@@ -63,11 +63,14 @@
 }
 
 .content-ios {
-  margin-top: 60px;
+  //   margin-top: 60px;
 }
 
+.content-ios div.scroll-content {
+  padding-top: 0px !important;
+  margin-top: 66px;
+}
 .striped.list-ios {
-  margin-top: 12px;
 }
 // ###########################################################
 

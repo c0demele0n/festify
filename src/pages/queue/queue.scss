@@ -1,27 +1,20 @@
 page-queue {
-    .content-ios {
-        margin-top: 44px !important;
-    }
+  .searchbar-search-icon {
+    display: block;
+    width: 0;
+    height: 0;
+    float: left;
+  }
 
-    .content-md {
-        margin-top: 56px !important;
-    }
-    .searchbar-search-icon {
-        display: block;
-        width: 0;
-        height: 0;
-        float: left;
-    }
-
-    .label {
-        display: block;
-        flex: 1;
-        font-size: 200%;
-        color: white;
-        text-align: center;
-    }
-    .share-button {
-        display: block;
-        margin: 0 auto;
-    }
+  .label {
+    display: block;
+    flex: 1;
+    font-size: 200%;
+    color: white;
+    text-align: center;
+  }
+  .share-button {
+    display: block;
+    margin: 0 auto;
+  }
 }
