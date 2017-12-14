@@ -14,82 +14,98 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+// general styles (for all platforms)
+// ###########################################################
 .searchbar {
-    background-color: color($colors, dark);
-}
-
-.title-ios {
-    margin-top: 12px;
-}
-
-.toolbar-ios {
-    padding-top: 30px;
+  background-color: color($colors, dark);
 }
 
 .toolbar-background {
-    background-color: color($colors, darkJungleGreen);
+  background-color: color($colors, darkJungleGreen);
 }
 
 .toolbar-title {
-    color: color($colors, white);
+  color: color($colors, white);
 }
 
 .content {
-    background-color: color($colors, dark);
-    color: color($colors, white);
-}
-
-.content-ios {
-    margin-top: 60px;
-}
-
-.content-md {
-    margin-top: 56px;
+  background-color: color($colors, dark);
+  color: color($colors, white);
 }
 
 .bar-button-menutoggle {
-    color: color($colors, white) !important;
+  color: color($colors, white) !important;
 }
 
 .item-input .label {
-    color: black;
-}
-
-.center {
-    text-align: center;
-}
-
-a {
-    color: color($colors, white);
-}
-
-.striped {
-    .item {
-        color: color($colors, white);
-        &:nth-child(even) {
-            background-color: color($colors, cinder);
-        }
-        &:nth-child(odd) {
-            background-color: color($colors, blackRussian);
-        }
-        img {
-            border: 2px solid white;
-        }
-        .icon {
-            color: color($colors, white);
-        }
-    }
-}
-
-.striped.list-ios {
-    margin-top: 20px;
+  color: black;
 }
 
 .side-menu {
-    background-color: color($colors, white);
-    color: color($colors, primary);
+  background-color: color($colors, white);
+  color: color($colors, primary);
 
-    .item:hover {
-        color: color($colors, primary);
+  .item:hover {
+    color: color($colors, primary);
+  }
+}
+// ###########################################################
+
+// platform specific styles
+// iOS
+// ###########################################################
+.title-ios {
+  margin-top: 12px;
+}
+
+.toolbar-ios {
+  padding-top: 30px;
+}
+
+.content-ios {
+  margin-top: 60px;
+}
+
+.striped.list-ios {
+  margin-top: 12px;
+}
+// ###########################################################
+
+// Android
+// ###########################################################
+.content-md {
+  margin-top: 56px;
+}
+// ###########################################################
+
+// general css classes for styling special elements
+.center {
+  text-align: center;
+}
+
+.padding-side {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+a {
+  color: color($colors, white);
+}
+
+.striped {
+  .item {
+    color: color($colors, white);
+    &:nth-child(even) {
+      background-color: color($colors, cinder);
     }
+    &:nth-child(odd) {
+      background-color: color($colors, blackRussian);
+    }
+    img {
+      border: 2px solid white;
+    }
+    .icon {
+      color: color($colors, white);
+    }
+  }
 }
