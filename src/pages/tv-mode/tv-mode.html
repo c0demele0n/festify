@@ -45,7 +45,7 @@
     <img ion-img [src]="current.thumbnail" class="background">
 
     <ion-grid>
-        <ion-row wrap>
+        <ion-row class="upper">
             <ion-col>
                 <!-- <ion-thumbnail item-start> -->
                 <img [src]="current.thumbnail" />
@@ -53,21 +53,26 @@
             </ion-col>
             <ion-col>
                 <div class="metadata">
-                    <h2>{{current.name}}</h2>
-                    <h3>{{current.artist}}</h3>
+                    <p>{{current.name}}</p>
+                    <p>{{current.artist}}</p>
 
-                    <h4>Go to festify.us/{{meta.url}} and vote!</h4>
-                    <h5>{{meta.id}}</h5>
+                    <p>Go to festify.us/{{meta.url}} and vote!</p>
+                    <p>{{meta.id}}</p>
                 </div>
             </ion-col>
         </ion-row>
-        <ion-row wrap>
+        <ion-row class="cover">
             <ion-col *ngFor="let track of queue">
-                <!-- <ion-thumbnail item-start> -->
                 <img [src]="track.thumbnail" />
-                <!-- </ion-thumbnail> -->
-                <h2>{{track.name}}</h2>
-                <p>{{track.artist}} </p>
+
+            </ion-col>
+        </ion-row>
+        <ion-row class="low">
+            <ion-col *ngFor="let track of queue">
+                <div class="fit">
+                    {{track.name}}
+                    <br>{{track.artist}}
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>

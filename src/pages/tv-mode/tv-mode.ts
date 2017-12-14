@@ -22,7 +22,14 @@ export class TvModePage {
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
-    ;(this.queue = [this.track1, this.track1, this.track1]),
+    ;(this.queue = [
+      this.track1,
+      this.track1,
+      this.track1,
+      this.track1,
+      this.track1,
+      this.track1
+    ]),
       (this.meta = [this.url, this.id])
   }
 

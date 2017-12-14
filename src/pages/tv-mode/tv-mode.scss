@@ -1,12 +1,4 @@
 page-tv-mode {
-  //   .upper {
-  //     height: 80vh;
-  //   }
-
-  //   .lower {
-  //     height: 5vh;
-  //   }
-
   .background {
     position: absolute;
     left: -3.704vh;
@@ -17,24 +9,25 @@ page-tv-mode {
     opacity: 0.3;
   }
 
-  ion-grid,
-  ion-row,
-  ion-col {
-    height: 100%;
-
-    // ion-row {
-    //   height: 100%;
-
-    // }
+  ion-grid {
+    height: 80%;
+    .upper {
+      height: 62%;
+    }
+    .cover {
+      height: 30%;
+    }
+    .low {
+      height: 8%;
+    }
   }
-
+  .fit {
+    height: 100%;
+  }
   img {
     width: auto;
     height: 100%;
-  }
-
-  ion-navbar {
-    opacity: 0;
+    //object-fit: scale-down;
   }
 
   // :host {
