@@ -30,6 +30,10 @@ export class AdminPage {
       this.playlist1,
       this.playlist1,
       this.playlist1,
+      this.playlist1,
+      this.playlist1,
+      this.playlist1,
+      this.playlist1,
       this.playlist1
     ]
   }

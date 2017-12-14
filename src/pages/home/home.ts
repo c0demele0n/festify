@@ -33,8 +33,18 @@ export class HomePage {
         {
           text: 'Party hard',
           handler: data => {
-            // redirect to NavPage
-            this.nav.setRoot(NavPage, { partyName: data.partyName })
+            // check if partyName is not empty
+            if (!data.partyName) {
+              let alert = this.alertCtrl.create({
+                title: 'Name is missing!',
+                subTitle: 'Please enter a name for your party',
+                buttons: ['Dismiss']
+              })
+              alert.present()
+            } else {
+              // redirect to NavPage
+              this.nav.setRoot(NavPage, { partyName: data.partyName })
+            }
           }
         }
       ]
