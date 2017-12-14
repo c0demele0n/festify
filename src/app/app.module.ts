@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
+import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component'
 
@@ -23,37 +24,19 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 @NgModule({
-    declarations: [
-        MyApp,
-        NavPage,
-        HomePage,
-        QueuePage,
-        AdminPage,
-        SettingsPage,
-        MorePage,
-        TvModePage
-    ],
-    imports: [BrowserModule, IonicModule.forRoot(MyApp)],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        NavPage,
-        HomePage,
-        QueuePage,
-        AdminPage,
-        SettingsPage,
-        MorePage,
-        TvModePage
-    ],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
-        FirebaseProvider,
-        SettingsProvider,
-        ErrorHandlerProvider,
-        PlatformServiceProvider,
-        SpotifyProvider
-    ]
+  declarations: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
+  bootstrap: [IonicApp],
+  entryComponents: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    FirebaseProvider,
+    SettingsProvider,
+    ErrorHandlerProvider,
+    PlatformServiceProvider,
+    SpotifyProvider
+  ]
 })
 export class AppModule {}
