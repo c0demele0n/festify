@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
+import { AngularFireDatabase } from 'angularfire2/database'
+import { AngularFireAuth } from 'angularfire2/auth'
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -9,9 +10,13 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class FirebaseProvider {
-
-  constructor(public http: HttpClient) {
-    console.log('Hello FirebaseProvider Provider');
+  constructor(public afd: AngularFireDatabase, public auth: AngularFireAuth) {
+    this.auth.auth.signInAnonymously()
+    // auth.authState.subscribe(user => {
+    //   console.log(user)
+    //   if (user) {
+    //     console.log(user.uid)
+    //   }
+    // })
   }
-
 }
