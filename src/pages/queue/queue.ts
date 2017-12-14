@@ -21,4 +21,11 @@ export class QueuePage {
         // get current platform
         this.plt = this.platform.getPlatform()
     }
+
+    Code: any = 504215
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad QueuePage')
+    }
+    shareLink() {}
 }

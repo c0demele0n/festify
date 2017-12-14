@@ -4,9 +4,9 @@
     <!-- android -->
     <ion-header showWhen="android">
         <ion-navbar>
-            <ion-title>Settings</ion-title>
+            <ion-title>Einstellungen</ion-title>
             <ion-buttons left>
-                <button ion-button icon-oncly navPop>
+                <button ion-button icon-only navPop>
                     <ion-icon name="arrow-round-back"></ion-icon>
                 </button>
             </ion-buttons>
@@ -31,6 +31,23 @@
 
 </div>
 
-<ion-content padding>
+<ion-content>
+    <ion-list class="striped">
 
+        <ion-item>
+            <ion-label>Farbschema dunkel</ion-label>
+            <ion-toggle [(ngModel)]="DarkMode"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Einstellung 2</ion-label>
+            <ion-toggle [(ngModel)]="Setting2"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Einstellung 3</ion-label>
+            <ion-toggle [(ngModel)]="Setting3"></ion-toggle>
+        </ion-item>
+
+    </ion-list>
 </ion-content>

@@ -44,7 +44,7 @@ export class NavPage {
     tab1: any = {
         Name: 'Queue',
         Page: QueuePage,
-        Icon: 'musical-notes'
+        Icon: 'icon-playlist'
     }
     tab2: any = {
         Name: 'Admin',
@@ -57,7 +57,7 @@ export class NavPage {
         Icon: 'settings'
     }
     tab4: any = {
-        Name: 'Tv Mode',
+        Name: 'TV Mode',
         Page: TvModePage,
         Icon: 'desktop'
     }
@@ -79,7 +79,6 @@ export class NavPage {
     ) {
         // get current platform
         this.plt = this.platform.getPlatform()
-
         if (this.plt == 'desktopweb') {
             this.openPage(this.tab1.Page, this.tab1.Name)
         }

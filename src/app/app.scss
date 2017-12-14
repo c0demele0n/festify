@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,113 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+// general styles (for all platforms)
+// ###########################################################
+.searchbar {
+  background-color: color($colors, dark);
+}
+
+.toolbar-background {
+  background-color: color($colors, darkJungleGreen);
+}
+
+.toolbar-title {
+  color: color($colors, white);
+}
+
+.content {
+  background-color: color($colors, dark);
+  color: color($colors, white);
+}
+
+.bar-button-menutoggle {
+  color: color($colors, white) !important;
+}
+
+.item-input .label {
+  color: black;
+}
+
+.side-menu {
+  background-color: color($colors, white);
+  color: color($colors, primary);
+
+  .item:hover {
+    color: color($colors, primary);
+  }
+}
+// ###########################################################
+
+// platform specific styles
+// iOS
+// ###########################################################
+.title-ios {
+  margin-top: 12px;
+}
+
+.toolbar-ios {
+  padding-top: 30px;
+}
+
+.content-ios {
+  //   margin-top: 60px;
+}
+
+.content-ios div.scroll-content {
+  padding-top: 0px !important;
+  margin-top: 66px;
+}
+.striped.list-ios {
+}
+// ###########################################################
+
+// Android
+// ###########################################################
+.content-md {
+  margin-top: 56px;
+}
+// ###########################################################
+
+// general css classes for styling special elements
+.center {
+  text-align: center;
+}
+
+.padding-side {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+a {
+  color: color($colors, white);
+}
+
+.striped {
+  .item {
+    color: color($colors, white);
+    &:nth-child(even) {
+      background-color: color($colors, cinder);
+    }
+    &:nth-child(odd) {
+      background-color: color($colors, blackRussian);
+    }
+    img {
+      border: 2px solid white;
+    }
+    .icon {
+      color: color($colors, white);
+    }
+  }
+}
+@font-face {
+  font-family: 'fest-ion';
+  src: url('../assets/fonts/fest-ion/fest-ion.eot?s11258');
+  src: url('/assets/fonts/fest-ion/fest-ion.eot?s11258#iefix')
+      format('embedded-opentype'),
+    url('/assets/fonts/fest-ion/fest-ion.ttf?s11258') format('truetype'),
+    url('/assets/fonts/fest-ion/fest-ion.woff?s11258') format('woff'),
+    url('/assets/fonts/fest-ion/fest-ion.svg?s11258#fest-ion') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

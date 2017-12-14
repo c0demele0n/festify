@@ -1,16 +1,8 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>
-            Start
-        </ion-title>
-    </ion-navbar>
-</ion-header>
-
-<ion-content padding class="background">
+<ion-content padding style="margin-top:0px">
     <!-- Image was taken from the original project / team Festify -->
     <img class="iconStartScreen" src="assets/imgs/icon.png">
-    <p class="whiteLettersStartPage">Festify is a free Spotify-powered app, that lets your guests choose which music should be played using their smartphones</p>
-    <button ion-button (click)="createParty()" class="buttonStartPage">CREATE A NEW PARTY</button>
-    <button ion-button (click)="joinParty()" class="buttonStartPage">JOIN A PARTY</button>
-    <button ion-button (click)="reopenParty()" class="buttonStartPage">REOPEN LAST PARTY</button>
+    <p class="center">Festify is a free Spotify-powered app, that lets your guests choose which music should be played using their smartphones</p>
+    <button ion-button block (tap)="createParty() ">CREATE A NEW PARTY</button>
+    <button ion-button block (tap)="joinParty() ">JOIN A PARTY</button>
+    <button ion-button block (tap)="reopenParty() ">REOPEN LAST PARTY</button>
 </ion-content>
