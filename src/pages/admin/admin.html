@@ -24,7 +24,7 @@
         </ion-item>
     </ion-list> -->
 
-    <ion-searchbar [(ngModel)]="myInput" placeholder="Partyname">
+    <ion-searchbar [(ngModel)]="partyName" (tap)="clearPartyName()" placeholder="{{partyNamePlaceholder}}">
     </ion-searchbar>
 
 

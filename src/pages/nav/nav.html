@@ -6,16 +6,19 @@
         <ion-header>
             <ion-navbar>
                 <ion-buttons start>
-                    <button ion-button icon-only color="white" (tap)="exitParty()">
+                    <!-- <button ion-button icon-only (tap)="exitParty()">
                         <ion-icon name="ios-exit-outline"></ion-icon>
+                    </button> -->
+                    <button ion-button (tap)="exitParty()">
+                        Exit
                     </button>
                 </ion-buttons>
                 <ion-title>{{currentTabName}}</ion-title>
                 <ion-buttons end>
-                    <button ion-button icon-only color="white" (tap)="showTvMode()">
+                    <button ion-button icon-only (tap)="showTvMode()">
                         <ion-icon name="ios-desktop-outline"></ion-icon>
                     </button>
-                    <button ion-button icon-only color="white" (tap)="shareParty()">
+                    <button ion-button icon-only (tap)="shareParty()">
                         <ion-icon name="ios-share-outline"></ion-icon>
                     </button>
                 </ion-buttons>
@@ -35,10 +38,10 @@
             <ion-navbar>
                 <ion-title>{{currentTabName}}</ion-title>
                 <ion-buttons end>
-                    <button ion-button icon-only color="white" (tap)="shareParty()">
+                    <button ion-button icon-only (tap)="shareParty()">
                         <ion-icon name="share"></ion-icon>
                     </button>
-                    <button ion-button icon-only color="white" (tap)="toggleMore()">
+                    <button ion-button icon-only (tap)="toggleMore()">
                         <ion-icon name="more"></ion-icon>
                     </button>
                 </ion-buttons>

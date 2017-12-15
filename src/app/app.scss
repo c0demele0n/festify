@@ -62,26 +62,44 @@
   padding-top: 30px;
 }
 
-.content-ios {
-  //   margin-top: 60px;
-}
-
 .content-ios div.scroll-content {
   padding-top: 0px !important;
   margin-top: 66px;
+  margin-bottom: 18px !important;
 }
-.striped.list-ios {
+.bar-button-default-ios {
+  color: color($colors, white) !important;
 }
 // ###########################################################
 
 // Android
 // ###########################################################
-.content-md {
+.content-md div.scroll-content {
   margin-top: 56px;
+  margin-bottom: 40px !important;
+}
+
+.bar-button-default-md {
+  color: color($colors, white) !important;
+}
+// ###########################################################
+
+// Web (Desktop)
+// ###########################################################
+.split-pane .content-md div.scroll-content {
+  margin-bottom: 0px !important;
+}
+// ###########################################################
+
+// Web (Mobile)
+// ###########################################################
+.menu-content-overlay div.scroll-content {
+  margin-bottom: 0px !important;
 }
 // ###########################################################
 
 // general css classes for styling special elements
+// ###########################################################
 .center {
   text-align: center;
 }
@@ -112,14 +130,15 @@ a {
     }
   }
 }
+
 @font-face {
   font-family: 'fest-ion';
   src: url('../assets/fonts/fest-ion/fest-ion.eot?s11258');
-  src: url('/assets/fonts/fest-ion/fest-ion.eot?s11258#iefix')
+  src: url('../assets/fonts/fest-ion/fest-ion.eot?s11258#iefix')
       format('embedded-opentype'),
-    url('/assets/fonts/fest-ion/fest-ion.ttf?s11258') format('truetype'),
-    url('/assets/fonts/fest-ion/fest-ion.woff?s11258') format('woff'),
-    url('/assets/fonts/fest-ion/fest-ion.svg?s11258#fest-ion') format('svg');
+    url('../assets/fonts/fest-ion/fest-ion.ttf?s11258') format('truetype'),
+    url('../assets/fonts/fest-ion/fest-ion.woff?s11258') format('woff'),
+    url('../assets/fonts/fest-ion/fest-ion.svg?s11258#fest-ion') format('svg');
   font-weight: normal;
   font-style: normal;
 }
