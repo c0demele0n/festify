@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { NavController, Nav, AlertController } from 'ionic-angular'
+import { SpotifyProvider } from '../../providers/spotify/spotify'
 
 // page imports
 import { NavPage } from '../nav/nav'
@@ -12,10 +13,18 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public nav: Nav,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public spotify: SpotifyProvider
   ) {}
 
   createParty() {
+    // if (this.spotify.isLoggedIn()) {
+    //   // redirect to NavPage
+    //   this.nav.setRoot(NavPage)
+    // } else {
+    //   this.spotify.login()
+    // }
+
     let alert = this.alertCtrl.create({
       title: 'Set Partyname',
       inputs: [
