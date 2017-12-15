@@ -6,23 +6,26 @@
         <ion-header>
             <ion-navbar>
                 <ion-buttons start>
-                    <button ion-button icon-only (tap)="exitParty()">
-                        <ion-icon name="exit"></ion-icon>
+                    <!-- <button ion-button icon-only (tap)="exitParty()">
+                        <ion-icon name="ios-exit-outline"></ion-icon>
+                    </button> -->
+                    <button ion-button (tap)="exitParty()">
+                        Exit
                     </button>
                 </ion-buttons>
                 <ion-title>{{currentTabName}}</ion-title>
                 <ion-buttons end>
                     <button ion-button icon-only (tap)="showTvMode()">
-                        <ion-icon name="desktop"></ion-icon>
+                        <ion-icon name="ios-desktop-outline"></ion-icon>
                     </button>
                     <button ion-button icon-only (tap)="shareParty()">
-                        <ion-icon name="share"></ion-icon>
+                        <ion-icon name="ios-share-outline"></ion-icon>
                     </button>
                 </ion-buttons>
             </ion-navbar>
         </ion-header>
 
-        <ion-tabs #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
+        <ion-tabs color="tuna" #tabsIos selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('ios')">
             <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
             <ion-tab tabTitle="{{tab3.Name}}" tabIcon="{{tab3.Icon}}" [root]="tab3.Page"></ion-tab>
@@ -45,7 +48,7 @@
             </ion-navbar>
         </ion-header>
 
-        <ion-tabs #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
+        <ion-tabs color="tuna" #tabsAndroid selectedIndex="{{selectedTabIndex}}" (ionChange)="tabChanged('android')">
             <ion-tab tabTitle="{{tab1.Name}}" tabIcon="{{tab1.Icon}}" [root]="tab1.Page"></ion-tab>
             <ion-tab tabTitle="{{tab2.Name}}" tabIcon="{{tab2.Icon}}" [root]="tab2.Page"></ion-tab>
         </ion-tabs>
@@ -69,7 +72,7 @@
     </ion-header>
 
     <ion-menu type="overlay" [content]="sideMenu">
-        <ion-content>
+        <ion-content class="side-menu">
             <h2 padding>Menu</h2>
             <ion-list>
                 <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page, tab.Name)">
@@ -97,7 +100,7 @@
 
     <ion-split-pane>
         <ion-menu type="overlay" [content]="sideMenuCore">
-            <ion-content>
+            <ion-content class="side-menu">
                 <h2 padding>Menu</h2>
                 <ion-list>
                     <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">

@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
 import { HttpModule } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http'
+
+
 import { MyApp } from './app.component'
 
 // Pages
@@ -23,6 +26,11 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 
+
+// Plugins
+import { SocialSharing } from '@ionic-native/social-sharing'
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -34,11 +42,13 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
     MorePage,
     TvModePage
   ],
+
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -58,7 +68,8 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
     SettingsProvider,
     ErrorHandlerProvider,
     PlatformServiceProvider,
-    SpotifyProvider
+    SpotifyProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}

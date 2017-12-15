@@ -16,6 +16,26 @@
 
 <!-- end: header: desktop web app -->
 
-<ion-content padding>
+<ion-content>
+    <!-- search bar-->
+    <ion-searchbar placeholder="Add Tracks">
+    </ion-searchbar>
+    <div>
+        <p class="center padding-side"> Add new songs to the queue by searching for them or ask your guests to go to
+            <span>
+                <a href="https://festify.rocks">festify.us</a>
+            </span> and enter this code: </p>
+    </div>
+    <ion-label>
+        {{Code}}
+    </ion-label>
+
+
+
+    <button ion-button icon-right (tap)="publishEvent('share-party')" class="share-button">
+        Share Link
+        <ion-icon ios="ios-share-outline" md="md-share"></ion-icon>
+    </button>
+
 
 </ion-content>

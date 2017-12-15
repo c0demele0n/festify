@@ -1,4 +1,4 @@
-<!-- desktop web app -->
+<!-- header: desktop web app -->
 <div *ngIf="plt == 'desktopweb'">
 
     <ion-header>
@@ -14,5 +14,34 @@
 
 </div>
 
-<ion-content padding>
+<!-- end: header: desktop web app -->
+
+<ion-content>
+    <!-- <ion-list margin>
+        <ion-item>
+            <ion-label>Party Name: </ion-label>
+            <ion-input type="text" placeholder="Type here"></ion-input>
+        </ion-item>
+    </ion-list> -->
+
+    <ion-searchbar [(ngModel)]="partyName" (tap)="clearPartyName()" placeholder="{{partyNamePlaceholder}}">
+    </ion-searchbar>
+
+
+    <ion-list class="striped">
+        <ion-item *ngFor="let playlist of playlists ">
+            <ion-thumbnail item-start>
+                <img ion-img [src]="playlist.thumbnail" />
+            </ion-thumbnail>
+            <h2>{{playlist.Name}}</h2>
+            <p>{{ amount }} {{playlist.AnzTitel}} </p>
+            <button ion-button clear item-end icon-only>
+                <ion-icon name="shuffle"></ion-icon>
+            </button>
+            <button ion-button clear item-end icon-only>
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+
 </ion-content>

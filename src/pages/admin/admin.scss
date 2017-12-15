@@ -1,9 +1,8 @@
 page-admin {
-    .content-ios {
-        margin-top: 44px !important;
-    }
-
-    .content-md {
-        margin-top: 56px !important;
-    }
+  .searchbar-search-icon {
+    display: none;
+  }
+  .searchbar-input {
+    text-align: center;
+  }
 }
