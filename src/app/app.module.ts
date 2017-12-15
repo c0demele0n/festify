@@ -23,11 +23,32 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
+// Plugins
+import { SocialSharing } from '@ionic-native/social-sharing'
+
 @NgModule({
-  declarations: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
+  declarations: [
+    MyApp,
+    NavPage,
+    HomePage,
+    QueuePage,
+    AdminPage,
+    SettingsPage,
+    MorePage,
+    TvModePage
+  ],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
+  entryComponents: [
+    MyApp,
+    NavPage,
+    HomePage,
+    QueuePage,
+    AdminPage,
+    SettingsPage,
+    MorePage,
+    TvModePage
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -36,7 +57,8 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
     SettingsProvider,
     ErrorHandlerProvider,
     PlatformServiceProvider,
-    SpotifyProvider
+    SpotifyProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}
