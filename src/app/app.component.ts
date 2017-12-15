@@ -18,7 +18,8 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, spotify: SpotifyProvider) {
     // retrieve url from custom url scheme redirect
-    ;(window as any).handleOpenURL = (url: string) => {
+    const w = window as any
+    w.handleOpenURL = (url: string) => {
       // hand over url to spotify provider
       spotify.setAccessToken(url)
     }
