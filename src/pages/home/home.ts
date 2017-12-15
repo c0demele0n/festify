@@ -5,6 +5,7 @@ import { SpotifyProvider } from '../../providers/spotify/spotify'
 // page imports
 import { NavPage } from '../nav/nav'
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -16,6 +17,8 @@ export class HomePage {
     public alertCtrl: AlertController,
     public spotify: SpotifyProvider
   ) {}
+
+
 
   createParty() {
     // if (this.spotify.isLoggedIn()) {
