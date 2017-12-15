@@ -12,22 +12,32 @@ page-tv-mode {
   ion-grid {
     height: 80%;
     .upper {
-      height: 62%;
+      height: 80%;
     }
     .cover {
-      height: 30%;
-    }
-    .low {
-      height: 8%;
+      //height: 20%;
     }
   }
   .fit {
     height: 100%;
   }
+  ion-col {
+    padding: auto;
+    .details {
+      margin: 0;
+    }
+    .metadata {
+      p {
+        margin: 0;
+      }
+    }
+  }
   img {
     width: auto;
     height: 100%;
-    //object-fit: scale-down;
+  }
+  .cover {
+    height: 75%;
   }
 
   // :host {

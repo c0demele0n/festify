@@ -1,45 +1,4 @@
 <!-- cordova app -->
-<div *ngIf="plt == 'cordova'">
-
-    <!-- ios -->
-    <ion-header showWhen="ios">
-        <ion-navbar>
-            <ion-buttons start>
-                <button ion-button color="white" navPop>
-                    Close
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-
-    <!-- android -->
-    <ion-header showWhen="android">
-        <ion-navbar>
-            <ion-buttons left>
-                <button ion-button icon-oncly navPop>
-                    <ion-icon name="arrow-round-back"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-
-</div>
-
-<!-- desktop web app -->
-<div *ngIf="plt == 'desktopweb'">
-
-    <ion-header>
-        <ion-navbar>
-            <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title>TV Mode</ion-title>
-        </ion-navbar>
-    </ion-header>
-
-</div>
 
 <ion-content padding>
     <img ion-img [src]="current.thumbnail" class="background">
@@ -56,23 +15,16 @@
                     <p>{{current.name}}</p>
                     <p>{{current.artist}}</p>
 
-                    <p>Go to festify.us/{{meta.url}} and vote!</p>
-                    <p>{{meta.id}}</p>
+                    <p>Go to {{url}} and vote!</p>
+                    <p>{{id}}</p>
                 </div>
             </ion-col>
         </ion-row>
         <ion-row class="cover">
             <ion-col *ngFor="let track of queue">
-                <img [src]="track.thumbnail" />
-
-            </ion-col>
-        </ion-row>
-        <ion-row class="low">
-            <ion-col *ngFor="let track of queue">
-                <div class="fit">
-                    {{track.name}}
-                    <br>{{track.artist}}
-                </div>
+                <img class="cover" [src]="track.thumbnail" />
+                <p class="details">{{track.name}}
+                    <br>{{track.artist}}</p>
             </ion-col>
         </ion-row>
     </ion-grid>
