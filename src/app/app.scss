@@ -62,13 +62,10 @@
   padding-top: 30px;
 }
 
-.content-ios {
-  //   margin-top: 60px;
-}
-
 .content-ios div.scroll-content {
   padding-top: 0px !important;
   margin-top: 66px;
+  margin-bottom: 18px !important;
 }
 .bar-button-default-ios {
   color: color($colors, white) !important;
@@ -77,8 +74,9 @@
 
 // Android
 // ###########################################################
-.content-md {
+.content-md div.scroll-content {
   margin-top: 56px;
+  margin-bottom: 40px !important;
 }
 
 .bar-button-default-md {
@@ -86,7 +84,22 @@
 }
 // ###########################################################
 
+// Web (Desktop)
+// ###########################################################
+.split-pane .content-md div.scroll-content {
+  margin-bottom: 0px !important;
+}
+// ###########################################################
+
+// Web (Mobile)
+// ###########################################################
+.menu-content-overlay div.scroll-content {
+  margin-bottom: 0px !important;
+}
+// ###########################################################
+
 // general css classes for styling special elements
+// ###########################################################
 .center {
   text-align: center;
 }
@@ -117,6 +130,7 @@ a {
     }
   }
 }
+
 @font-face {
   font-family: 'fest-ion';
   src: url('../assets/fonts/fest-ion/fest-ion.eot?s11258');

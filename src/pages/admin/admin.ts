@@ -10,6 +10,9 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
   templateUrl: 'admin.html'
 })
 export class AdminPage {
+  partyName: string = ''
+  partyNamePlaceholder = 'Partyname'
+
   plt: string
   playlists = []
   generalName: string = 'Name of Party:'
@@ -27,12 +30,25 @@ export class AdminPage {
       this.playlist1,
       this.playlist1,
       this.playlist1,
+      this.playlist1,
+      this.playlist1,
+      this.playlist1,
+      this.playlist1,
       this.playlist1
     ]
+  }
+
+  ionViewDidEnter() {
+    this.partyNamePlaceholder = 'Partyname'
   }
   playlist1: any = {
     Name: 'Cool Playlist !',
     AnzTitel: '43',
-    thumbnail: 'assets/imgs/logo.png'
+    thumbnail: '../assets/imgs/logo.png'
+  }
+
+  clearPartyName() {
+    this.partyName = ''
+    this.partyNamePlaceholder = ''
   }
 }

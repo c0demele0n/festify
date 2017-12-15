@@ -1,13 +1,13 @@
 import { Component } from '@angular/core'
-import { NavController, Nav } from 'ionic-angular'
 import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler'
+import { NavController, Nav, AlertController } from 'ionic-angular'
+import { SpotifyProvider } from '../../providers/spotify/spotify'
 
 // page imports
 import { NavPage } from '../nav/nav'
 import { ErrorHandler } from '@angular/core/src/error_handler'
 import { errorHandler } from '@angular/platform-browser/src/browser'
 import { Events } from 'ionic-angular'
-import { AlertController } from 'ionic-angular'
 
 @Component({
   selector: 'page-home',
@@ -16,6 +16,7 @@ import { AlertController } from 'ionic-angular'
 export class HomePage {
   public startApp: boolean = false
   constructor(
+    public spotify: SpotifyProvider,
     private alertCtrl: AlertController,
     public events: Events,
     public navCtrl: NavController,
@@ -41,15 +42,50 @@ export class HomePage {
   }
 
   createParty() {
-    /*
-      TODO:       Implement complete logic
-      Dependency: Task MPJ-19
-    */
-    // redirect to NavPage
-
     if (this.startApp == true) {
       this.nav.setRoot(NavPage)
     }
+    // if (this.spotify.isLoggedIn()) {
+    //   // redirect to NavPage
+    //   this.nav.setRoot(NavPage)
+    // } else {
+    //   this.spotify.login()
+    // }
+
+    let alert = this.alertCtrl.create({
+      title: 'Set Partyname',
+      inputs: [
+        {
+          name: 'partyName',
+          placeholder: 'Partyname'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {}
+        },
+        {
+          text: 'Party hard',
+          handler: data => {
+            // check if partyName is not empty
+            if (!data.partyName) {
+              let alert = this.alertCtrl.create({
+                title: 'Name is missing!',
+                subTitle: 'Please enter a name for your party',
+                buttons: ['Dismiss']
+              })
+              alert.present()
+            } else {
+              // redirect to NavPage
+              this.nav.setRoot(NavPage, { partyName: data.partyName })
+            }
+          }
+        }
+      ]
+    })
+    alert.present()
   }
   joinParty() {
     /*

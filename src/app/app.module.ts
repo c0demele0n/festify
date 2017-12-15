@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core'
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
+import { HttpModule } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component'
 
@@ -24,6 +26,7 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
 
 // Plugin imports
 import { Network } from '@ionic-native/network'
+import { SocialSharing } from '@ionic-native/social-sharing'
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { Network } from '@ionic-native/network'
     MorePage,
     TvModePage
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -57,7 +62,8 @@ import { Network } from '@ionic-native/network'
     ErrorHandlerProvider,
     PlatformServiceProvider,
     SpotifyProvider,
-    Network
+    Network,
+    SocialSharing
   ]
 })
 export class AppModule {}
