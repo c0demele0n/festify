@@ -45,7 +45,7 @@ import { SocialSharing } from '@ionic-native/social-sharing'
 
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
 
