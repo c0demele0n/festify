@@ -207,7 +207,7 @@ export class NavPage {
         {
           text: 'WhatsApp',
           handler: () => {
-            this.socialSharing.shareVia()
+            // this.socialSharing.shareVia()
           }
         },
         {
