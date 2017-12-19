@@ -1,37 +1,34 @@
 <!-- cordova app -->
 
 <ion-content padding>
-    <img ion-img [src]="current.thumbnail" class="background">
-
     <ion-grid>
+        <img ion-img [src]="current.thumbnail" class="background">
         <ion-row class="upper">
-            <ion-col>
-                <!-- <ion-thumbnail item-start> -->
-                <img [src]="current.thumbnail" />
+            <ion-col class="bigpicture">
+                <div class="bg">
+                    <!-- <ion-thumbnail item-start> -->
+                    <img [src]="current.thumbnail" />
+                </div>
                 <!-- </ion-thumbnail> -->
             </ion-col>
             <ion-col>
                 <div class="metadata">
-                    <p>{{current.name}}</p>
-                    <p>{{current.artist}}</p>
-
-                    <p>Go to {{url}} and vote!</p>
-                    <p>{{id}}</p>
+                    <h2>{{current.name}}</h2>
+                    <h3>{{current.artist}}</h3>
+                    <div class="line"></div>
+                    <h4>Go to {{url}} and vote!</h4>
+                    <h5>{{id}}</h5>
                 </div>
             </ion-col>
         </ion-row>
         <ion-row class="cover">
             <ion-col *ngFor="let track of queue">
-                <img class="cover" [src]="track.thumbnail" />
-                <p class="details">{{track.name}}
-                    <br>{{track.artist}}</p>
+                <div class="bg-small">
+                    <img [src]="track.thumbnail" />
+                </div>
+                <div class="card-title">{{track.name}}</div>
+                <div class="card-subtitle">{{track.artist}}</div>
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
-<!--     <dom-flip>
-        <template is="dom-repeat" items="[[_getVisibleTracks(tracks.*)]]">
-            <tv-track data-flip-id$="[[_generateFbId(item)]]" metadata="[[meta]]" state="[[state]]" track="[[item]]">
-            </tv-track>
-        </template>
-    </dom-flip> -->

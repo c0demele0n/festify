@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar'
 import { HttpModule } from '@angular/http'
 import { HttpClientModule } from '@angular/common/http'
 
-
 import { MyApp } from './app.component'
 
 // Pages
@@ -25,11 +24,8 @@ import { ErrorHandlerProvider } from '../providers/error-handler/error-handler'
 import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
-
-
 // Plugins
 import { SocialSharing } from '@ionic-native/social-sharing'
-
 
 @NgModule({
   declarations: [
@@ -46,7 +42,8 @@ import { SocialSharing } from '@ionic-native/social-sharing'
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
 
   bootstrap: [IonicApp],
