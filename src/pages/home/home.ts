@@ -29,7 +29,9 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    console.log('Starting app')
+    if (this.spotify.isLoggedIn()) {
+      this.checkForPremium()
+    }
   }
 
   public initializeSubScriptions() {
@@ -42,22 +44,26 @@ export class HomePage {
   }
 
   createParty() {
-    this.nav.setRoot(NavPage)
-    // if (this.spotify.isLoggedIn()) {
-    //   // redirect to NavPage
-    //   this.nav.setRoot(NavPage)
-    // } else {
-    //   this.spotify.login()
-    // }
+    if (!this.spotify.isLoggedIn()) {
+      this.spotify.login()
+    } else {
+      this.checkForPremium()
+    }
+  }
 
+  async checkForPremium() {
+    const premium = await this.spotify.hasPremium()
+    if (!premium) {
+      this.createSpotifyAlert()
+    } else {
+      this.nav.setRoot(NavPage)
+    }
+  }
+
+  createSpotifyAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Set Partyname',
-      inputs: [
-        {
-          name: 'partyName',
-          placeholder: 'Partyname'
-        }
-      ],
+      title: 'You have no Spotify Premium account',
+      message: 'Do you want to login with a Premium account?',
       buttons: [
         {
           text: 'Cancel',
@@ -65,26 +71,16 @@ export class HomePage {
           handler: data => {}
         },
         {
-          text: 'Party hard',
+          text: 'Ok',
           handler: data => {
-            // check if partyName is not empty
-            if (!data.partyName) {
-              let alert = this.alertCtrl.create({
-                title: 'Name is missing!',
-                subTitle: 'Please enter a name for your party',
-                buttons: ['Dismiss']
-              })
-              alert.present()
-            } else {
-              // redirect to NavPage
-              this.nav.setRoot(NavPage, { partyName: data.partyName })
-            }
+            this.spotify.logout()
           }
         }
       ]
     })
     alert.present()
   }
+
   joinParty() {
     /*
       TODO:       Implement complete logic
