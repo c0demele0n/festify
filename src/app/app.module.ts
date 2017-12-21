@@ -39,12 +39,7 @@ import { SocialSharing } from '@ionic-native/social-sharing'
     TvModePage
   ],
 
-  imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp),
-    HttpClientModule
-  ],
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
 
   bootstrap: [IonicApp],
   entryComponents: [
