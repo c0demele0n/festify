@@ -27,6 +27,7 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
 // Plugins
 import { SocialSharing } from '@ionic-native/social-sharing'
 import { ScreenOrientation } from '@ionic-native/screen-orientation'
+import { AndroidFullScreen } from '@ionic-native/android-full-screen'
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation'
     PlatformServiceProvider,
     SpotifyProvider,
     SocialSharing,
-    ScreenOrientation
+    ScreenOrientation,
+    AndroidFullScreen
   ]
 })
 export class AppModule {}

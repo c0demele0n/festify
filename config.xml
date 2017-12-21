@@ -39,4 +39,5 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.1" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.0" />
+    <plugin name="cordova-plugin-fullscreen" spec="^1.2.0" />
 </widget>
