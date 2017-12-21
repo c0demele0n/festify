@@ -4,6 +4,7 @@ import { SpotifyProvider } from '../../providers/spotify/spotify'
 
 // page imports
 import { NavPage } from '../nav/nav'
+import { errorHandler } from '@angular/platform-browser/src/browser'
 
 @Component({
   selector: 'page-home',
@@ -17,14 +18,51 @@ export class HomePage {
     public spotify: SpotifyProvider
   ) {}
 
-  createParty() {
-    // if (this.spotify.isLoggedIn()) {
-    //   // redirect to NavPage
-    //   this.nav.setRoot(NavPage)
-    // } else {
-    //   this.spotify.login()
-    // }
+  ionViewDidEnter() {
+    if (this.spotify.isLoggedIn()) {
+      this.checkForPremium()
+    }
+  }
 
+  createParty() {
+    if (!this.spotify.isLoggedIn()) {
+      this.spotify.login()
+    } else {
+      this.checkForPremium()
+    }
+  }
+
+  async checkForPremium() {
+    const premium = await this.spotify.hasPremium()
+    if (!premium) {
+      this.createSpotifyAlert()
+    } else {
+      this.createPartyAlert()
+    }
+  }
+
+  createSpotifyAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'You have no Spotify Premium account',
+      message: 'Do you want to login with a Premium account?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {}
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.spotify.logout()
+          }
+        }
+      ]
+    })
+    alert.present()
+  }
+
+  createPartyAlert() {
     let alert = this.alertCtrl.create({
       title: 'Set Partyname',
       inputs: [
