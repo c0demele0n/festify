@@ -26,6 +26,7 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
 
 // Plugins
 import { SocialSharing } from '@ionic-native/social-sharing'
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SocialSharing } from '@ionic-native/social-sharing'
     ErrorHandlerProvider,
     PlatformServiceProvider,
     SpotifyProvider,
-    SocialSharing
+    SocialSharing,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

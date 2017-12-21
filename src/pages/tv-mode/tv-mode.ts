@@ -4,6 +4,9 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
 
+//plugin imports
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
+
 @IonicPage()
 @Component({
   selector: 'page-tv-mode',
@@ -18,7 +21,8 @@ export class TvModePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
-    public platform: PlatformServiceProvider
+    public platform: PlatformServiceProvider,
+    private screenOrientation: ScreenOrientation
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
@@ -31,11 +35,15 @@ export class TvModePage {
       this.track1
     ]),
       (this.meta = [this.url, this.id])
+    //only lock orientation on cordova since it will crash on browser
+    if (this.plt == 'cordova') {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE)
+    }
   }
 
   track1: any = {
-    name: 'Tracke',
-    artist: 'Artist',
+    name: 'Track X',
+    artist: 'Artist X',
     thumbnail: 'assets/imgs/logo.png'
   }
   current: any = {
@@ -45,4 +53,9 @@ export class TvModePage {
   }
   url: string = 'festify.us'
   id: number = 12345
+
+  //unlocks Orientation
+  ionViewWillLeave() {
+    this.screenOrientation.unlock()
+  }
 }
