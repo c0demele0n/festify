@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler'
 import { NavController, Nav, AlertController } from 'ionic-angular'
 import { SpotifyProvider } from '../../providers/spotify/spotify'
+import { LoadingController } from 'ionic-angular'
 
 // page imports
 import { NavPage } from '../nav/nav'
@@ -21,30 +22,27 @@ export class HomePage {
     public events: Events,
     public navCtrl: NavController,
     public nav: Nav,
-    public errorHandler: ErrorHandlerProvider
+    public errorHandler: ErrorHandlerProvider,
+    public loadingCtrl: LoadingController
   ) {
-    events.subscribe('network:state', (network, state) => {
-      // user and time are the same arguments passed in `events.publish(user, time)`
-      let alert = this.alertCtrl.create({
-        title: network,
-        subTitle: state
-      })
-      alert.present()
-    })
+    this.initializeSubScriptions()
   }
 
   ionViewDidEnter() {
-    if (this.errorHandler.isNetworkAvailable() == true) {
-      console.log('Is Device online: ' + this.errorHandler.isNetworkAvailable())
-      console.log('Starting app')
-      this.startApp = true
-    }
+    console.log('Starting app')
+  }
+
+  public initializeSubScriptions() {
+    this.events.subscribe('networkOnStart', eventName => {
+      if (eventName == 'offline') {
+      }
+      if (eventName == 'online') {
+      }
+    })
   }
 
   createParty() {
-    if (this.startApp == true) {
-      this.nav.setRoot(NavPage)
-    }
+    this.nav.setRoot(NavPage)
     // if (this.spotify.isLoggedIn()) {
     //   // redirect to NavPage
     //   this.nav.setRoot(NavPage)
