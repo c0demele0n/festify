@@ -3,6 +3,7 @@ import { Platform } from 'ionic-angular'
 import { StatusBar } from '@ionic-native/status-bar'
 import { SplashScreen } from '@ionic-native/splash-screen'
 
+
 // page imports
 import { HomePage } from '../pages/home/home'
 import { NavPage } from '../pages/nav/nav'
@@ -22,6 +23,7 @@ export class MyApp {
     w.handleOpenURL = (url: string) => {
       // hand over url to spotify provider
       spotify.setAccessToken(url)
+
     }
 
     platform.ready().then(() => {
