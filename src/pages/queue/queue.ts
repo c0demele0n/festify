@@ -26,12 +26,6 @@ export class QueuePage {
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
-    // <only for dev>
-    if (this.spotify.isLoggedIn()) {
-      // redirect to NavPage
-    } else {
-      this.spotify.login()
-    }
   }
 
   // function which publishes events
@@ -44,7 +38,6 @@ export class QueuePage {
   async getTracks(ev: any) {
     if (ev.target.value) {
       // trigger spotify search
-
       this.spotify.getTracks(ev.target.value).then($Data => {
         this.tracks = $Data
       })
