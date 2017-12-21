@@ -6,6 +6,7 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
 
 //plugin imports
 import { ScreenOrientation } from '@ionic-native/screen-orientation'
+import { StatusBar } from '@ionic-native/status-bar'
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class TvModePage {
     public navParams: NavParams,
     public events: Events,
     public platform: PlatformServiceProvider,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private statusBar: StatusBar
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
@@ -38,6 +40,7 @@ export class TvModePage {
     //only lock orientation on cordova since it will crash on browser
     if (this.plt == 'cordova') {
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE)
+      this.statusBar.hide()
     }
   }
 
