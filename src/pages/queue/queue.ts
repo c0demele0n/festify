@@ -13,6 +13,7 @@ import { SpotifyProvider } from '../../providers/spotify/spotify'
 export class QueuePage {
   searchString: string
   tracks: any
+
   plt: string
   Code: number = 504215
 
@@ -25,6 +26,12 @@ export class QueuePage {
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
+    // <only for dev>
+    if (this.spotify.isLoggedIn()) {
+      // redirect to NavPage
+    } else {
+      this.spotify.login()
+    }
   }
 
   // function which publishes events
@@ -35,23 +42,21 @@ export class QueuePage {
 
   // function which calls the spotify provider to search for tracks
   async getTracks(ev: any) {
-    // <only for dev>
-    if (this.spotify.isLoggedIn()) {
-      // redirect to NavPage
+    if (ev.target.value) {
+      // trigger spotify search
+
+      this.spotify.getTracks(ev.target.value).then($Data => {
+        this.tracks = $Data
+      })
     } else {
-      this.spotify.login()
+      // don't trigger spotify search
+      // clear tracks array
+      this.tracks = []
     }
-    // </only for dev>
+  }
 
-    console.log(this.searchString)
-
-    console.log('search for: ' + ev.target.value)
-    this.tracks = await this.spotify.getTracks(ev.target.value)
-    console.log(this.tracks)
-
-    if (this.searchString == '') {
-      console.log('empty')
-      this.tracks = {}
-    }
+  clearSearch(ev: any) {
+    // clear tracks array
+    this.tracks = []
   }
 }

@@ -17,20 +17,19 @@
 <!-- end: header: desktop web app -->
 
 <ion-content>
-    <ion-searchbar [(ngModel)]="searchString" (ionInput)="getTracks($event)" placeholder="Add Tracks">
+    <ion-searchbar [(ngModel)]="searchString" (ionInput)="getTracks($event)" (ionClear)="clearSearch($event)" placeholder="Add Tracks">
     </ion-searchbar>
 
     <!-- List -->
-
     <ion-list class="striped">
         <ion-item *ngFor="let track of tracks">
             <ion-thumbnail item-start>
                 <img ion-img [src]="track.album.images[2].url" />
             </ion-thumbnail>
             <h2>{{track.name}}</h2>
-            <p>{{track.artists[0].name}} </p>
+            <p>{{track.artists[0].name}} • {{track.album.name}}</p>
             <button ion-button clear item-end icon-only>
-                <ion-icon name="heart"></ion-icon>
+                <ion-icon name="heart-outline"></ion-icon>
             </button>
         </ion-item>
     </ion-list>
