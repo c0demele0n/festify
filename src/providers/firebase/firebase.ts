@@ -15,21 +15,27 @@ export class FirebaseProvider {
 
   createAnonymousUser() {
     // we will use anonymous auth turn it on on firebase
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(auth => {
-        // when authenticated... alert the user
-        console.log('login success')
-        this.userAuth = auth
-        this.userId = this.auth.auth.currentUser.uid
-        console.log('User:', this.userId)
-      })
-      .catch((error: Error) => {
-        // Handle Errors here.
-        var errorMessage = error.message
-        alert(errorMessage)
-      })
+    return new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .signInAnonymously()
+        .then(auth => {
+          // when authenticated... alert the user
+          console.log('login success')
+          this.userAuth = auth
+          this.userId = this.auth.auth.currentUser.uid
+          console.log('User:', this.userId)
+
+          resolve({ $ID: this.userId, $Msg: 'success' })
+        })
+        .catch((error: Error) => {
+          // Handle Errors here.
+          var errorMessage = error.message
+          alert(errorMessage)
+
+          reject({ $ID: '', $Msg: errorMessage })
+        })
+    })
   }
   //check if firebase network available
   firebaseNetworkConnection() {
