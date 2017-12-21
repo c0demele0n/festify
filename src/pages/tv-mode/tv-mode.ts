@@ -34,14 +34,14 @@ export class TvModePage {
   }
 
   track1: any = {
-    name: 'Track X',
-    artist: 'Artist X',
-    thumbnail: '../assets/imgs/logo.png'
+    name: 'Tracke',
+    artist: 'Artist',
+    thumbnail: 'assets/imgs/logo.png'
   }
   current: any = {
     name: 'In the end',
     artist: 'Linkin Park',
-    thumbnail: '../assets/imgs/logo.png'
+    thumbnail: 'assets/imgs/logo.png'
   }
   url: string = 'festify.us'
   id: number = 12345
