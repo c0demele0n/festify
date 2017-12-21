@@ -142,3 +142,13 @@ a {
   font-weight: normal;
   font-style: normal;
 }
+// prevents the tv mode margin
+page-tv-mode {
+  .content {
+    div.scroll-content {
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  }
+}

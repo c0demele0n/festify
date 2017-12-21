@@ -35,7 +35,6 @@ page-tv-mode {
 
   .bg-small {
     width: 80%;
-    height: 80%;
     -webkit-box-shadow: 0px 0px 51px 8px rgba(0, 0, 0, 0.72);
     -moz-box-shadow: 0px 0px 51px 8px rgba(0, 0, 0, 0.72);
     box-shadow: 0px 0px 51px 8px rgba(0, 0, 0, 0.72);
@@ -93,6 +92,9 @@ page-tv-mode {
     font-size: 4.444vh;
     font-weight: 100;
     line-height: 5.185vh;
+  }
+
+  .scroll-content {
   }
 
   // :host {
