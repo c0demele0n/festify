@@ -30,14 +30,7 @@ export class TvModePage {
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
-    ;(this.queue = [
-      this.track1,
-      this.track1,
-      this.track1,
-      this.track1,
-      this.track1,
-      this.track1
-    ]),
+    ;(this.queue = [this.track1, this.track1, this.track1, this.track1, this.track1, this.track1]),
       (this.meta = [this.url, this.id])
     //only lock orientation on cordova since it will crash on browser
     if (this.plt == 'cordova') {
@@ -54,12 +47,12 @@ export class TvModePage {
   track1: any = {
     name: 'Track X',
     artist: 'Artist X',
-    thumbnail: 'assets/imgs/logo.png'
+    thumbnail: 'http://via.placeholder.com/900x900'
   }
   current: any = {
     name: 'In the end',
     artist: 'Linkin Park',
-    thumbnail: 'assets/imgs/logo.png'
+    thumbnail: 'http://via.placeholder.com/900x900'
   }
   url: string = 'festify.us'
   id: number = 12345
