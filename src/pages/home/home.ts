@@ -9,6 +9,7 @@ import { NavPage } from '../nav/nav'
 import { ErrorHandler } from '@angular/core/src/error_handler'
 import { errorHandler } from '@angular/platform-browser/src/browser'
 import { Events } from 'ionic-angular'
+import { FirebaseProvider } from '../../providers/firebase/firebase'
 
 @Component({
   selector: 'page-home',
@@ -23,32 +24,39 @@ export class HomePage {
     public navCtrl: NavController,
     public nav: Nav,
     public errorHandler: ErrorHandlerProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public firebase: FirebaseProvider
   ) {
     this.initializeSubScriptions()
   }
 
-  ionViewDidEnter() {
-    if (this.spotify.isLoggedIn()) {
-      this.checkForPremium()
-    }
-  }
+  ionViewDidEnter() {}
 
   public initializeSubScriptions() {
+    /*
     this.events.subscribe('networkOnStart', eventName => {
       if (eventName == 'offline') {
       }
       if (eventName == 'online') {
       }
     })
+    */
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'AUcreated') {
+        console.log('Event5:' + eventName + ' triggered')
+        this.firebase.firebaseNetworkConnection()
+        this.firebase.addParty()
+        if (!this.spotify.isLoggedIn()) {
+          this.spotify.login()
+        } else {
+          this.checkForPremium()
+        }
+      }
+    })
   }
 
   createParty() {
-    if (!this.spotify.isLoggedIn()) {
-      this.spotify.login()
-    } else {
-      this.checkForPremium()
-    }
+    this.firebase.createAnonymousUser()
   }
 
   async checkForPremium() {
