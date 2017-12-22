@@ -27,7 +27,6 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
 // Plugin imports
 import { Network } from '@ionic-native/network'
 import { SocialSharing } from '@ionic-native/social-sharing'
-import { Clipboard } from 'ts-clipboard'
 
 @NgModule({
   declarations: [
@@ -64,8 +63,7 @@ import { Clipboard } from 'ts-clipboard'
     PlatformServiceProvider,
     SpotifyProvider,
     Network,
-    SocialSharing,
-    Clipboard
+    SocialSharing
   ]
 })
 export class AppModule {}
