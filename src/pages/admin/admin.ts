@@ -44,7 +44,7 @@ export class AdminPage {
   playlist1: any = {
     Name: 'Cool Playlist !',
     AnzTitel: '43',
-    thumbnail: '../assets/imgs/logo.png'
+    thumbnail: 'assets/imgs/logo.png'
   }
 
   clearPartyName() {

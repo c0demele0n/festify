@@ -9,6 +9,7 @@ import { NavPage } from '../nav/nav'
 import { ErrorHandler } from '@angular/core/src/error_handler'
 import { errorHandler } from '@angular/platform-browser/src/browser'
 import { Events } from 'ionic-angular'
+import { FirebaseProvider } from '../../providers/firebase/firebase'
 
 @Component({
   selector: 'page-home',
@@ -23,32 +24,56 @@ export class HomePage {
     public navCtrl: NavController,
     public nav: Nav,
     public errorHandler: ErrorHandlerProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public firebase: FirebaseProvider
   ) {
     this.initializeSubScriptions()
   }
 
+  // lifecycle function which handles the redirect when using mobile web and desktop web
   ionViewDidEnter() {
-    if (this.spotify.isLoggedIn()) {
-      this.checkForPremium()
-    }
+    // if (this.spotify.isLoggedIn()) {
+    //   // you are already logged in
+    //   alert('You are already logged in')
+    //   //   this.nav.setRoot(NavPage)
+    // } else {
+    //   // you are not logged out
+    //   // do nothing
+    // }
   }
 
   public initializeSubScriptions() {
+    /*
     this.events.subscribe('networkOnStart', eventName => {
       if (eventName == 'offline') {
       }
       if (eventName == 'online') {
       }
     })
+    */
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'AUcreated') {
+        console.log('Event5:' + eventName + ' triggered')
+        this.firebase.firebaseNetworkConnection()
+        this.firebase.addParty()
+        if (!this.spotify.isLoggedIn()) {
+          this.spotify.login()
+        } else {
+          this.checkForPremium()
+        }
+      }
+    })
   }
 
   createParty() {
-    if (!this.spotify.isLoggedIn()) {
-      this.spotify.login()
-    } else {
-      this.checkForPremium()
-    }
+    this.spotify.init().then($Data => {
+      console.log('spotify.init() >> true')
+    }),
+      $Error => {
+        console.log('spotify.init() >> false')
+        console.log('passt ned')
+      }
+    this.firebase.createAnonymousUser()
   }
 
   async checkForPremium() {

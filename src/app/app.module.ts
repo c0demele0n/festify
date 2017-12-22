@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen'
 import { StatusBar } from '@ionic-native/status-bar'
 import { HttpModule } from '@angular/http'
 import { HttpClientModule } from '@angular/common/http'
+import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { AngularFireModule } from 'angularfire2'
+import { AngularFireAuthModule } from 'angularfire2/auth'
 
 import { MyApp } from './app.component'
 
@@ -25,34 +28,34 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 // Plugin imports
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
 import { Network } from '@ionic-native/network'
 import { SocialSharing } from '@ionic-native/social-sharing'
 
-@NgModule({
-  declarations: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
+var config = {
+  apiKey: 'AIzaSyDl9A10FlNzy3smQQWp11RzYVPs2FgOzMg',
+  authDomain: 'festify-dev.firebaseapp.com',
+  databaseURL: 'https://festify-dev-pse.firebaseio.com',
+  projectId: 'festify-dev',
+  storageBucket: 'festify-dev.appspot.com',
+  messagingSenderId: '1010348797724'
+}
 
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
+@NgModule({
+  declarations: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
+
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(config),
+    IonicModule.forRoot(MyApp)
+  ],
 
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
+  entryComponents: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
   providers: [
     StatusBar,
     SplashScreen,
@@ -62,8 +65,9 @@ import { SocialSharing } from '@ionic-native/social-sharing'
     ErrorHandlerProvider,
     PlatformServiceProvider,
     SpotifyProvider,
-    Network,
-    SocialSharing
+    SocialSharing,
+    ScreenOrientation,
+    Network
   ]
 })
 export class AppModule {}
