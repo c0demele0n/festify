@@ -28,11 +28,7 @@ export class HomePage {
     this.initializeSubScriptions()
   }
 
-  ionViewDidEnter() {
-    if (this.spotify.isLoggedIn()) {
-      this.checkForPremium()
-    }
-  }
+  ionViewDidEnter() {}
 
   public initializeSubScriptions() {
     this.events.subscribe('networkOnStart', eventName => {
@@ -44,41 +40,14 @@ export class HomePage {
   }
 
   createParty() {
-    if (!this.spotify.isLoggedIn()) {
-      this.spotify.login()
-    } else {
-      this.checkForPremium()
-    }
-  }
-
-  async checkForPremium() {
-    const premium = await this.spotify.hasPremium()
-    if (!premium) {
-      this.createSpotifyAlert()
-    } else {
-      this.nav.setRoot(NavPage)
-    }
-  }
-
-  createSpotifyAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'You have no Spotify Premium account',
-      message: 'Do you want to login with a Premium account?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {}
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            this.spotify.logout()
-          }
-        }
-      ]
-    })
-    alert.present()
+    this.spotify.init().then($Data => {
+      console.log('passt')
+      // redirect to NavPage
+      //   this.nav.setRoot(NavPage)
+    }),
+      $Error => {
+        console.log('passt ned')
+      }
   }
 
   joinParty() {

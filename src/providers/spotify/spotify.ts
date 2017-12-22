@@ -1,33 +1,66 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Platform, Events } from 'ionic-angular'
+import { Events, AlertController } from 'ionic-angular'
 
-/*
-  Generated class for the SpotifyProvider provider.
+// page imports
+import { NavPage } from '../../pages/nav/nav'
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+// provider imports
+import { PlatformServiceProvider } from '../platform-service/platform-service'
+
 @Injectable()
 export class SpotifyProvider {
-  // holds spotify credentials
-  config: any
+  // holds spotify credentials and api call params
+  private config: any
 
   // api token from successful login
-  accessToken: string
+  private accessToken: string
 
-  // set credentials and token
-  constructor(public http: HttpClient, public plt: Platform, public events: Events) {
+  // dev toggle for allowing noPremium Accounts to create a party
+  private allowNoPremium: boolean = true
+
+  constructor(
+    public http: HttpClient,
+    public plt: PlatformServiceProvider,
+    public events: Events,
+    public alertCtrl: AlertController
+  ) {
+    // set credentials and token
     this.config = {
       clientID: '2d3395530b5641dba4f40c4571465621',
       scope: 'user-read-private user-read-email',
-      redirectURI: plt.is('mobile') ? 'festion://' : 'http://localhost:8100'
+      redirectURI: plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
     }
     this.config.clientID = encodeURIComponent(this.config.clientID)
     this.config.scope = encodeURIComponent(this.config.scope)
     this.config.redirectURI = encodeURIComponent(this.config.redirectURI)
 
     this.setAccessToken()
+  }
+
+  // function which inits the spotify connection and returns true | false
+  async init(): Promise<any> {
+    // check if user is already logged in (check for access token)
+    if (this.isLoggedIn() == true) {
+      // if user is already logged in --> check for premium status
+      const premium = await this.hasPremium()
+      if (this.allowNoPremium ? false : !premium) {
+        alert('no premium')
+        //   this.createSpotifyAlert()
+        //   this.nav.setRoot(NavPage)
+      } else {
+        alert('you are premium')
+      }
+    } else {
+      // if no user is logged in --> call login() function
+      this.login()
+    }
+    this.login()
+
+    return new Promise((resolve, reject) => {
+      resolve({ $SpotifyStatus: true, $Msg: 'success' })
+      reject({ $SpotifyStatus: false, $Msg: 'error' })
+    })
   }
 
   // compose spotify login url from config and open it in browser
