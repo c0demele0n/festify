@@ -21,7 +21,12 @@
         <ion-row>
             <ion-col *ngFor="let track of queue">
                 <div class="queue-item">
-                    <img [src]="track.thumbnail" />
+                    <div class="thumbnail">
+                        <img [src]="track.thumbnail" />
+                        <div class="votes">
+                            <h2>{{track.votes}}</h2>
+                        </div>
+                    </div>
                     <h4 class="card-title">{{track.name}}</h4>
                     <h5 class="card-subtitle">{{track.artist}}</h5>
                 </div>

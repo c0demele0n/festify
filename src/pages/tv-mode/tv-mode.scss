@@ -29,7 +29,9 @@ page-tv-mode {
     }
 
     &:last-child .col {
+      flex: 0 0 16.66%;
       padding: 0 2vw;
+      min-width: 0;
     }
   }
 
@@ -55,10 +57,35 @@ page-tv-mode {
     position: relative;
     width: 100%;
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .card-title {
     font-weight: bold;
+  }
+
+  .thumbnail {
+    position: relative;
+    margin-bottom: 1vh;
+  }
+
+  .votes {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+
+    h2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+    }
   }
 
   h2,

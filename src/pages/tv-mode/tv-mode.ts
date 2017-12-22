@@ -38,21 +38,21 @@ export class TvModePage {
       this.statusBar.hide()
     }
     if (this.plt == 'android') {
-      this.androidFullScreen
-        .isImmersiveModeSupported()
-        .then(() => this.androidFullScreen.immersiveMode())
+      this.androidFullScreen.isImmersiveModeSupported().then(() => this.androidFullScreen.immersiveMode())
     }
   }
 
   track1: any = {
     name: 'Track X',
     artist: 'Artist X',
-    thumbnail: 'http://via.placeholder.com/900x900'
+    thumbnail: 'http://via.placeholder.com/900x900',
+    votes: 7
   }
   current: any = {
     name: 'In the end',
     artist: 'Linkin Park',
-    thumbnail: 'http://via.placeholder.com/900x900'
+    thumbnail: 'http://via.placeholder.com/900x900',
+    votes: 7
   }
   url: string = 'festify.us'
   id: number = 12345
