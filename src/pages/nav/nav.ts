@@ -149,22 +149,68 @@ export class NavPage {
 
   // function which switches to the tv mode
   showTvMode() {
-    console.log('tvMode()')
-
-    let tvModeModal = this.modalCtrl.create(
-      TvModePage,
-      {},
-      {
-        showBackdrop: true,
-        enableBackdropDismiss: true
-      }
-    )
-    tvModeModal.present()
+    this.nav.setRoot(TvModePage)
   }
+
+  copyToClipboard(partyID: string) {
+    let textArea = document.createElement('textarea')
+
+    textArea.value = partyID
+
+    document.body.appendChild(textArea)
+
+    textArea.select()
+
+    try {
+      var successful = document.execCommand('copy')
+      var msg = successful ? 'successful' : 'unsuccessful'
+      console.log('Copying text command was ' + msg)
+    } catch (err) {
+      console.log('Oops, unable to copy')
+    }
+
+    document.body.removeChild(textArea)
+  }
+
+  shareAlert(partyID) {}
 
   // function which provides a share link to the current party
   shareParty() {
-    this.socialSharing.share('Party ID: ')
+    // Dummy PartyID
+    let partyID = '1234567890'
+
+    // mobile app
+    if (this.plt == 'cordova') {
+      this.socialSharing.share(partyID)
+    } else {
+      // mobile web
+      let shareAlert = this.alertCtrl.create({
+        title: 'Share this party',
+        message:
+          'To share this party with your friends, send them the party code<br /> <h3>' +
+          partyID +
+          '</h3>',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked')
+            }
+          },
+
+          {
+            text: 'Copy to Clipboard',
+            role: 'null',
+            handler: () => {
+              console.log('Copied to clipboard')
+              this.copyToClipboard(partyID)
+            }
+          }
+        ]
+      })
+      shareAlert.present()
+    }
   }
 
   // function which pushes the settings-page to the navigation stack
@@ -185,14 +231,23 @@ export class NavPage {
   // function which toggles the 'more' menu on android devices
   toggleMore() {
     console.log('toggleMore()')
-    let morePopover = this.popoverCtrl.create(MorePage, {}, { cssClass: 'more-popover' })
+    let morePopover = this.popoverCtrl.create(
+      MorePage,
+      {},
+      { cssClass: 'more-popover' }
+    )
     morePopover.present()
   }
 
   // function which pushes a new page to the navigation stack (only for web-view)
   openPage(page: any, pageName?: string) {
     this.root = page
-    this.namePage(pageName)
+
+    if (pageName == 'TV Mode') {
+      this.nav.setRoot(TvModePage)
+    } else {
+      this.namePage(pageName)
+    }
   }
 
   // function which listens to the ionChange tab event
