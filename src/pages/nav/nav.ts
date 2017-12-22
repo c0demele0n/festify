@@ -149,17 +149,7 @@ export class NavPage {
 
   // function which switches to the tv mode
   showTvMode() {
-    console.log('tvMode()')
-
-    let tvModeModal = this.modalCtrl.create(
-      TvModePage,
-      {},
-      {
-        showBackdrop: true,
-        enableBackdropDismiss: true
-      }
-    )
-    tvModeModal.present()
+    this.nav.setRoot(TvModePage)
   }
 
   // function which provides a share link to the current party
@@ -192,7 +182,12 @@ export class NavPage {
   // function which pushes a new page to the navigation stack (only for web-view)
   openPage(page: any, pageName?: string) {
     this.root = page
-    this.namePage(pageName)
+
+    if (pageName == 'TV Mode') {
+      this.nav.setRoot(TvModePage)
+    } else {
+      this.namePage(pageName)
+    }
   }
 
   // function which listens to the ionChange tab event
