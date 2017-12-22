@@ -154,63 +154,7 @@ export class NavPage {
 
   // function which provides a share link to the current party
   shareParty() {
-    // Check if sharing via 'sharingOptions' is supported
-    this.sharingOptions.forEach(option => {
-      console.log('check sharing option: ' + option.Name)
-
-      this.socialSharing
-        .canShareVia(option.Name)
-        .then(() => {
-          console.log(option.Name + ' true')
-        })
-        .catch(() => {
-          console.log(option.Name + ' false')
-        })
-    })
-
-    this.sharingOptions.forEach(option => {
-      if (option.Status) {
-        this.availableSharingoptions.push(option)
-      }
-    })
-
-    console.log('available sharing options')
-    this.availableSharingoptions.forEach(option => {
-      console.log(option.Name)
-    })
-
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Sharing options',
-      buttons: [
-        {
-          text: 'SMS',
-          handler: () => {
-            console.log('Destructive clicked')
-          }
-        },
-        {
-          text: 'Mail',
-          handler: () => {
-            console.log('Archive clicked')
-          }
-        },
-        {
-          text: 'WhatsApp',
-          handler: () => {
-            // this.socialSharing.shareVia()
-          }
-        },
-        {
-          text: 'cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked')
-          }
-        }
-      ]
-    })
-
-    actionSheet.present()
+    this.socialSharing.share('Party ID: ')
   }
 
   // function which pushes the settings-page to the navigation stack

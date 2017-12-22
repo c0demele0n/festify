@@ -1,41 +1,77 @@
 import { Component } from '@angular/core'
+import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler'
 import { NavController, Nav, AlertController } from 'ionic-angular'
 import { SpotifyProvider } from '../../providers/spotify/spotify'
+import { LoadingController } from 'ionic-angular'
 
 // page imports
 import { NavPage } from '../nav/nav'
-
+import { ErrorHandler } from '@angular/core/src/error_handler'
+import { errorHandler } from '@angular/platform-browser/src/browser'
+import { Events } from 'ionic-angular'
+import { FirebaseProvider } from '../../providers/firebase/firebase'
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public startApp: boolean = false
   constructor(
+    public spotify: SpotifyProvider,
+    private alertCtrl: AlertController,
+    public events: Events,
     public navCtrl: NavController,
     public nav: Nav,
-    public alertCtrl: AlertController,
-    public spotify: SpotifyProvider
-  ) {}
+    public errorHandler: ErrorHandlerProvider,
+    public loadingCtrl: LoadingController,
+    public firebase: FirebaseProvider
+  ) {
+    this.initializeSubScriptions()
+  }
 
+  ionViewDidEnter() {}
 
+  public initializeSubScriptions() {
+    /*
+    this.events.subscribe('networkOnStart', eventName => {
+      if (eventName == 'offline') {
+      }
+      if (eventName == 'online') {
+      }
+    })
+    */
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'AUcreated') {
+        console.log('Event5:' + eventName + ' triggered')
+        this.firebase.firebaseNetworkConnection()
+        this.firebase.addParty()
+        if (!this.spotify.isLoggedIn()) {
+          this.spotify.login()
+        } else {
+          this.checkForPremium()
+        }
+      }
+    })
+  }
 
   createParty() {
-    // if (this.spotify.isLoggedIn()) {
-    //   // redirect to NavPage
-    //   this.nav.setRoot(NavPage)
-    // } else {
-    //   this.spotify.login()
-    // }
+    this.firebase.createAnonymousUser()
+  }
 
+  async checkForPremium() {
+    const premium = await this.spotify.hasPremium()
+    if (!premium) {
+      this.createSpotifyAlert()
+    } else {
+      this.nav.setRoot(NavPage)
+    }
+  }
+
+  createSpotifyAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Set Partyname',
-      inputs: [
-        {
-          name: 'partyName',
-          placeholder: 'Partyname'
-        }
-      ],
+      title: 'You have no Spotify Premium account',
+      message: 'Do you want to login with a Premium account?',
       buttons: [
         {
           text: 'Cancel',
@@ -43,26 +79,16 @@ export class HomePage {
           handler: data => {}
         },
         {
-          text: 'Party hard',
+          text: 'Ok',
           handler: data => {
-            // check if partyName is not empty
-            if (!data.partyName) {
-              let alert = this.alertCtrl.create({
-                title: 'Name is missing!',
-                subTitle: 'Please enter a name for your party',
-                buttons: ['Dismiss']
-              })
-              alert.present()
-            } else {
-              // redirect to NavPage
-              this.nav.setRoot(NavPage, { partyName: data.partyName })
-            }
+            this.spotify.logout()
           }
         }
       ]
     })
     alert.present()
   }
+
   joinParty() {
     /*
       TODO:       Implement complete logic

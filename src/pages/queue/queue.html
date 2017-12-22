@@ -17,25 +17,39 @@
 <!-- end: header: desktop web app -->
 
 <ion-content>
-    <!-- search bar-->
-    <ion-searchbar placeholder="Add Tracks">
+    <ion-searchbar [(ngModel)]="searchString" (ionInput)="getTracks($event)" (ionClear)="clearSearch($event)" placeholder="Add Tracks">
     </ion-searchbar>
-    <div>
+
+    <!-- List -->
+    <ion-list class="striped">
+        <ion-item *ngFor="let track of tracks">
+            <ion-thumbnail item-start>
+                <img ion-img [src]="track.album.images[2].url" />
+            </ion-thumbnail>
+            <h2>{{track.name}}</h2>
+            <p>{{track.artists[0].name}} • {{track.album.name}}</p>
+            <button ion-button clear item-end icon-only>
+                <ion-icon name="heart-outline"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+
+    <!-- <div>
         <p class="center padding-side"> Add new songs to the queue by searching for them or ask your guests to go to
             <span>
                 <a href="https://festify.rocks">festify.us</a>
             </span> and enter this code: </p>
     </div>
-    <ion-label>
+    <div class="code">
         {{Code}}
-    </ion-label>
+    </div> -->
 
 
-
+    <!--
     <button ion-button icon-right (tap)="publishEvent('share-party')" class="share-button">
         Share Link
         <ion-icon ios="ios-share-outline" md="md-share"></ion-icon>
-    </button>
+    </button> -->
 
 
 </ion-content>
