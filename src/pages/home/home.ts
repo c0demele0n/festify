@@ -30,7 +30,17 @@ export class HomePage {
     this.initializeSubScriptions()
   }
 
-  ionViewDidEnter() {}
+  // lifecycle function which handles the redirect when using mobile web and desktop web
+  ionViewDidEnter() {
+    // if (this.spotify.isLoggedIn()) {
+    //   // you are already logged in
+    //   alert('You are already logged in')
+    //   //   this.nav.setRoot(NavPage)
+    // } else {
+    //   // you are not logged out
+    //   // do nothing
+    // }
+  }
 
   public initializeSubScriptions() {
     /*
@@ -56,6 +66,13 @@ export class HomePage {
   }
 
   createParty() {
+    this.spotify.init().then($Data => {
+      console.log('spotify.init() >> true')
+    }),
+      $Error => {
+        console.log('spotify.init() >> false')
+        console.log('passt ned')
+      }
     this.firebase.createAnonymousUser()
   }
 
