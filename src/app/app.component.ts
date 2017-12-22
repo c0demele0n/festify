@@ -24,12 +24,12 @@ export class MyApp {
     public app: App
   ) {
     // retrieve url from custom url scheme redirect
+    // only cordova app
     const w = window as any
     w.handleOpenURL = (url: string) => {
-      // hand over url to spotify provider
-      console.log('alskdjjhasd')
-      alert('ab gehts')
+      // redirect to the NavPage
       //   this.app.getRootNav().setRoot(NavPage)
+      // hand over url to spotify provider
       //   spotify.setAccessToken(url)
     }
 
