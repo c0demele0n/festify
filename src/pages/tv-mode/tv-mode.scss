@@ -3,6 +3,14 @@ page-tv-mode {
 
   .scroll-content {
     overflow: hidden;
+
+    > button {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      background-color: color($colors, dark);
+      z-index: 100;
+    }
   }
 
   .background {

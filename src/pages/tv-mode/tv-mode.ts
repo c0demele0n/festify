@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular'
+import { IonicPage, Nav, NavController, NavParams, Events } from 'ionic-angular'
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
@@ -7,7 +7,7 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
 //plugin imports
 import { ScreenOrientation } from '@ionic-native/screen-orientation'
 import { StatusBar } from '@ionic-native/status-bar'
-import { AndroidFullScreen } from '@ionic-native/android-full-screen'
+import { NavPage } from '../nav/nav'
 
 @IonicPage()
 @Component({
@@ -20,13 +20,13 @@ export class TvModePage {
   meta = []
 
   constructor(
+    public nav: Nav,
     public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
     public platform: PlatformServiceProvider,
     private screenOrientation: ScreenOrientation,
-    private statusBar: StatusBar,
-    private androidFullScreen: AndroidFullScreen
+    private statusBar: StatusBar
   ) {
     // get current platform
     this.plt = this.platform.getPlatform()
@@ -34,11 +34,8 @@ export class TvModePage {
       (this.meta = [this.url, this.id])
     //only lock orientation on cordova since it will crash on browser
     if (this.plt == 'cordova') {
-      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE)
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE)
       this.statusBar.hide()
-    }
-    if (this.plt == 'android') {
-      this.androidFullScreen.isImmersiveModeSupported().then(() => this.androidFullScreen.immersiveMode())
     }
   }
 
@@ -60,5 +57,9 @@ export class TvModePage {
   //unlocks Orientation
   ionViewWillLeave() {
     this.screenOrientation.unlock()
+  }
+
+  goBack() {
+    this.nav.setRoot(NavPage)
   }
 }

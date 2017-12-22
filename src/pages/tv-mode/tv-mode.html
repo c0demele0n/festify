@@ -1,6 +1,10 @@
 <!-- cordova app -->
 
 <ion-content>
+    <button ion-button icon-only (tap)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+    </button>
+
     <img ion-img [src]="current.thumbnail" class="background">
 
     <ion-grid>

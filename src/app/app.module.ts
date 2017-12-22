@@ -27,33 +27,14 @@ import { PlatformServiceProvider } from '../providers/platform-service/platform-
 // Plugins
 import { SocialSharing } from '@ionic-native/social-sharing'
 import { ScreenOrientation } from '@ionic-native/screen-orientation'
-import { AndroidFullScreen } from '@ionic-native/android-full-screen'
 
 @NgModule({
-  declarations: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
+  declarations: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
 
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
 
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
+  entryComponents: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
   providers: [
     StatusBar,
     SplashScreen,
@@ -64,8 +45,7 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen'
     PlatformServiceProvider,
     SpotifyProvider,
     SocialSharing,
-    ScreenOrientation,
-    AndroidFullScreen
+    ScreenOrientation
   ]
 })
 export class AppModule {}
