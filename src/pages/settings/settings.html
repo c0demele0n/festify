@@ -34,6 +34,19 @@
 <ion-content>
     <ion-list class="striped">
 
+        <ion-list radio-group [(ngModel)]="availableDevices">
+
+            <ion-list-header>
+                Available Devices
+            </ion-list-header>
+
+            <ion-item *ngFor="let device of devices">
+                <ion-label>{{device.type}}: {{device.name}}</ion-label>
+                <ion-radio value={{device.id}}></ion-radio>
+            </ion-item>
+
+        </ion-list>
+
         <ion-item>
             <ion-label>Farbschema dunkel</ion-label>
             <ion-toggle [(ngModel)]="DarkMode"></ion-toggle>

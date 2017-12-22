@@ -81,6 +81,13 @@ export class SpotifyProvider {
     return (result as any).product == 'premium'
   }
 
+  async getAvailableDevices() {
+    const url = `https://api.spotify.com/v1/me/player/devices`
+
+    const result = await this._apiCall(url)
+    return (result as any).devices
+  }
+
   // private function to uniform API calls to Spotify
   async _apiCall(url) {
     const authorization = 'Bearer ' + this.accessToken
