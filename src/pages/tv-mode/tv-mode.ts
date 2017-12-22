@@ -57,6 +57,7 @@ export class TvModePage {
   //unlocks Orientation
   ionViewWillLeave() {
     this.screenOrientation.unlock()
+    this.statusBar.show()
   }
 
   goBack() {
