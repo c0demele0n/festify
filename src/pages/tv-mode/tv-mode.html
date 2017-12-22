@@ -1,48 +1,40 @@
 <!-- cordova app -->
-<div *ngIf="plt == 'cordova'">
 
-    <!-- ios -->
-    <ion-header showWhen="ios">
-        <ion-navbar>
-            <ion-buttons start>
-                <button ion-button navPop>
-                    Close
-                </button>
-            </ion-buttons>
-            <ion-title>TV Mode</ion-title>
-        </ion-navbar>
-    </ion-header>
+<ion-content>
+    <button ion-button icon-only (tap)="goBack()">
+        <ion-icon name="close"></ion-icon>
+    </button>
 
-    <!-- android -->
-    <ion-header showWhen="android">
-        <ion-navbar>
-            <ion-title>TV Mode</ion-title>
-            <ion-buttons left>
-                <button ion-button icon-oncly navPop>
-                    <ion-icon name="arrow-round-back"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
+    <img ion-img [src]="current.thumbnail" class="background">
 
-</div>
-
-<!-- desktop web app -->
-<div *ngIf="plt == 'desktopweb'">
-
-    <ion-header>
-        <ion-navbar>
-            <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title>TV Mode</ion-title>
-        </ion-navbar>
-    </ion-header>
-
-</div>
-
-<ion-content padding>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col col-5>
+                <img [src]="current.thumbnail" class="bigpicture" />
+            </ion-col>
+            <ion-col col-7>
+                <div class="metadata">
+                    <h2>{{current.name}}</h2>
+                    <h3>{{current.artist}}</h3>
+                    <div class="line"></div>
+                    <h4>Go to {{url}} and vote!</h4>
+                    <h5>{{id}}</h5>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngFor="let track of queue">
+                <div class="queue-item">
+                    <div class="thumbnail">
+                        <img [src]="track.thumbnail" />
+                        <div class="votes">
+                            <h2>{{track.votes}}</h2>
+                        </div>
+                    </div>
+                    <h4 class="card-title">{{track.name}}</h4>
+                    <h5 class="card-subtitle">{{track.artist}}</h5>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
