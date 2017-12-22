@@ -27,6 +27,7 @@ import { PlatformServiceProvider } from '../../providers/platform-service/platfo
 
 // plugin imports
 import { SocialSharing } from '@ionic-native/social-sharing'
+import { Clipboard } from 'ts-clipboard'
 
 @IonicPage()
 @Component({
@@ -92,7 +93,8 @@ export class NavPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public socialSharing: SocialSharing,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public clipboard: Clipboard
   ) {
     // get partyname from nav params
     console.log('Partyname: ' + this.navParams.get('partyName'))
@@ -164,7 +166,35 @@ export class NavPage {
 
   // function which provides a share link to the current party
   shareParty() {
-    this.socialSharing.share('Party ID: ')
+    // Dummy PartyID
+    let partyID = '1234567890'
+
+    // mobile app
+    if (this.plt == 'cordova') {
+      this.socialSharing.share(partyID)
+    } else if (this.plt == 'mobileweb') {
+      // mobile web
+      let shareAlert = this.alertCtrl.create({
+        title: 'Share this party',
+        message:
+          'To share this party with your friends, send them the following code<br /> <h3>' +
+          partyID +
+          '</h3>'
+      })
+      shareAlert.present()
+    } else if (this.plt == 'desktopweb') {
+      // desktop web
+      let shareAlert = this.alertCtrl.create({
+        title: 'Share this party',
+        message:
+          'To share this party with your friends, send them the following code<br /> <h3>' +
+          partyID +
+          '</h3>'
+      })
+
+      this.clipboard.copy('oh dang!!!')
+      shareAlert.present()
+    }
   }
 
   // function which pushes the settings-page to the navigation stack

@@ -3,7 +3,6 @@ import { Platform } from 'ionic-angular'
 import { StatusBar } from '@ionic-native/status-bar'
 import { SplashScreen } from '@ionic-native/splash-screen'
 
-
 // page imports
 import { HomePage } from '../pages/home/home'
 import { NavPage } from '../pages/nav/nav'
@@ -15,15 +14,19 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = HomePage
+  rootPage: any = NavPage
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, spotify: SpotifyProvider) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    spotify: SpotifyProvider
+  ) {
     // retrieve url from custom url scheme redirect
     const w = window as any
     w.handleOpenURL = (url: string) => {
       // hand over url to spotify provider
       spotify.setAccessToken(url)
-
     }
 
     platform.ready().then(() => {
