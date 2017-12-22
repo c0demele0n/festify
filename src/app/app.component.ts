@@ -14,7 +14,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = HomePage
+  rootPage: any = NavPage
 
   constructor(
     platform: Platform,
