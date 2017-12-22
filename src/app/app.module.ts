@@ -28,9 +28,9 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
 import { PlatformServiceProvider } from '../providers/platform-service/platform-service'
 
 // Plugin imports
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
 import { Network } from '@ionic-native/network'
 import { SocialSharing } from '@ionic-native/social-sharing'
-
 
 var config = {
   apiKey: 'AIzaSyDl9A10FlNzy3smQQWp11RzYVPs2FgOzMg',
@@ -41,19 +41,8 @@ var config = {
   messagingSenderId: '1010348797724'
 }
 
-
 @NgModule({
-  declarations: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
-
+  declarations: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
 
   imports: [
     BrowserModule,
@@ -65,18 +54,8 @@ var config = {
     IonicModule.forRoot(MyApp)
   ],
 
-
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    NavPage,
-    HomePage,
-    QueuePage,
-    AdminPage,
-    SettingsPage,
-    MorePage,
-    TvModePage
-  ],
+  entryComponents: [MyApp, NavPage, HomePage, QueuePage, AdminPage, SettingsPage, MorePage, TvModePage],
   providers: [
     StatusBar,
     SplashScreen,
@@ -86,8 +65,9 @@ var config = {
     ErrorHandlerProvider,
     PlatformServiceProvider,
     SpotifyProvider,
-    Network,
-    SocialSharing
+    SocialSharing,
+    ScreenOrientation,
+    Network
   ]
 })
 export class AppModule {}

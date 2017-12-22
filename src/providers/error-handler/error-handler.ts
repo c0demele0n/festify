@@ -27,6 +27,7 @@ export class ErrorHandlerProvider {
     public events: Events,
     public loadingCtrl: LoadingController
   ) {
+    this.initializeSubScriptionsForErrorhandler()
     // check network status
     this.networkIsOnline = navigator.onLine
     this.isNetworkAvailable()
@@ -84,5 +85,17 @@ export class ErrorHandlerProvider {
     if (this.loadingMessageCanBeDismissed == true) {
       this.loading.dismiss()
     }
+  }
+  initializeSubScriptionsForErrorhandler() {
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'userIdNotCreated') {
+        console.log('Event4:' + eventName + ' triggered')
+        this.loading = this.loadingCtrl.create({
+          content: 'No UserID available...'
+        })
+        this.loading.present()
+        this.loadingMessageCanBeDismissed = true
+      }
+    })
   }
 }

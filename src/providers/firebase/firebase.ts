@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-
+import { Events } from 'ionic-angular'
 import { AngularFireDatabase } from 'angularfire2/database'
 import { AngularFireAuth } from 'angularfire2/auth'
 import * as firebase from 'firebase/app'
@@ -9,9 +9,15 @@ export class FirebaseProvider {
   private userAuth: any
   authState: any = null
   userId: any = null
+  firebaseNetwork: any
 
-  firebaseNetwork: any = firebase.database().ref('.info/connected')
-  constructor(public afd: AngularFireDatabase, public auth: AngularFireAuth) {}
+  constructor(
+    public afd: AngularFireDatabase,
+    public auth: AngularFireAuth,
+    public events: Events
+  ) {
+    this.firebaseNetwork = firebase.database().ref('.info/connected')
+  }
 
   createAnonymousUser() {
     // we will use anonymous auth turn it on on firebase
@@ -27,6 +33,7 @@ export class FirebaseProvider {
           console.log('User:', this.userId)
 
           resolve({ $ID: this.userId, $Msg: 'success' })
+          this.events.publish('firebase', 'AUcreated')
         })
         .catch((error: Error) => {
           // Handle Errors here.
@@ -41,9 +48,9 @@ export class FirebaseProvider {
   firebaseNetworkConnection() {
     this.firebaseNetwork.on('value', function(snap) {
       if (snap.val() === true) {
-        console.log('connected')
+        console.log('connected!!!!')
       } else {
-        console.log('not connected')
+        console.log('firebaseNetworkConnection(): offline')
       }
     })
   }
@@ -54,7 +61,8 @@ export class FirebaseProvider {
   addParty() {
     const userId = this.auth.auth.currentUser.uid
     if (!userId || userId.length < 1) {
-      throw new Error('Tried to create a party but user ID was null or empty!')
+      this.events.publish('firebase', 'userIdNotCreated')
+      console.log('addParty(): ofuserIdNotCreatedfline')
     }
 
     const now = firebase.database.ServerValue.TIMESTAMP
