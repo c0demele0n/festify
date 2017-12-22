@@ -44,16 +44,20 @@ export class FirebaseProvider {
         })
     })
   }
+
   //check if firebase network available
   firebaseNetworkConnection() {
     this.firebaseNetwork.on('value', function(snap) {
       if (snap.val() === true) {
         console.log('connected!!!!')
+        return true
       } else {
         console.log('firebaseNetworkConnection(): offline')
+        return false
       }
     })
   }
+
   getPartyItems() {
     return this.afd.list('/parties')
   }

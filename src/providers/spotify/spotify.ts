@@ -40,7 +40,7 @@ export class SpotifyProvider {
 
   // function which inits the spotify connection and returns true | false
   async init(): Promise<any> {
-    alert('init() >> started')
+    // alert('init() >> started')
     // check if user is already logged in (check for access token)
     if (this.isLoggedIn() == true) {
       alert('you are already logged in')
