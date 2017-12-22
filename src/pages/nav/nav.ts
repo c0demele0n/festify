@@ -117,9 +117,6 @@ export class NavPage {
       if (eventName == 'show-settings') {
         this.showSettings()
       }
-      if (eventName == 'toggle-more') {
-        this.toggleMore()
-      }
     })
   }
 
@@ -229,14 +226,12 @@ export class NavPage {
   }
 
   // function which toggles the 'more' menu on android devices
-  toggleMore() {
+  toggleMore(myEvent) {
     console.log('toggleMore()')
-    let morePopover = this.popoverCtrl.create(
-      MorePage,
-      {},
-      { cssClass: 'more-popover' }
-    )
-    morePopover.present()
+    let morePopover = this.popoverCtrl.create(MorePage)
+    morePopover.present({
+      ev: myEvent
+    })
   }
 
   // function which pushes a new page to the navigation stack (only for web-view)
