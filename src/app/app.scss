@@ -70,6 +70,14 @@
 .bar-button-default-ios {
   color: color($colors, white) !important;
 }
+page-home {
+  .content-ios {
+    div.scroll-content {
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
+}
 // ###########################################################
 
 // Android
@@ -81,6 +89,15 @@
 
 .bar-button-default-md {
   color: color($colors, white) !important;
+}
+
+page-home {
+  .content-md {
+    div.scroll-content {
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
 }
 // ###########################################################
 
