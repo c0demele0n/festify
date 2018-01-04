@@ -119,7 +119,10 @@ export class NavPage {
       }
     })
   }
-
+  //MPJ 116
+  ionViewWillLeave() {
+    this.events.unsubscribe('all-events')
+  }
   // function which shutdowns the current party
   exitParty() {
     console.log('exitParty()')
