@@ -17,6 +17,7 @@ export class SpotifyProvider {
   accessToken: string
   header: HttpHeaders
   activeDevice: string
+  volume: number
 
   // set credentials and token
   constructor(public http: HttpClient, public plt: Platform, public events: Events) {
@@ -101,6 +102,21 @@ export class SpotifyProvider {
       this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
     })
     this.activeDevice = device
+  }
+
+  async setVolumeOnDevice(volume) {
+    const url = `https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`
+    let body = { volume_percent: volume }
+
+    const result = await new Promise(resolve => {
+      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+
+    this.volume = volume
+  }
+
+  getVolume() {
+    return this.volume
   }
 
   async getActiveDeviceFromSpotify() {

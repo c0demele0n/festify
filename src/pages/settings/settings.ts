@@ -15,6 +15,7 @@ export class SettingsPage {
   plt: string
   devices: Array<Object> = []
   activeDevice: Object = {}
+  volume: number
 
   constructor(
     public navCtrl: NavController,
@@ -30,6 +31,7 @@ export class SettingsPage {
   //TODO: ausgewähltes Gerät speichern
   ionViewDidEnter() {
     this.activeDevice = this.spotify.getActiveDevice()
+    this.volume = this.spotify.getVolume()
     this.showAvailableDevices()
   }
 
@@ -51,5 +53,9 @@ export class SettingsPage {
     device.checked = true
     this.activeDevice = device
     this.spotify.setSelectedDevice(device)
+  }
+
+  async setVolume(volume) {
+    await this.spotify.setVolumeOnDevice(volume)
   }
 }
