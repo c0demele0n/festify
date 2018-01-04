@@ -40,18 +40,18 @@ export class SpotifyProvider {
 
   // function which inits the spotify connection and returns true | false
   async init(): Promise<any> {
-    alert('init() >> started')
+    // alert('init() >> started')
     // check if user is already logged in (check for access token)
     if (this.isLoggedIn() == true) {
-      alert('you are already logged in')
+      //   alert('you are already logged in')
       // if user is already logged in --> check for premium status
       const premium = await this.hasPremium()
       if (this.allowNoPremium ? false : !premium) {
-        alert('no premium')
+        // alert('no premium')
         //   this.createSpotifyAlert()
         //   this.nav.setRoot(NavPage)
       } else {
-        alert('you are premium')
+        // alert('you are premium')
       }
     } else {
       // if no user is logged in --> call login() function

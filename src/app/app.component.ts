@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen'
 // page imports
 import { HomePage } from '../pages/home/home'
 import { NavPage } from '../pages/nav/nav'
-import { QueuePage } from '../pages/queue/queue'
 
 import { SpotifyProvider } from '../providers/spotify/spotify'
 
@@ -14,7 +13,7 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = NavPage
+  rootPage: any = HomePage
 
   constructor(
     platform: Platform,
@@ -27,10 +26,10 @@ export class MyApp {
     // only cordova app
     const w = window as any
     w.handleOpenURL = (url: string) => {
-      // redirect to the NavPage
-      //   this.app.getRootNav().setRoot(NavPage)
-      // hand over url to spotify provider
-      //   spotify.setAccessToken(url)
+      //   redirect to the NavPage
+      this.app.getRootNav().setRoot(NavPage)
+      //   hand over url to spotify provider
+      spotify.setAccessToken(url)
     }
 
     platform.ready().then(() => {
