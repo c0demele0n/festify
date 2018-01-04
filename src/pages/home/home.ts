@@ -34,7 +34,7 @@ export class HomePage {
   ionViewDidEnter() {
     if (this.spotify.isLoggedIn()) {
       // you are already logged in
-      alert('You are already logged in')
+      //   alert('You are already logged in')
       this.nav.setRoot(NavPage)
     } else {
       // you are not logged out
