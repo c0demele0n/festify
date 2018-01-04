@@ -48,18 +48,21 @@ export class FirebaseProvider {
         })
     })
   }
+
   //check if firebase network available
   firebaseNetworkConnection() {
     this.firebaseNetwork.on('value', function(snap) {
       if (snap.val() === true) {
         console.log('connected!!!!')
+        return true
       } else {
         console.log('firebaseNetworkConnection(): offline')
+        return false
       }
     })
   }
-   getPartyItems() {
 
+  getPartyItems() {
     return this.afd.list('/parties')
     // this.partyItems =  this.afd.list('/parties')
     // this.parties=this.partyItems.valueChanges();

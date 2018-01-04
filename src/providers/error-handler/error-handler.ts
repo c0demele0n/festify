@@ -6,12 +6,6 @@ import { Network } from '@ionic-native/network'
 import { AlertController, LoadingController } from 'ionic-angular'
 import { Loading } from 'ionic-angular/components/loading/loading'
 
-/*
-  Generated class for the ErrorHandlerProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class ErrorHandlerProvider {
   fireBaseInOnline: boolean = false
