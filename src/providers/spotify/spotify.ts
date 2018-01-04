@@ -114,9 +114,45 @@ export class SpotifyProvider {
     return (result as any).device == this.activeDevice
   }
 
+  // toggle play state
+  async togglePlay() {
+    const isPlaying = await this.isPlaying()
+
+    if (isPlaying) {
+      this.pause()
+    } else {
+      this.play()
+    }
+  }
+
+  // check if current playlist is playing
+  async isPlaying() {
+    const url = `https://api.spotify.com/v1/me/player`
+    const result = await this._apiCall(url)
+
+    return (result as any).is_playing
+  }
+
+  // play/resume current playlist
+  async play() {
+    const url = `https://api.spotify.com/v1/me/player/play`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+  }
+
+  // pause current playlist
+  async pause() {
+    const url = `https://api.spotify.com/v1/me/player/pause`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+  }
+
   // private function to uniform API calls to Spotify
   async _apiCall(url) {
-    console.log('apicall', this.header)
     const result = await new Promise(resolve => {
       this.http
         .get(url, { headers: this.header })
