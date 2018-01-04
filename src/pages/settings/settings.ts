@@ -29,12 +29,15 @@ export class SettingsPage {
 
   //TODO: ausgewähltes Gerät speichern
   ionViewDidEnter() {
+    this.activeDevice = this.spotify.getActiveDevice()
     this.showAvailableDevices()
   }
 
   async showAvailableDevices() {
     let result = await this.spotify.getAvailableDevices()
-    //console.log('result', result)
+    if (!this.activeDevice) {
+      this.activeDevice = await this.spotify.getActiveDeviceFromSpotify()
+    }
     this.devices = []
     for (let i = 0; i < result.length; i++) {
       if (!result[i].is_restricted) {
@@ -45,8 +48,8 @@ export class SettingsPage {
   }
 
   setDevice(device) {
+    device.checked = true
     this.activeDevice = device
-    console.log('device: ', this.activeDevice)
     this.spotify.setSelectedDevice(device)
   }
 }

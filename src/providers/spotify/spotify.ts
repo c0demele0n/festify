@@ -93,25 +93,25 @@ export class SpotifyProvider {
     return (result as any).devices
   }
 
-  //Fix: PUT
   async setSelectedDevice(device) {
     const url = `https://api.spotify.com/v1/me/player`
+    let body = { device_ids: [device.id], play: false }
 
     const result = await new Promise(resolve => {
-      this.http
-        .put(url, { device_ids: device.id }, { headers: this.header })
-        .subscribe(data => resolve(data), err => console.log(err))
+      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
     })
     this.activeDevice = device
-    console.log('setSelectedDevice:', result)
-    //return result
   }
 
-  async getActiveDevice() {
+  async getActiveDeviceFromSpotify() {
     const url = `https://api.spotify.com/v1/me/player`
 
     const result = await this._apiCall(url)
     return (result as any).device == this.activeDevice
+  }
+
+  getActiveDevice() {
+    return this.activeDevice
   }
 
   // toggle play state
