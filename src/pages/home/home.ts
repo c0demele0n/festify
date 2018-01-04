@@ -31,14 +31,13 @@ export class HomePage {
   }
 
   // lifecycle function which handles the redirect when using mobile web and desktop web
-  ionViewDidEnter() {
-    if (this.spotify.isLoggedIn()) {
-      // you are already logged in
-      //   alert('You are already logged in')
-      this.nav.setRoot(NavPage)
-    } else {
-      // you are not logged out
-      // do nothing
+  async ionViewDidEnter() {
+    // this.spotify.setAccessToken()
+
+    let accessTokenStatus = await this.spotify.setAccessToken()
+    if (accessTokenStatus) {
+      let spotifyStatus = await this.spotify.init()
+      if (spotifyStatus) this.nav.setRoot(NavPage)
     }
   }
 
@@ -57,20 +56,12 @@ export class HomePage {
     })
   }
 
-  createParty() {
-    this.firebase.createAnonymousUser().then($Data => {
-      // success
-      this.spotify.init().then($Data => {
-        console.log('spotify.init() >> true')
-      }),
-        $Error => {
-          console.log('spotify.init() >> false')
-          console.log('passt ned')
-        }
-    }),
-      $Error => {
-        // error
-      }
+  async createParty() {
+    let firebaseAnonymousUserStatus = await this.firebase.createAnonymousUser()
+    if ((firebaseAnonymousUserStatus as any).$ID) {
+      let spotifyStatus = await this.spotify.init()
+      if (spotifyStatus) this.nav.setRoot(NavPage)
+    }
   }
 
   joinParty() {

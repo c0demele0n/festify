@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Platform, App } from 'ionic-angular'
+import { Platform, App, Events, Nav } from 'ionic-angular'
 import { StatusBar } from '@ionic-native/status-bar'
 import { SplashScreen } from '@ionic-native/splash-screen'
 
@@ -20,16 +20,20 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     spotify: SpotifyProvider,
-    public app: App
+    public app: App,
+    public events: Events
   ) {
     // retrieve url from custom url scheme redirect
     // only cordova app
     const w = window as any
-    w.handleOpenURL = (url: string) => {
-      //   redirect to the NavPage
-      this.app.getRootNav().setRoot(NavPage)
+    w.handleOpenURL = async (url: string) => {
       //   hand over url to spotify provider
-      spotify.setAccessToken(url)
+
+      let accessTokenStatus = await spotify.setAccessToken(url)
+      if (accessTokenStatus) {
+        let spotifyStatus = await spotify.init()
+        if (spotifyStatus) this.app.getRootNav().setRoot(NavPage)
+      }
     }
 
     platform.ready().then(() => {

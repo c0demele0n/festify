@@ -24,6 +24,7 @@ import { MorePage } from '../more/more'
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
+import { SpotifyProvider } from '../../providers/spotify/spotify'
 
 // plugin imports
 import { SocialSharing } from '@ionic-native/social-sharing'
@@ -92,7 +93,8 @@ export class NavPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public socialSharing: SocialSharing,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public spotify: SpotifyProvider
   ) {
     // get partyname from nav params
     console.log('Partyname: ' + this.navParams.get('partyName'))
@@ -136,6 +138,9 @@ export class NavPage {
           text: 'Exit',
           handler: () => {
             // navigate to HomePage (StartPage)
+            // this.spotify.logout()
+            // this.spotify.removeAccessToken()
+            this.spotify.logout()
             this.nav.setRoot(HomePage)
           }
         }
