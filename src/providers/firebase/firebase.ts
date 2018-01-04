@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Events } from 'ionic-angular'
 import { AngularFireDatabase } from 'angularfire2/database'
 import { AngularFireAuth } from 'angularfire2/auth'
+import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app'
 
 @Injectable()
@@ -10,12 +11,15 @@ export class FirebaseProvider {
   authState: any = null
   userId: any = null
   firebaseNetwork: any
+  parties: Observable<any[]>;
+  shortID:any;
 
   constructor(
     public afd: AngularFireDatabase,
     public auth: AngularFireAuth,
     public events: Events
   ) {
+    
     this.firebaseNetwork = firebase.database().ref('.info/connected')
   }
 
@@ -54,9 +58,20 @@ export class FirebaseProvider {
       }
     })
   }
-  getPartyItems() {
+   getPartyItems() {
+
     return this.afd.list('/parties')
-  }
+    // this.partyItems =  this.afd.list('/parties')
+    // this.parties=this.partyItems.valueChanges();
+    // return this.parties.subscribe(val=>console.log(val));
+
+   }
+   setShort_id(id){
+this.shortID=id;
+   }
+   getShort_id(){
+     return this.shortID;
+   }
 
   addParty() {
     const userId = this.auth.auth.currentUser.uid
@@ -66,6 +81,7 @@ export class FirebaseProvider {
     }
 
     const now = firebase.database.ServerValue.TIMESTAMP
+    
 
     const party = {
       country: 'DE',
@@ -77,7 +93,17 @@ export class FirebaseProvider {
         last_position_ms: 0,
         playing: false
       },
-      short_id: Math.floor(Math.random() * 1000000) + ''
+       short_id: Math.floor(Math.random() * 1000000) + ''
+  
+       
+    }
+    if(party) {
+      this.setShort_id(party.short_id);
+      console.log(this.getShort_id());
+
+    }
+    else {
+      this.shortID ="";
     }
     const key = firebase
       .database()
