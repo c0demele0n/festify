@@ -1,2 +1,17 @@
 page-settings {
+  $bgcolor: color($colors, blackRussian);
+
+  .button {
+    background-color: $bgcolor;
+    box-shadow: none;
+    border: none;
+
+    &:hover:not(.disable-hover) {
+      background-color: $bgcolor;
+    }
+  }
+
+  .item-md .item-button[icon-only] {
+    padding: 1em;
+  }
 }

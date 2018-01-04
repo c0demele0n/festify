@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Platform, Events } from 'ionic-angular'
 
@@ -15,12 +15,14 @@ export class SpotifyProvider {
 
   // api token from successful login
   accessToken: string
+  header: HttpHeaders
+  activeDevice: string
 
   // set credentials and token
   constructor(public http: HttpClient, public plt: Platform, public events: Events) {
     this.config = {
       clientID: '2d3395530b5641dba4f40c4571465621',
-      scope: 'user-read-private user-read-email',
+      scope: 'user-read-private user-read-email user-read-playback-state user-modify-playback-state',
       redirectURI: plt.is('mobile') ? 'festion://' : 'http://localhost:8100'
     }
     this.config.clientID = encodeURIComponent(this.config.clientID)
@@ -54,6 +56,9 @@ export class SpotifyProvider {
     const hash = tokens[tokens.length - 1]
     const token = hash.split('&')[0].replace('access_token=', '')
     this.accessToken = token
+
+    const authorization = 'Bearer ' + this.accessToken
+    this.header = new HttpHeaders({ Authorization: authorization })
   }
 
   // you are logged in if you have an access token
@@ -88,14 +93,33 @@ export class SpotifyProvider {
     return (result as any).devices
   }
 
-  // private function to uniform API calls to Spotify
-  async _apiCall(url) {
-    const authorization = 'Bearer ' + this.accessToken
-    const header = new HttpHeaders({ Authorization: authorization })
+  //Fix: PUT
+  async setSelectedDevice(device) {
+    const url = `https://api.spotify.com/v1/me/player`
 
     const result = await new Promise(resolve => {
       this.http
-        .get(url, { headers: header })
+        .put(url, { device_ids: device.id }, { headers: this.header })
+        .subscribe(data => resolve(data), err => console.log(err))
+    })
+    this.activeDevice = device
+    console.log('setSelectedDevice:', result)
+    //return result
+  }
+
+  async getActiveDevice() {
+    const url = `https://api.spotify.com/v1/me/player`
+
+    const result = await this._apiCall(url)
+    return (result as any).device == this.activeDevice
+  }
+
+  // private function to uniform API calls to Spotify
+  async _apiCall(url) {
+    console.log('apicall', this.header)
+    const result = await new Promise(resolve => {
+      this.http
+        .get(url, { headers: this.header })
         .subscribe(data => resolve(data), err => this.events.publish('SpotifyError', err))
     })
 
