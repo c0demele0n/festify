@@ -185,7 +185,7 @@ export class SpotifyProvider {
     const result = await new Promise(resolve => {
       this.http
         .get(url, { headers: this.header })
-        .subscribe(data => resolve(data), err => this.events.publish('SpotifyError', err))
+        .subscribe(data => resolve(data), err => this.events.publish('spotify', err))
     })
 
     return result
@@ -193,8 +193,11 @@ export class SpotifyProvider {
 
   async _apiPutCall(url, body) {
     const result = await new Promise(resolve => {
-      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+      this.http
+        .put(url, body, { headers: this.header })
+        .subscribe(data => resolve(data), err => this.events.publish('spotify', err))
     })
+
     return result
   }
 }
