@@ -41,7 +41,7 @@
                     <button ion-button icon-only (tap)="shareParty()">
                         <ion-icon name="share"></ion-icon>
                     </button>
-                    <button ion-button icon-only (tap)="toggleMore()">
+                    <button ion-button icon-only (tap)="toggleMore($event)">
                         <ion-icon name="more"></ion-icon>
                     </button>
                 </ion-buttons>
@@ -103,7 +103,7 @@
             <ion-content class="side-menu">
                 <h2 padding>Menu</h2>
                 <ion-list>
-                    <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page)">
+                    <button ion-item menuClose *ngFor="let tab of tabs" (tap)="openPage(tab.Page, tab.Name)">
                         <ion-icon name="{{tab.Icon}}" item-start></ion-icon>
                         {{tab.Name}}
                     </button>

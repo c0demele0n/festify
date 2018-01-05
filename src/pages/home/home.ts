@@ -1,14 +1,15 @@
 import { Component } from '@angular/core'
-import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler'
 import { NavController, Nav, AlertController } from 'ionic-angular'
-import { SpotifyProvider } from '../../providers/spotify/spotify'
 import { LoadingController } from 'ionic-angular'
+import { Events } from 'ionic-angular'
 
 // page imports
 import { NavPage } from '../nav/nav'
-import { ErrorHandler } from '@angular/core/src/error_handler'
-import { errorHandler } from '@angular/platform-browser/src/browser'
-import { Events } from 'ionic-angular'
+
+// provider imports
+import { SpotifyProvider } from '../../providers/spotify/spotify'
+import { FirebaseProvider } from '../../providers/firebase/firebase'
+import { ErrorHandlerProvider } from '../../providers/error-handler/error-handler'
 
 @Component({
   selector: 'page-home',
@@ -23,62 +24,44 @@ export class HomePage {
     public navCtrl: NavController,
     public nav: Nav,
     public errorHandler: ErrorHandlerProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public firebase: FirebaseProvider
   ) {
     this.initializeSubScriptions()
   }
 
-  ionViewDidEnter() {
-    if (this.spotify.isLoggedIn()) {
-      this.checkForPremium()
+  // lifecycle function which handles the redirect when using mobile web and desktop web
+  async ionViewDidEnter() {
+    // this.spotify.setAccessToken()
+
+    let accessTokenStatus = await this.spotify.setAccessToken()
+    if (accessTokenStatus) {
+      let spotifyStatus = await this.spotify.init()
+      if (spotifyStatus) this.nav.setRoot(NavPage)
     }
   }
 
   public initializeSubScriptions() {
-    this.events.subscribe('networkOnStart', eventName => {
-      if (eventName == 'offline') {
-      }
-      if (eventName == 'online') {
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'AUcreated') {
+        console.log('Event5:' + eventName + ' triggered')
+        this.firebase.firebaseNetworkConnection()
+        this.firebase.addParty()
+        // if (!this.spotify.isLoggedIn()) {
+        //   this.spotify.login()
+        // } else {
+        //   this.checkForPremium()
+        // }
       }
     })
   }
 
-  createParty() {
-    if (!this.spotify.isLoggedIn()) {
-      this.spotify.login()
-    } else {
-      this.checkForPremium()
+  async createParty() {
+    let firebaseAnonymousUserStatus = await this.firebase.createAnonymousUser()
+    if ((firebaseAnonymousUserStatus as any).$ID) {
+      let spotifyStatus = await this.spotify.init()
+      if (spotifyStatus) this.nav.setRoot(NavPage)
     }
-  }
-
-  async checkForPremium() {
-    const premium = await this.spotify.hasPremium()
-    if (!premium) {
-      this.createSpotifyAlert()
-    } else {
-      this.nav.setRoot(NavPage)
-    }
-  }
-
-  createSpotifyAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'You have no Spotify Premium account',
-      message: 'Do you want to login with a Premium account?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {}
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            this.spotify.logout()
-          }
-        }
-      ]
-    })
-    alert.present()
   }
 
   joinParty() {

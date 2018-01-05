@@ -11,7 +11,8 @@ import {
   ModalController,
   Tabs,
   AlertController,
-  ActionSheetController
+  ActionSheetController,
+  LoadingController
 } from 'ionic-angular'
 
 // page imports
@@ -24,6 +25,7 @@ import { MorePage } from '../more/more'
 
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
+import { SpotifyProvider } from '../../providers/spotify/spotify'
 
 // plugin imports
 import { SocialSharing } from '@ionic-native/social-sharing'
@@ -73,15 +75,6 @@ export class NavPage {
   // string which holds the current platform name
   plt: string
 
-  // array which holds all available sharing options
-  sharingOptions = [
-    { Name: 'sms', Status: false },
-    { Name: 'mail', Status: false },
-    { Name: 'whatsapp', Status: false }
-  ]
-
-  availableSharingoptions = []
-
   constructor(
     public nav: Nav,
     public navCtrl: NavController,
@@ -92,7 +85,9 @@ export class NavPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public socialSharing: SocialSharing,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public loadingCtrl: LoadingController,
+    public spotify: SpotifyProvider
   ) {
     // get partyname from nav params
     console.log('Partyname: ' + this.navParams.get('partyName'))
@@ -117,12 +112,12 @@ export class NavPage {
       if (eventName == 'show-settings') {
         this.showSettings()
       }
-      if (eventName == 'toggle-more') {
-        this.toggleMore()
-      }
     })
   }
-
+  //MPJ 116
+  ionViewWillLeave() {
+    this.events.unsubscribe('all-events')
+  }
   // function which shutdowns the current party
   exitParty() {
     console.log('exitParty()')
@@ -139,6 +134,9 @@ export class NavPage {
           text: 'Exit',
           handler: () => {
             // navigate to HomePage (StartPage)
+            // this.spotify.logout()
+            this.spotify.removeAccessToken()
+            // this.spotify.logout()
             this.nav.setRoot(HomePage)
           }
         }
@@ -149,22 +147,75 @@ export class NavPage {
 
   // function which switches to the tv mode
   showTvMode() {
-    console.log('tvMode()')
-
-    let tvModeModal = this.modalCtrl.create(
-      TvModePage,
-      {},
-      {
-        showBackdrop: true,
-        enableBackdropDismiss: true
-      }
-    )
-    tvModeModal.present()
+    let loading = this.loadingCtrl.create({
+      content: 'Loading TV Mode...'
+    })
+    loading.present()
+    setTimeout(() => {
+      loading.dismiss()
+      this.nav.setRoot(TvModePage)
+    }, 1000)
   }
+
+  copyToClipboard(partyID: string) {
+    let textArea = document.createElement('textarea')
+
+    textArea.value = partyID
+
+    document.body.appendChild(textArea)
+
+    textArea.select()
+
+    try {
+      var successful = document.execCommand('copy')
+      var msg = successful ? 'successful' : 'unsuccessful'
+      console.log('Copying text command was ' + msg)
+    } catch (err) {
+      console.log('Oops, unable to copy')
+    }
+
+    document.body.removeChild(textArea)
+  }
+
+  shareAlert(partyID) {}
 
   // function which provides a share link to the current party
   shareParty() {
-    this.socialSharing.share('Party ID: ')
+    // Dummy PartyID
+    let partyID = '1234567890'
+
+    // mobile app
+    if (this.plt == 'cordova') {
+      this.socialSharing.share(partyID)
+    } else {
+      // mobile web
+      let shareAlert = this.alertCtrl.create({
+        title: 'Share this party',
+        message:
+          'To share this party with your friends, send them the party code<br /> <h3>' +
+          partyID +
+          '</h3>',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked')
+            }
+          },
+
+          {
+            text: 'Copy to Clipboard',
+            role: 'null',
+            handler: () => {
+              console.log('Copied to clipboard')
+              this.copyToClipboard(partyID)
+            }
+          }
+        ]
+      })
+      shareAlert.present()
+    }
   }
 
   // function which pushes the settings-page to the navigation stack
@@ -183,16 +234,35 @@ export class NavPage {
   }
 
   // function which toggles the 'more' menu on android devices
-  toggleMore() {
+  toggleMore(myEvent) {
     console.log('toggleMore()')
-    let morePopover = this.popoverCtrl.create(MorePage, {}, { cssClass: 'more-popover' })
-    morePopover.present()
+    let morePopover = this.popoverCtrl.create(MorePage)
+    morePopover.present({
+      ev: myEvent
+    })
   }
 
   // function which pushes a new page to the navigation stack (only for web-view)
   openPage(page: any, pageName?: string) {
-    this.root = page
-    this.namePage(pageName)
+    // FIXME
+    // if you are trying to show the TV Mode Page, when the Split Pane is overlayed,
+    // the app throws a TransitionError because of the Transition of the Split Pane Menu
+    // to fix this, there is a simple Timeout with a Loading Message implemented
+    // should be fixed!!!
+    if (pageName == 'TV Mode') {
+      let loading = this.loadingCtrl.create({
+        content: 'Loading TV Mode...'
+      })
+      loading.present()
+      setTimeout(() => {
+        loading.dismiss()
+        this.nav.setRoot(TvModePage)
+      }, 500)
+    } else {
+      // normal procedure when changing the tab on mobile and desktop web
+      this.root = page
+      this.namePage(pageName)
+    }
   }
 
   // function which listens to the ionChange tab event

@@ -1,13 +1,11 @@
 import { Component } from '@angular/core'
-import { Platform } from 'ionic-angular'
+import { Platform, App, Events, Nav } from 'ionic-angular'
 import { StatusBar } from '@ionic-native/status-bar'
 import { SplashScreen } from '@ionic-native/splash-screen'
-
 
 // page imports
 import { HomePage } from '../pages/home/home'
 import { NavPage } from '../pages/nav/nav'
-import { QueuePage } from '../pages/queue/queue'
 
 import { SpotifyProvider } from '../providers/spotify/spotify'
 
@@ -17,13 +15,25 @@ import { SpotifyProvider } from '../providers/spotify/spotify'
 export class MyApp {
   rootPage: any = HomePage
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, spotify: SpotifyProvider) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    spotify: SpotifyProvider,
+    public app: App,
+    public events: Events
+  ) {
     // retrieve url from custom url scheme redirect
+    // only cordova app
     const w = window as any
-    w.handleOpenURL = (url: string) => {
-      // hand over url to spotify provider
-      spotify.setAccessToken(url)
+    w.handleOpenURL = async (url: string) => {
+      //   hand over url to spotify provider
 
+      let accessTokenStatus = await spotify.setAccessToken(url)
+      if (accessTokenStatus) {
+        let spotifyStatus = await spotify.init()
+        if (spotifyStatus) this.app.getRootNav().setRoot(NavPage)
+      }
     }
 
     platform.ready().then(() => {

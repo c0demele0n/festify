@@ -6,12 +6,6 @@ import { Network } from '@ionic-native/network'
 import { AlertController, LoadingController } from 'ionic-angular'
 import { Loading } from 'ionic-angular/components/loading/loading'
 
-/*
-  Generated class for the ErrorHandlerProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class ErrorHandlerProvider {
   fireBaseInOnline: boolean = false
@@ -27,6 +21,7 @@ export class ErrorHandlerProvider {
     public events: Events,
     public loadingCtrl: LoadingController
   ) {
+    this.initializeSubScriptionsForErrorhandler()
     // check network status
     this.networkIsOnline = navigator.onLine
     this.isNetworkAvailable()
@@ -84,5 +79,17 @@ export class ErrorHandlerProvider {
     if (this.loadingMessageCanBeDismissed == true) {
       this.loading.dismiss()
     }
+  }
+  initializeSubScriptionsForErrorhandler() {
+    this.events.subscribe('firebase', eventName => {
+      if (eventName == 'userIdNotCreated') {
+        console.log('Event4:' + eventName + ' triggered')
+        this.loading = this.loadingCtrl.create({
+          content: 'No UserID available...'
+        })
+        this.loading.present()
+        this.loadingMessageCanBeDismissed = true
+      }
+    })
   }
 }
