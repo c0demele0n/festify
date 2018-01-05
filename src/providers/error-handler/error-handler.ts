@@ -91,5 +91,34 @@ export class ErrorHandlerProvider {
         this.loadingMessageCanBeDismissed = true
       }
     })
+
+    this.events.subscribe('spotify', err => {
+      const errorStatus = err.error.error.status ? err.error.error.status : err.status
+      let subTitle
+      let title
+      if (errorStatus == 404) {
+        title = 'Device not found'
+        subTitle = 'Make sure your device is active or choose another one'
+      } else if (errorStatus == 403) {
+        title = 'You have no access to this function'
+        subTitle = 'Make sure you are logged in with a Spotify Premium Account'
+      } else if (errorStatus == 500) {
+        title = 'Internal Spotify Error'
+        subTitle = 'Please retry again later'
+      } else if (errorStatus == 202) {
+        title = 'Your device is temporarily unavailable'
+        subTitle = 'Please retry again later'
+      } else {
+        title = 'Error ' + errorStatus
+        subTitle = err
+      }
+
+      let alert = this.alertCtrl.create({
+        title: title,
+        subTitle: subTitle,
+        buttons: ['Okay']
+      })
+      alert.present()
+    })
   }
 }
