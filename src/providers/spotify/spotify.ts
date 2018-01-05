@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Events, AlertController } from 'ionic-angular'
 
@@ -15,6 +15,7 @@ export class SpotifyProvider {
 
   // api token from successful login
   private accessToken: string
+  private header: HttpHeaders
 
   // dev toggle for allowing noPremium Accounts to create a party
   private allowNoPremium: boolean = true
@@ -28,7 +29,7 @@ export class SpotifyProvider {
     // set credentials and token
     this.config = {
       clientID: '2d3395530b5641dba4f40c4571465621',
-      scope: 'user-read-private user-read-email',
+      scope: 'user-read-private user-read-email user-read-playback-state user-modify-playback-state',
       redirectURI: plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
     }
     this.config.clientID = encodeURIComponent(this.config.clientID)
@@ -84,13 +85,14 @@ export class SpotifyProvider {
     const token = hash.split('&')[0].replace('access_token=', '')
     this.accessToken = token
 
+    const authorization = 'Bearer ' + this.accessToken
+    this.header = new HttpHeaders({ Authorization: authorization })
     return true
   }
 
   removeAccessToken() {
     this.accessToken = ''
-    window.location.href =
-      this.plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
+    window.location.href = this.plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
   }
 
   // you are logged in if you have an access token
@@ -106,7 +108,7 @@ export class SpotifyProvider {
     const query = encodeURIComponent(searchQuery)
     const url = `https://api.spotify.com/v1/search?q=${query}&type=track`
 
-    const result = await this._apiCall(url)
+    const result = await this._apiGetCall(url)
     return (result as any).tracks.items
   }
 
@@ -114,21 +116,45 @@ export class SpotifyProvider {
   async hasPremium() {
     const url = `https://api.spotify.com/v1/me`
 
-    const result = await this._apiCall(url)
+    const result = await this._apiGetCall(url)
     return (result as any).product == 'premium'
   }
 
-  // private function to uniform API calls to Spotify
-  async _apiCall(url) {
-    const authorization = 'Bearer ' + this.accessToken
-    const header = new HttpHeaders({ Authorization: authorization })
+  async getAvailableDevices() {
+    const url = `https://api.spotify.com/v1/me/player/devices`
 
+    const result = await this._apiGetCall(url)
+    return (result as any).devices
+  }
+
+  async setSelectedDevice(device) {
+    const url = `https://api.spotify.com/v1/me/player`
+    let body = { device_ids: [device.id], play: true }
+
+    this._apiPutCall(url, body)
+  }
+
+  async setVolumeOnDevice(volume) {
+    const url = `https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`
+
+    this._apiPutCall(url, null)
+  }
+
+  // private function to uniform API calls to Spotify
+  async _apiGetCall(url) {
     const result = await new Promise(resolve => {
       this.http
-        .get(url, { headers: header })
+        .get(url, { headers: this.header })
         .subscribe(data => resolve(data), err => this.events.publish('SpotifyError', err))
     })
 
+    return result
+  }
+
+  async _apiPutCall(url, body) {
+    const result = await new Promise(resolve => {
+      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
     return result
   }
 }
