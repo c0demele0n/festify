@@ -35,11 +35,11 @@ export class SpotifyProvider {
     this.config.scope = encodeURIComponent(this.config.scope)
     this.config.redirectURI = encodeURIComponent(this.config.redirectURI)
 
-    this.setAccessToken()
+    // this.setAccessToken()
   }
 
   // function which inits the spotify connection and returns true | false
-  async init(): Promise<any> {
+  async init(url?: string) {
     // alert('init() >> started')
     // check if user is already logged in (check for access token)
     if (this.isLoggedIn() == true) {
@@ -49,19 +49,14 @@ export class SpotifyProvider {
       if (this.allowNoPremium ? false : !premium) {
         // alert('no premium')
         //   this.createSpotifyAlert()
-        //   this.nav.setRoot(NavPage)
       } else {
         // alert('you are premium')
+        return true
       }
     } else {
       // if no user is logged in --> call login() function
       this.login()
     }
-
-    return new Promise((resolve, reject) => {
-      resolve({ $SpotifyStatus: true, $Msg: 'success' })
-      reject({ $SpotifyStatus: false, $Msg: 'error' })
-    })
   }
 
   // compose spotify login url from config and open it in browser
@@ -83,11 +78,19 @@ export class SpotifyProvider {
   // get and set access token from url
   async setAccessToken(url = window.location.href) {
     const tokens = url.split('#')
-    if (tokens.length <= 1) return
+    if (tokens.length <= 1) return false
 
     const hash = tokens[tokens.length - 1]
     const token = hash.split('&')[0].replace('access_token=', '')
     this.accessToken = token
+
+    return true
+  }
+
+  removeAccessToken() {
+    this.accessToken = ''
+    window.location.href =
+      this.plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
   }
 
   // you are logged in if you have an access token
