@@ -87,6 +87,7 @@ export class SpotifyProvider {
 
     const authorization = 'Bearer ' + this.accessToken
     this.header = new HttpHeaders({ Authorization: authorization })
+
     return true
   }
 
@@ -138,6 +139,45 @@ export class SpotifyProvider {
     const url = `https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`
 
     this._apiPutCall(url, null)
+  }
+
+  // toggle play state
+  async togglePlay() {
+    const isPlaying = await this.isPlaying()
+
+    if (isPlaying) {
+      this.pause()
+    } else {
+      this.play()
+    }
+
+    return !isPlaying
+  }
+
+  // check if current playlist is playing
+  async isPlaying() {
+    const url = `https://api.spotify.com/v1/me/player`
+    const result = await this._apiGetCall(url)
+
+    return (result as any).is_playing
+  }
+
+  // play/resume current playlist
+  async play() {
+    const url = `https://api.spotify.com/v1/me/player/play`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+  }
+
+  // pause current playlist
+  async pause() {
+    const url = `https://api.spotify.com/v1/me/player/pause`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
   }
 
   // private function to uniform API calls to Spotify
