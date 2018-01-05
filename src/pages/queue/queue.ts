@@ -17,6 +17,8 @@ export class QueuePage {
   plt: string
   Code: number = 504215
 
+  playingIcon: string = 'play'
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -51,5 +53,15 @@ export class QueuePage {
   clearSearch(ev: any) {
     // clear tracks array
     this.tracks = []
+  }
+
+  // toggle play/pause state
+  async togglePlay() {
+    const isPlaying = await this.spotify.togglePlay()
+    this.playingIcon = isPlaying ? 'pause' : 'play'
+  }
+
+  next() {
+    // TODO: play next track
   }
 }
