@@ -11,7 +11,8 @@ import {
   ModalController,
   Tabs,
   AlertController,
-  ActionSheetController
+  ActionSheetController,
+  LoadingController
 } from 'ionic-angular'
 
 // page imports
@@ -74,15 +75,6 @@ export class NavPage {
   // string which holds the current platform name
   plt: string
 
-  // array which holds all available sharing options
-  sharingOptions = [
-    { Name: 'sms', Status: false },
-    { Name: 'mail', Status: false },
-    { Name: 'whatsapp', Status: false }
-  ]
-
-  availableSharingoptions = []
-
   constructor(
     public nav: Nav,
     public navCtrl: NavController,
@@ -94,6 +86,7 @@ export class NavPage {
     public alertCtrl: AlertController,
     public socialSharing: SocialSharing,
     public actionSheetCtrl: ActionSheetController,
+    public loadingCtrl: LoadingController,
     public spotify: SpotifyProvider
   ) {
     // get partyname from nav params
@@ -139,8 +132,8 @@ export class NavPage {
           handler: () => {
             // navigate to HomePage (StartPage)
             // this.spotify.logout()
-            // this.spotify.removeAccessToken()
-            this.spotify.logout()
+            this.spotify.removeAccessToken()
+            // this.spotify.logout()
             this.nav.setRoot(HomePage)
           }
         }
@@ -241,11 +234,23 @@ export class NavPage {
 
   // function which pushes a new page to the navigation stack (only for web-view)
   openPage(page: any, pageName?: string) {
-    this.root = page
-
+    // FIXME
+    // if you are trying to show the TV Mode Page, when the Split Pane is overlayed,
+    // the app throws a TransitionError because of the Transition of the Split Pane Menu
+    // to fix this, there is a simple Timeout with a Loading Message implemented
+    // should be fixed!!!
     if (pageName == 'TV Mode') {
-      this.nav.setRoot(TvModePage)
+      let loading = this.loadingCtrl.create({
+        content: 'Loading TV Mode...'
+      })
+      loading.present()
+      setTimeout(() => {
+        loading.dismiss()
+        this.nav.setRoot(TvModePage)
+      }, 500)
     } else {
+      // normal procedure when changing the tab on mobile and desktop web
+      this.root = page
       this.namePage(pageName)
     }
   }
