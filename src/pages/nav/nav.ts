@@ -147,7 +147,14 @@ export class NavPage {
 
   // function which switches to the tv mode
   showTvMode() {
-    this.nav.setRoot(TvModePage)
+    let loading = this.loadingCtrl.create({
+      content: 'Loading TV Mode...'
+    })
+    loading.present()
+    setTimeout(() => {
+      loading.dismiss()
+      this.nav.setRoot(TvModePage)
+    }, 1000)
   }
 
   copyToClipboard(partyID: string) {
