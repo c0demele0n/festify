@@ -15,6 +15,7 @@ export class SpotifyProvider {
 
   // api token from successful login
   private accessToken: string
+  private header: HttpHeaders
 
   // dev toggle for allowing noPremium Accounts to create a party
   private allowNoPremium: boolean = true
@@ -84,13 +85,15 @@ export class SpotifyProvider {
     const token = hash.split('&')[0].replace('access_token=', '')
     this.accessToken = token
 
+    const authorization = 'Bearer ' + this.accessToken
+    this.header = new HttpHeaders({ Authorization: authorization })
+
     return true
   }
 
   removeAccessToken() {
     this.accessToken = ''
-    window.location.href =
-      this.plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
+    window.location.href = this.plt.getPlatform() == 'cordova' ? 'festion://' : 'http://localhost:8100'
   }
 
   // you are logged in if you have an access token
@@ -118,14 +121,50 @@ export class SpotifyProvider {
     return (result as any).product == 'premium'
   }
 
+  // toggle play state
+  async togglePlay() {
+    const isPlaying = await this.isPlaying()
+
+    if (isPlaying) {
+      this.pause()
+    } else {
+      this.play()
+    }
+
+    return !isPlaying
+  }
+
+  // check if current playlist is playing
+  async isPlaying() {
+    const url = `https://api.spotify.com/v1/me/player`
+    const result = await this._apiCall(url)
+
+    return (result as any).is_playing
+  }
+
+  // play/resume current playlist
+  async play() {
+    const url = `https://api.spotify.com/v1/me/player/play`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+  }
+
+  // pause current playlist
+  async pause() {
+    const url = `https://api.spotify.com/v1/me/player/pause`
+
+    return await new Promise(resolve => {
+      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
+  }
+
   // private function to uniform API calls to Spotify
   async _apiCall(url) {
-    const authorization = 'Bearer ' + this.accessToken
-    const header = new HttpHeaders({ Authorization: authorization })
-
     const result = await new Promise(resolve => {
       this.http
-        .get(url, { headers: header })
+        .get(url, { headers: this.header })
         .subscribe(data => resolve(data), err => this.events.publish('SpotifyError', err))
     })
 
