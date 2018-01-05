@@ -40,19 +40,19 @@
                 <ion-label stacked>Available Devices</ion-label>
                 <ion-label stacked>Currently playing on: {{activeDevice ? activeDevice.name : ""}}</ion-label>
 
-                <button ion-button icon-only item-right (tap)='showAvailableDevices()'>
+                <button ion-button icon-only item-right (tap)='updateStatus()'>
                     <ion-icon name="refresh"></ion-icon>
                 </button>
 
             </ion-list-header>
             <ion-item *ngFor="let device of devices">
                 <ion-label>{{device.type}}: {{device.name}}</ion-label>
-                <ion-radio (tap)="setDevice(device)" value={{device.id}} checked={{device.checked}}></ion-radio>
+                <ion-radio (tap)="setDevice(device)" value={{device.id}} checked={{device.is_active}}></ion-radio>
             </ion-item>
         </ion-list>
 
         <ion-list>
-            <ion-item>
+            <ion-item [ngClass]="showVolume ? '' : 'disabled'">
                 <ion-label stacked>Volume: {{volume ? volume : "0"}}</ion-label>
                 <ion-range min="0" max="100" debounce="100" [(ngModel)]="volume" color="secondary" (ionChange)="setVolume(volume)">
                     <ion-label range-left>0</ion-label>

@@ -14,4 +14,10 @@ page-settings {
   .item-md .item-button[icon-only] {
     padding: 1em;
   }
+
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 }

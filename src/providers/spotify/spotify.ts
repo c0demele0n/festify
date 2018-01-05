@@ -16,8 +16,6 @@ export class SpotifyProvider {
   // api token from successful login
   accessToken: string
   header: HttpHeaders
-  activeDevice: string
-  volume: number
 
   // set credentials and token
   constructor(public http: HttpClient, public plt: Platform, public events: Events) {
@@ -75,7 +73,7 @@ export class SpotifyProvider {
     const query = encodeURIComponent(searchQuery)
     const url = `https://api.spotify.com/v1/search?q=${query}&type=track`
 
-    const result = await this._apiCall(url)
+    const result = await this._apiGetCall(url)
     return (result as any).tracks.items
   }
 
@@ -83,98 +81,45 @@ export class SpotifyProvider {
   async hasPremium() {
     const url = `https://api.spotify.com/v1/me`
 
-    const result = await this._apiCall(url)
+    const result = await this._apiGetCall(url)
     return (result as any).product == 'premium'
   }
 
   async getAvailableDevices() {
     const url = `https://api.spotify.com/v1/me/player/devices`
 
-    const result = await this._apiCall(url)
+    const result = await this._apiGetCall(url)
     return (result as any).devices
   }
 
   async setSelectedDevice(device) {
     const url = `https://api.spotify.com/v1/me/player`
-    let body = { device_ids: [device.id], play: false }
+    let body = { device_ids: [device.id], play: true }
 
-    const result = await new Promise(resolve => {
-      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
-    })
-    this.activeDevice = device
+    this._apiPutCall(url, body)
   }
 
   async setVolumeOnDevice(volume) {
     const url = `https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`
-    let body = { volume_percent: volume }
 
-    const result = await new Promise(resolve => {
-      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
-    })
-
-    this.volume = volume
-  }
-
-  getVolume() {
-    return this.volume
-  }
-
-  async getActiveDeviceFromSpotify() {
-    const url = `https://api.spotify.com/v1/me/player`
-
-    const result = await this._apiCall(url)
-    return (result as any).device == this.activeDevice
-  }
-
-  getActiveDevice() {
-    return this.activeDevice
-  }
-
-  // toggle play state
-  async togglePlay() {
-    const isPlaying = await this.isPlaying()
-
-    if (isPlaying) {
-      this.pause()
-    } else {
-      this.play()
-    }
-  }
-
-  // check if current playlist is playing
-  async isPlaying() {
-    const url = `https://api.spotify.com/v1/me/player`
-    const result = await this._apiCall(url)
-
-    return (result as any).is_playing
-  }
-
-  // play/resume current playlist
-  async play() {
-    const url = `https://api.spotify.com/v1/me/player/play`
-
-    return await new Promise(resolve => {
-      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
-    })
-  }
-
-  // pause current playlist
-  async pause() {
-    const url = `https://api.spotify.com/v1/me/player/pause`
-
-    return await new Promise(resolve => {
-      this.http.put(url, null, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
-    })
+    this._apiPutCall(url, null)
   }
 
   // private function to uniform API calls to Spotify
-  async _apiCall(url) {
+  async _apiGetCall(url) {
     const result = await new Promise(resolve => {
       this.http
         .get(url, { headers: this.header })
         .subscribe(data => resolve(data), err => this.events.publish('SpotifyError', err))
     })
 
+    return result
+  }
+
+  async _apiPutCall(url, body) {
+    const result = await new Promise(resolve => {
+      this.http.put(url, body, { headers: this.header }).subscribe(data => resolve(data), err => console.log(err))
+    })
     return result
   }
 }

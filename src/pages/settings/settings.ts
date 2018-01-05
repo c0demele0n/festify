@@ -16,6 +16,7 @@ export class SettingsPage {
   devices: Array<Object> = []
   activeDevice: Object = {}
   volume: number
+  showVolume: boolean
 
   constructor(
     public navCtrl: NavController,
@@ -28,34 +29,43 @@ export class SettingsPage {
     this.plt = this.platform.getPlatform()
   }
 
-  //TODO: ausgewähltes Gerät speichern
-  ionViewDidEnter() {
-    this.activeDevice = this.spotify.getActiveDevice()
-    this.volume = this.spotify.getVolume()
-    this.showAvailableDevices()
+  ionViewWillEnter() {
+    this.updateStatus()
   }
 
-  async showAvailableDevices() {
+  async updateStatus() {
     let result = await this.spotify.getAvailableDevices()
-    if (!this.activeDevice) {
-      this.activeDevice = await this.spotify.getActiveDeviceFromSpotify()
-    }
     this.devices = []
+
     for (let i = 0; i < result.length; i++) {
-      if (!result[i].is_restricted) {
-        result[i].checked = (this.activeDevice as any).id == result[i].id
-        this.devices.push(result[i])
+      const device = result[i]
+      const { is_restricted, is_active } = device
+
+      if (!is_restricted) {
+        this.devices.push(device)
+
+        if (is_active) {
+          this.updateVolume(device)
+        }
       }
     }
   }
 
+  updateVolume({ volume_percent }) {
+    if (volume_percent) {
+      this.showVolume = true
+      this.volume = volume_percent
+    } else {
+      this.showVolume = false
+    }
+  }
+
   setDevice(device) {
-    device.checked = true
-    this.activeDevice = device
+    this.updateVolume(device)
     this.spotify.setSelectedDevice(device)
   }
 
-  async setVolume(volume) {
-    await this.spotify.setVolumeOnDevice(volume)
+  setVolume(volume) {
+    this.spotify.setVolumeOnDevice(volume)
   }
 }
