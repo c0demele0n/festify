@@ -51,5 +51,14 @@
         <ion-icon ios="ios-share-outline" md="md-share"></ion-icon>
     </button> -->
 
+    <!-- Controls -->
+    <div class="controls">
+        <button ion-button white round outline color="light" (tap)="togglePlay()">
+            <ion-icon name="{{playingIcon}}"></ion-icon>
+        </button>
 
+        <button ion-button white round outline color="light" (tap)="next()">
+            <ion-icon name="skip-forward"></ion-icon>
+        </button>
+    </div>
 </ion-content>

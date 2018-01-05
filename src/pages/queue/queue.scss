@@ -17,4 +17,17 @@ page-queue {
     display: block;
     margin: 0 auto;
   }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    background-color: rgba(color($colors, dark), 0.9);
+    z-index: 999;
+  }
 }
