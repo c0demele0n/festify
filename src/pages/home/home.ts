@@ -37,16 +37,13 @@ export class HomePage {
     let accessTokenStatus = await this.spotify.setAccessToken()
     if (accessTokenStatus) {
       let spotifyStatus = await this.spotify.init()
-      if (spotifyStatus) 
-      { 
+      if (spotifyStatus) {
         let firebaseAnonymousUserStatus = await this.firebase.createAnonymousUser()
-        if ((firebaseAnonymousUserStatus as any).$ID){
-        await this.firebase.addParty()
-        this.firebase.addShortID();
-        this.nav.setRoot(NavPage)
-      }
-        
-        
+        if ((firebaseAnonymousUserStatus as any).$ID) {
+          await this.firebase.addParty()
+          this.firebase.addShortID()
+          this.nav.setRoot(NavPage)
+        }
       }
     }
   }
@@ -56,7 +53,7 @@ export class HomePage {
       if (eventName == 'AUcreated') {
         console.log('Event5:' + eventName + ' triggered')
         this.firebase.firebaseNetworkConnection()
-        
+
         // if (!this.spotify.isLoggedIn()) {
         //   this.spotify.login()
         // } else {
@@ -71,25 +68,55 @@ export class HomePage {
     if ((firebaseAnonymousUserStatus as any).$ID) {
       let spotifyStatus = await this.spotify.init()
 
-      if (spotifyStatus) 
-      {
-       await this.firebase.addParty()
+      if (spotifyStatus) {
+        await this.firebase.addParty()
         this.nav.setRoot(NavPage)
-       
-        
       }
     }
-   
   }
 
   joinParty() {
+    let prompt = this.alertCtrl.create({
+      title: 'Enter Party ID',
+      message: 'Enter the Party ID to join this party',
+      inputs: [
+        {
+          name: 'shortId',
+          placeholder: 'Party ID'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked')
+          }
+        },
+        {
+          text: 'Join',
+          handler: data => {
+            this.firebase.checkShortID(data.shortId).then(
+              $Data => {
+                // success
+                // navigate to navPage
+              },
+              $Error => {
+                // something went wrong
+                // error handling
+              }
+            )
+          }
+        }
+      ]
+    })
+    prompt.present()
 
-    this.firebase.checkShortID("897414")
     /*
       TODO:       Implement complete logic
       Dependency: After finishing the logic for the host
     */
   }
+
   reopenParty() {
     /*
       TODO:       Implement complete logic

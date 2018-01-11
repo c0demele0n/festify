@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Events } from 'ionic-angular'
 import { AngularFireDatabase } from 'angularfire2/database'
 import { AngularFireAuth } from 'angularfire2/auth'
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable'
 import * as firebase from 'firebase/app'
 
 @Injectable()
@@ -11,16 +11,15 @@ export class FirebaseProvider {
   authState: any = null
   userId: any = null
   firebaseNetwork: any
-  parties: Observable<any[]>;
-   shortID:any;
-  party:any;
+  parties: Observable<any[]>
+  shortID: any
+  party: any
 
   constructor(
     public afd: AngularFireDatabase,
     public auth: AngularFireAuth,
     public events: Events
   ) {
-    
     this.firebaseNetwork = firebase.database().ref('.info/connected')
   }
 
@@ -62,20 +61,19 @@ export class FirebaseProvider {
       }
     })
   }
-//get party data from firebase
+  //get party data from firebase
   getPartyItems() {
     return this.afd.list('/parties')
     // this.partyItems =  this.afd.list('/parties')
     // this.parties=this.partyItems.valueChanges();
     // return this.parties.subscribe(val=>console.log(val));
-
-   }
-   setShort_id(id){
-    this.shortID=id;
-   }
-   getShort_id(){
-     return this.shortID;
-   }
+  }
+  setShort_id(id) {
+    this.shortID = id
+  }
+  getShort_id() {
+    return this.shortID
+  }
 
   //create and add new Party to firebase
   addParty() {
@@ -86,45 +84,49 @@ export class FirebaseProvider {
     }
 
     return new Promise((resolve, reject) => {
-    const now = firebase.database.ServerValue.TIMESTAMP
-    this.party = {
-      country: 'DE',
-      created_at: now,
-      created_by: userId,
-      name: "Today's Party",
-      playback: {
-        last_change: now,
-        last_position_ms: 0,
-        playing: false
-      },
-       short_id: Math.floor(Math.random() * 1000000) + '' 
-    } 
-     firebase
-      .database()
-      .ref('/parties')
-      .push(this.party).key
+      const now = firebase.database.ServerValue.TIMESTAMP
+      this.party = {
+        country: 'DE',
+        created_at: now,
+        created_by: userId,
+        name: "Today's Party",
+        playback: {
+          last_change: now,
+          last_position_ms: 0,
+          playing: false
+        },
+        short_id: Math.floor(Math.random() * 1000000) + ''
+      }
+      firebase
+        .database()
+        .ref('/parties')
+        .push(this.party).key
       resolve({ $Party: this.party, $Msg: 'success' })
     })
-  
   }
   //set short_id
-  addShortID(){
-    this.setShort_id(this.party.short_id);
-
+  addShortID() {
+    this.setShort_id(this.party.short_id)
   }
-//check if short_id is exists in firebase
-  checkShortID(shortValue){
-    
-    firebase.database().ref().child("parties").orderByChild('short_id').equalTo(shortValue).once("value",snapshot => {
-      const shortData = snapshot.val();
-      if (shortData){
-        console.log("exists!");
-      }else{
-        console.log("not exists!")
-      }
-  });
-  
-
-}
-  
+  //check if short_id is exists in firebase
+  async checkShortID(shortValue) {
+    return new Promise((resolve, reject) => {
+      firebase
+        .database()
+        .ref()
+        .child('parties')
+        .orderByChild('short_id')
+        .equalTo(shortValue)
+        .once('value', snapshot => {
+          const shortData = snapshot.val()
+          if (shortData) {
+            console.log('exists!')
+            resolve(true)
+          } else {
+            console.log('not exists!')
+            reject()
+          }
+        })
+    })
+  }
 }
