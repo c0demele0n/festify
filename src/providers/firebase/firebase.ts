@@ -12,7 +12,8 @@ export class FirebaseProvider {
   userId: any = null
   firebaseNetwork: any
   parties: Observable<any[]>;
-  shortID:any;
+   shortID:any;
+  party:any;
 
   constructor(
     public afd: AngularFireDatabase,
@@ -61,7 +62,7 @@ export class FirebaseProvider {
       }
     })
   }
-
+//get party data from firebase
   getPartyItems() {
     return this.afd.list('/parties')
     // this.partyItems =  this.afd.list('/parties')
@@ -70,12 +71,13 @@ export class FirebaseProvider {
 
    }
    setShort_id(id){
-this.shortID=id;
+    this.shortID=id;
    }
    getShort_id(){
      return this.shortID;
    }
 
+  //create and add new Party to firebase
   addParty() {
     const userId = this.auth.auth.currentUser.uid
     if (!userId || userId.length < 1) {
@@ -83,10 +85,9 @@ this.shortID=id;
       console.log('addParty(): ofuserIdNotCreatedfline')
     }
 
+    return new Promise((resolve, reject) => {
     const now = firebase.database.ServerValue.TIMESTAMP
-    
-
-    const party = {
+    this.party = {
       country: 'DE',
       created_at: now,
       created_by: userId,
@@ -96,25 +97,34 @@ this.shortID=id;
         last_position_ms: 0,
         playing: false
       },
-       short_id: Math.floor(Math.random() * 1000000) + ''
-  
-       
-    }
-    if(party) {
-      this.setShort_id(party.short_id);
-      console.log(this.getShort_id());
-
-    }
-    else {
-      this.shortID ="";
-    }
-    const key = firebase
+       short_id: Math.floor(Math.random() * 1000000) + '' 
+    } 
+     firebase
       .database()
       .ref('/parties')
-      .push(party).key
-    return [key, party]
-
-    // let o = this.afd.object('/parties')
-    // o.set({ party })
+      .push(this.party).key
+      resolve({ $Party: this.party, $Msg: 'success' })
+    })
+  
   }
+  //set short_id
+  addShortID(){
+    this.setShort_id(this.party.short_id);
+
+  }
+//check if short_id is exists in firebase
+  checkShortID(shortValue){
+    
+    firebase.database().ref().child("parties").orderByChild('short_id').equalTo(shortValue).once("value",snapshot => {
+      const shortData = snapshot.val();
+      if (shortData){
+        console.log("exists!");
+      }else{
+        console.log("not exists!")
+      }
+  });
+  
+
+}
+  
 }

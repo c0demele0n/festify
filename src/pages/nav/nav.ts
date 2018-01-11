@@ -26,7 +26,7 @@ import { MorePage } from '../more/more'
 // provider imports
 import { PlatformServiceProvider } from '../../providers/platform-service/platform-service'
 import { SpotifyProvider } from '../../providers/spotify/spotify'
-
+import{FirebaseProvider}from'../../providers/firebase/firebase'
 // plugin imports
 import { SocialSharing } from '@ionic-native/social-sharing'
 
@@ -45,6 +45,7 @@ export class NavPage {
 
   // current tab name
   currentTabName: string = 'QueuePage'
+  test:any;
 
   root = QueuePage
 
@@ -87,7 +88,8 @@ export class NavPage {
     public socialSharing: SocialSharing,
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController,
-    public spotify: SpotifyProvider
+    public spotify: SpotifyProvider,
+    public firebase:FirebaseProvider
   ) {
     // get partyname from nav params
     console.log('Partyname: ' + this.navParams.get('partyName'))
@@ -182,7 +184,7 @@ export class NavPage {
   // function which provides a share link to the current party
   shareParty() {
     // Dummy PartyID
-    let partyID = '1234567890'
+    let partyID =''+ this.firebase.getShort_id();
 
     // mobile app
     if (this.plt == 'cordova') {

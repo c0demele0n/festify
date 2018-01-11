@@ -37,7 +37,17 @@ export class HomePage {
     let accessTokenStatus = await this.spotify.setAccessToken()
     if (accessTokenStatus) {
       let spotifyStatus = await this.spotify.init()
-      if (spotifyStatus) this.nav.setRoot(NavPage)
+      if (spotifyStatus) 
+      { 
+        let firebaseAnonymousUserStatus = await this.firebase.createAnonymousUser()
+        if ((firebaseAnonymousUserStatus as any).$ID){
+        await this.firebase.addParty()
+        this.firebase.addShortID();
+        this.nav.setRoot(NavPage)
+      }
+        
+        
+      }
     }
   }
 
@@ -46,7 +56,7 @@ export class HomePage {
       if (eventName == 'AUcreated') {
         console.log('Event5:' + eventName + ' triggered')
         this.firebase.firebaseNetworkConnection()
-        this.firebase.addParty()
+        
         // if (!this.spotify.isLoggedIn()) {
         //   this.spotify.login()
         // } else {
@@ -60,11 +70,21 @@ export class HomePage {
     let firebaseAnonymousUserStatus = await this.firebase.createAnonymousUser()
     if ((firebaseAnonymousUserStatus as any).$ID) {
       let spotifyStatus = await this.spotify.init()
-      if (spotifyStatus) this.nav.setRoot(NavPage)
+
+      if (spotifyStatus) 
+      {
+       await this.firebase.addParty()
+        this.nav.setRoot(NavPage)
+       
+        
+      }
     }
+   
   }
 
   joinParty() {
+
+    this.firebase.checkShortID("897414")
     /*
       TODO:       Implement complete logic
       Dependency: After finishing the logic for the host
